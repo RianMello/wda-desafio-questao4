@@ -134,7 +134,7 @@ export function FormRent({rent, onFinish}: FormRentProps){
               className="errorMessage"
               name="quantidade"
             />
-            <Select book={rent} publishers={publishers} />
+            {/* <Select book={rent} publishers={publishers} /> */}
             <ErrorMessage
               component="span"
               className="errorMessage"

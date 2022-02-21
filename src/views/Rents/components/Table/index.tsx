@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRent } from '../../../../hooks/useRent'
 import { Rent } from "../../../../interfaces/ResponseAPI";
+import * as dayjs from "dayjs"
 
 import { styled } from "@mui/system";
 import TablePaginationUnstyled from "@mui/base/TablePaginationUnstyled";

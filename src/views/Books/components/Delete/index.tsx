@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from "axios";
 import { useBook } from "../../../../hooks/useBook";
 import { useRent } from "../../../../hooks/useRent";
 import { Book } from "../../../../interfaces/ResponseAPI";

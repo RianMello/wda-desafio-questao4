@@ -75,9 +75,9 @@ export const TableStyle = styled.div`
     
     tr{ 
       background: #ebeced;
-        transition: background 0.15s;
+        transition: filter 0.15s;
       &:hover{
-        background: #c6c6c6;
+        filter: brightness(0.9) ;
       }
       border-bottom: 1px solid #CDD2D7;
       max-height: 2rem;
@@ -90,6 +90,8 @@ export const TableStyle = styled.div`
     }
     .pagination{
       border: 1px solid #CDD2D7;
+      background-color: #91bce6;
+      color: #ffefeb;
     }
     .btn-edit{
         border-radius: 1.5rem;

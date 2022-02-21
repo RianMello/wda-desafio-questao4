@@ -6,9 +6,10 @@ import { SelectContainer } from "./style";
 interface SelectProps{
     book?: Book;
     publishers: PublisherCompany[];
+    pubChange: (pub: PublisherCompany) => void
 }
 
-export function Select({book, publishers}: SelectProps){
+export function Select({book, publishers, pubChange}: SelectProps){
 
     const [publisher, setPublisher] = useState(publishers[0])
 
@@ -18,12 +19,13 @@ export function Select({book, publishers}: SelectProps){
         <Field
           as="select"
           id="editora_id"
-          name={publisher.nome}
+          name={publisher.id}
           placeholder="editora..."
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             publishers.map((pub) => {
               if (pub.id === Number(e.target.value)) {
                 setPublisher(pub)
+                pubChange(pub)
               }
             });
           }}

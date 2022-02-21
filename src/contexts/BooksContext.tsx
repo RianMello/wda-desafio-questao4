@@ -29,17 +29,17 @@ export function BooksProvider({ children }: BookProviderProps){
 
     function addBook(book:Book){
         api.post('/api/livro', book)
-        .then(()=> alert("livro adicionado com sucesso"))
+        .then(()=> alert("Sucesso!"))
         .catch(err => alert("Ops! Algo de errado não deu certo"))
     }
 
     function removeBook(book:Book){
-        api.delete('/api/livro', book as AxiosRequestConfig<Book>)
-        .then(res => console.log(res))
-        .catch(err => {
-            console.log(err.response)
-            console.log(err.request)
-        })
+        api.delete('/api/livro', { data: book})
+        // .then(res => console.log(res))
+        // .catch(err => {
+        //     console.log( book as AxiosRequestConfig<Book>)
+        //     console.log(err.request)
+        // })
     }
 
     function editBook(book: Book){

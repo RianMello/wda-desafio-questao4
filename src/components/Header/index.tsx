@@ -30,7 +30,7 @@ export function Header() {
     },
     {
       id: 4,
-      label: "Customers",
+      label: "Users",
       navigate: "/users",
       isSelected: false,
     },

@@ -7,6 +7,7 @@ import { usePublisher }from "../../../../hooks/usePublisher";
 import { Formik, FormikHelpers, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Select } from "./Select";
+import { useState } from "react";
 
 interface PropsFormBook {
   onFinish: () => void;
@@ -47,7 +48,11 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
   const { addBook, editBook } = useBook();
   const { publishers } = usePublisher();
 
-  var publisher = book?.id ? book.editora : publishers[0];
+  const[ publisher, setPublisher] = useState<PublisherCompany>(book?.id ? book.editora : publishers[0]);
+
+  const handlePublisherChange = (pub: PublisherCompany) => {
+      setPublisher(pub)
+  };
 
   const initialValue = book?.id
     ? {
@@ -82,15 +87,13 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
       totalalugado: values.totalalugado,
     };
 
-    console.log(values)
+    console.log(bookFinish)
     if (book?.id !== undefined) {
       editBook(bookFinish as Book)
-      //onFinish();
-      return;
+      onFinish()
     } else {
       addBook(bookFinish as Book);
-      //onFinish()
-      return ;
+      onFinish()
     }
   };
 
@@ -145,7 +148,7 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
               className="errorMessage"
               name="quantidade"
             />
-            <Select book={book} publishers={publishers} />
+            <Select book={book} publishers={publishers} pubChange={handlePublisherChange}/>
             <ErrorMessage
               component="span"
               className="errorMessage"

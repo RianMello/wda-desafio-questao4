@@ -1,3 +1,7 @@
+export interface AxiosRequestConfig{
+    data: Book;
+}
+
 export interface Rent{
     data_aluguel:string;
     data_devolucao:string;
