@@ -43,7 +43,7 @@ export const TableContainer = styled.div`
         }
     }
     .search-input{
-        width: 15rem;
+        width: 20rem;
         height: 2rem;
         border-width: 0;
         border-bottom: 1px solid #CDD2D7;

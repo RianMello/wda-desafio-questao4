@@ -6,6 +6,7 @@ import api from "../services/api"
 interface RentsContextProps{
     rents: Rent[];
     addRent: (rent: Rent) => void;
+    editRent: (rent: Rent) => void;
     removeRent: (rent:Rent) => void;
 }
 
@@ -38,10 +39,16 @@ export function RentsProvider({children}: RentsProviderProps){
         .then(() => console.log("deletado!"))
         .catch(()=> console.log("deu erro aqui em"))
     }
+    function editRent(rent: Rent){
+        api
+        .put('api/alugueis', rent)
+        .then(res => console.log(res.data, 'deu certo'))
+        .catch(err => console.log(err, "deu ruim"))
+    }
 
     return(
         <RentsContext.Provider
-            value={{rents, addRent, removeRent}}
+            value={{rents, addRent, removeRent, editRent}}
         >
             {children}
         </RentsContext.Provider>

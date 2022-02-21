@@ -7,6 +7,7 @@ import * as Yup from "yup";
 
 interface FormRentProps{
     rent?: Rent;
+    onFinish: () => void;
 }
 interface initialProps {
     id: number;
@@ -17,9 +18,9 @@ interface initialProps {
     livro_id: Book;
   }
 
-export function FormRent({rent}: FormRentProps){
+export function FormRent({rent, onFinish}: FormRentProps){
 
-    const { rents } = useRent()
+    const { addRent, editRent } = useRent()
 
     const schema = Yup.object().shape({
         id: Yup.number(),
@@ -48,9 +49,40 @@ export function FormRent({rent}: FormRentProps){
         }).required("Você precisa informar o livro alugado"),
     })
     
-    const initialValue = rent?.id ? {} : {}
+    const initialValue = rent?.id ? {
+      id: rent.id,
+      data_aluguel:rent.data_aluguel,
+      data_previsao: rent.data_previsao,
+      data_devolucao: rent.data_previsao,
+      usuario_id: rent.usuario_id,
+      livro_id: rent.livro_id,
+    } : {
+      id: 0,
+      data_aluguel:'',
+      data_previsao: '',
+      data_devolucao: '',
+      usuario_id: {} as User,
+      livro_id: {} as Book,
+    }
 
 
+  const handleSubmit = (values: initialProps) => {
+    const rentFinish = {
+      id: values.id,
+      data_aluguel:values.data_aluguel,
+      data_previsao: values.data_previsao,
+      data_devolucao: values.data_previsao,
+      usuario_id: values.usuario_id,
+      livro_id: values.livro_id,
+    };
+    if (rent?.id !== undefined) {
+      editRent(rentFinish as Rent);
+      return onFinish();
+    } else {
+      addRent(rentFinish as Rent);
+      return onFinish();
+    }
+  };
     return(
         <>
             {/* <Formik

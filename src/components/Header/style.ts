@@ -16,7 +16,9 @@ export const Button = styled.button<PropType>`
 
     background: ${props => props.selected ? '#e6e6e6' : '#fcfcfc'};
 
+    font-family:'Poppins', sans-serif;
     font-size: 1.2rem;
+    font-weight: ${props=> props.selected ? 'bold' : 'normal'};
     color: ${props => props.selected ? '#03d4ff' :'#000000'};
 
     transition: filter 0.2s, transform 0.2s;
