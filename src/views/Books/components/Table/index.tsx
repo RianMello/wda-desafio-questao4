@@ -283,7 +283,7 @@ export function Table() {
 
             {emptyRows > 0 && (
               <tr style={{ height: 41 * emptyRows }}>
-                <td colSpan={3} />
+                <td colSpan={8} />
               </tr>
             )}
           </tbody>

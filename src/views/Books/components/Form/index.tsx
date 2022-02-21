@@ -67,7 +67,7 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
         autor: "",
         quantidade: 1,
         editora_id: 0,
-        editora: publisher,
+        editora: publishers[0],
         totalalugado: 0,
       };
 
@@ -81,12 +81,16 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
       editora: publisher,
       totalalugado: values.totalalugado,
     };
+
+    console.log(values)
     if (book?.id !== undefined) {
-      editBook(bookFinish as Book);
-      return onFinish();
+      editBook(bookFinish as Book)
+      //onFinish();
+      return;
     } else {
       addBook(bookFinish as Book);
-      return onFinish();
+      //onFinish()
+      return ;
     }
   };
 

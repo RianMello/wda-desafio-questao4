@@ -85,7 +85,7 @@ export function FormRent({rent, onFinish}: FormRentProps){
   };
     return(
         <>
-            {/* <Formik
+            <Formik
         initialValues={initialValue}
         validationSchema={schema}
         onSubmit={(values, { setSubmitting }: FormikHelpers<initialProps>) => {
@@ -95,7 +95,7 @@ export function FormRent({rent, onFinish}: FormRentProps){
       >
         <Form>
           <fieldset>
-            <legend>{book?.id ? 'Edit book' :'Add new book'}</legend>
+            <legend>{rent?.id ? 'Edit book' :'Add new book'}</legend>
             <label htmlFor="nome">Book name:</label>
             <Field id="nome" name="nome" placeholder="name..." type="text" />
             <ErrorMessage
@@ -134,7 +134,7 @@ export function FormRent({rent, onFinish}: FormRentProps){
               className="errorMessage"
               name="quantidade"
             />
-            <Select book={book} publishers={publishers} />
+            <Select book={rent} publishers={publishers} />
             <ErrorMessage
               component="span"
               className="errorMessage"
@@ -150,7 +150,7 @@ export function FormRent({rent, onFinish}: FormRentProps){
             </button>
           </div>
         </Form>
-      </Formik> */}
+      </Formik>
         </>
     )
 }

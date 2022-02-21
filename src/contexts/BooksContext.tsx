@@ -39,7 +39,7 @@ export function BooksProvider({ children }: BookProviderProps){
         .catch(err => {
             console.log(err.response)
             console.log(err.request)
-            })
+        })
     }
 
     function editBook(book: Book){
