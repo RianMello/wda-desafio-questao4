@@ -28,7 +28,7 @@ export function FormRent({rent, onFinish}: FormRentProps){
 
     const { addRent, editRent } = useRent()
     const { users } = useUser()
-    const { books } = useBook()
+    const { books, editBook } = useBook()
 
     const [user, setUser] = useState(rent?.id ? rent.usuario_id : {} as User)
     const [book, setBook] = useState(rent?.id ? rent.livro_id : {} as Book)
@@ -94,10 +94,12 @@ export function FormRent({rent, onFinish}: FormRentProps){
     };
     if (rent?.id !== undefined) {
       editRent(rentFinish as Rent);
-      return onFinish();
+      
+      // return onFinish();
     } else {
+      editBook({...book, totalalugado: book.totalalugado + 1})
       addRent(rentFinish as Rent);
-      return onFinish();
+      // return onFinish();
     }
   };
     return(

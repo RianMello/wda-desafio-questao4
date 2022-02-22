@@ -10,6 +10,7 @@ interface BookProviderProps{
 
 interface BookContextProps{
     books: Book[]
+    moreRenteds: Book[]
     addBook: (book: Book) => void;
     removeBook: (book: Book) => void;
     editBook: (book: Book) => void;
@@ -19,14 +20,19 @@ export const BooksContext = createContext<BookContextProps>({} as BookContextPro
 
 export function BooksProvider({ children }: BookProviderProps){
     const [books, setBooks] = useState<Book[]>([])
+    const [moreRenteds, setMoreRenteds] = useState([])
 
     useEffect(()=>{
         api
         .get('/api/livros')
         .then(res => setBooks(res.data))
         .catch(err => console.log(err))
-    })
 
+        api
+        .get('/api/maisalugados')
+        .then(res => setMoreRenteds(res.data))
+        .catch(err => console.log(err))
+    },[])
     function addBook(book:Book){
         api.post('/api/livro', book)
         .then(()=> alert("Sucesso!"))
@@ -49,7 +55,7 @@ export function BooksProvider({ children }: BookProviderProps){
     return(
         <BooksContext.Provider 
             value={{
-                books, addBook, removeBook, editBook
+                books, addBook, removeBook, editBook, moreRenteds
             }}
         >
             {children}

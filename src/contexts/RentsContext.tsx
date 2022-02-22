@@ -1,4 +1,3 @@
-import { AxiosRequestConfig } from "axios"
 import { createContext, ReactNode, useEffect, useState } from "react"
 import { Rent } from "../interfaces/ResponseAPI"
 import api from "../services/api"
@@ -29,19 +28,19 @@ export function RentsProvider({children}: RentsProviderProps){
 
     function addRent(rent: Rent){
         api
-        .post('api/alugueis', rent)
+        .post('api/aluguel', rent)
         .then(() => console.log("deletado!"))
         .catch(()=> console.log("deu erro aqui em"))
     }
     function removeRent(rent: Rent){
         api
-        .delete('api/alugueis', rent as AxiosRequestConfig)
+        .delete('api/aluguel', {data: rent})
         .then(() => console.log("deletado!"))
         .catch(()=> console.log("deu erro aqui em"))
     }
     function editRent(rent: Rent){
         api
-        .put('api/alugueis', rent)
+        .put('api/aluguel', rent)
         .then(res => console.log(res.data, 'deu certo'))
         .catch(err => console.log(err, "deu ruim"))
     }
