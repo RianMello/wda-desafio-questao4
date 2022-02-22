@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
     method: 'GET',
-    baseURL: 'https://livraria--back.herokuapp.com/'
+    baseURL: 'http://livraria--back.herokuapp.com/'
 })
 
 export default api

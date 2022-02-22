@@ -23,11 +23,11 @@ export const Button = styled.button<PropType>`
     text-shadow: ${props => props.selected ? '0 0 5px white': 'none'};
 
     transition: filter 0.2s, transform 0.2s;
-    transform: ${props => props.selected ? 'scale(1.05)': 0};
+    transform: ${props => props.selected ? 'scale(1.10)': 0};
 
     &:hover{
         filter: brightness(0.9);
-        transform: scale(1.05, 1.05);
+        transform: scale(1.1);
         box-shadow: 0 1px 4px #cccc;
     }
     
@@ -38,7 +38,7 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     width: 70rem;
-    height: 5rem;
+    height: 5.2rem;
     background: white;
     box-shadow: 1px 3px 5px #ababab;
     border-radius: 0.5rem;
