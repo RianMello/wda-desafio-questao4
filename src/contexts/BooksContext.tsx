@@ -1,4 +1,3 @@
-import { AxiosRequestConfig } from "axios";
 import { createContext, useState, ReactNode, useEffect } from "react";
 import { Book } from "../interfaces/ResponseAPI";
 import api from "../services/api";

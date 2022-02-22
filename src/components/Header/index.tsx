@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Container } from "./style";
 import { useNavigate } from "react-router-dom";
 
@@ -42,8 +42,6 @@ export function Header() {
     },
   ];
   const [button, setButton] = useState(buttons);
-  // useEffect(() => {}, [button]);
-
   var currentPage = document.URL
 
   const handleChangeSelectedPage = () => {
@@ -80,7 +78,7 @@ export function Header() {
 
   useEffect(() => {
     handleChangeSelectedPage()
-  }, [currentPage]);
+  });
 
   const toNavigate = useNavigate();
 

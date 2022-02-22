@@ -112,8 +112,8 @@ export function Table() {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
 
   const { publishers } = usePublisher();
-  const [publisherToEdited, setPublisherToEdited] = useState(publishers[0]);
-  const [publisherToDelete, setPublisherToDelete] = useState({} as PublisherCompany);
+  // const [publisherToEdited, setPublisherToEdited] = useState(publishers[0]);
+  // const [publisherToDelete, setPublisherToDelete] = useState({} as PublisherCompany);
 
   useEffect(() => {
     if (publishers) {
@@ -161,9 +161,9 @@ export function Table() {
     setIsModalDeleteOpen(false);
   };
 
-  const handleDeleteVerification = (publisher: PublisherCompany) => {
-    // return <Delete book={book} onFinish={handleModalDeleteClose} />;
-  };
+  // const handleDeleteVerification = (publisher: PublisherCompany) => {
+  //   // return <Delete book={book} onFinish={handleModalDeleteClose} />;
+  // };
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - publishers.length) : 0;
@@ -199,7 +199,7 @@ export function Table() {
           className="btn-new"
           onClick={() => {
             handleModalFormOpen();
-            setPublisherToDelete({} as PublisherCompany);
+            // setPublisherToDelete({} as PublisherCompany);
           }}
         >
           <AddCircleTwoToneIcon /> <strong>Publisher</strong>
@@ -241,7 +241,7 @@ export function Table() {
                       className="btn-edit"
                         onClick={() => {
                           handleModalFormOpen();
-                          setPublisherToEdited(data);
+                          // setPublisherToEdited(data);
                         }}
                       >
                         <EditTwoToneIcon color="primary" fontSize="large" />
@@ -249,7 +249,7 @@ export function Table() {
                       <button
                         className="btn-delete"
                         onClick={() => {
-                          setPublisherToDelete(data);
+                          // setPublisherToDelete(data);
                           handleModalDeleteOpen();
                         }}
                       >
