@@ -16,10 +16,10 @@ export function SelectUser({ rent, users, userChange }: SelectProps){
 
     return (
       <SelectContainer>
-        <label htmlFor="editora_id">Responsible:</label>
+        <label htmlFor="usuario_id">Responsible:</label>
         <Field
           as="select"
-          id="usuario"
+          id="usuario_id"
           name={user.id}
           placeholder="editora..."
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {

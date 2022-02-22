@@ -30,7 +30,7 @@ export function FormRent({rent, onFinish}: FormRentProps){
     const { users } = useUser()
     const { books } = useBook()
 
-    const [user, setUser] = useState(rent?.id ? rent.usuario_id : {} as User[] )
+    const [user, setUser] = useState(rent?.id ? rent.usuario_id : {} as User)
     const [book, setBook] = useState(rent?.id ? rent.livro_id : {} as Book)
 
     const schema = Yup.object().shape({
@@ -72,8 +72,8 @@ export function FormRent({rent, onFinish}: FormRentProps){
       data_aluguel:'',
       data_previsao: '',
       data_devolucao: '',
-      usuario_id: users[0],
-      livro_id: books[0],
+      usuario_id: user,
+      livro_id: book,
     }
 
     const handleUserChange = (user: User) => {

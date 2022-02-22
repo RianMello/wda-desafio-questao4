@@ -11,16 +11,16 @@ interface SelectProps{
 
 export function SelectBook({ rent, books, bookChange }: SelectProps){
 
-    const [book, setBook] = useState(books[0])
+    const [book, setBook] = useState({}as Book)
 
     return (
       <SelectContainer>
-        <label htmlFor="editora_id">Responsible:</label>
+        <label htmlFor="livro_id">Book:</label>
         <Field
           as="select"
-          id="usuario"
+          id="livro_id"
           name={book.id}
-          placeholder="editora..."
+          placeholder="Livro..."
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             books.map((book) => {
               if (book.id === Number(e.target.value)) {
@@ -31,17 +31,17 @@ export function SelectBook({ rent, books, bookChange }: SelectProps){
             });
           }}
         >
-          {books.map((book) => {
-            if (rent?.id && rent?.usuario_id.id === book.id) {
+          {books.map((b) => {
+            if (rent?.id && rent?.usuario_id.id === b.id) {
               return (
-                <option selected key={book.id} value={book.id}>
-                  {book.nome}
+                <option selected key={b.id} value={b.id}>
+                  {b.nome}
                 </option>
               );
             }
             return (
-              <option key={book.id} value={book.id}>
-                {book.nome}
+              <option key={b.id} value={b.id}>
+                {b.nome}
               </option>
             );
           })}

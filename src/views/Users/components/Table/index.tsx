@@ -11,7 +11,7 @@ import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 
 import { ModalComponent } from "../../../../components/Modal";
 
-// import { FormBook } from "../Form";
+import { FormUser } from "../Form";
 // import { Delete } from "../Delete";
 
 const blue = {
@@ -179,7 +179,7 @@ export function Table() {
         isOpen={isModalOpen}
         onRequestClose={handleModalFormClose}
       >
-        {/* <FormBook onFinish={handleModalFormClose} book={bookToEdited} /> */}
+        <FormUser onFinish={handleModalFormClose} user={userToEdited} />
       </ModalComponent>
       <ModalComponent
         isDeleteModal={true}

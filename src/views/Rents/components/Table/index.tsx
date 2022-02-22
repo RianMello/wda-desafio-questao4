@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRent } from '../../../../hooks/useRent'
 import { Rent } from "../../../../interfaces/ResponseAPI";
-// import * as dayjs from "dayjs"
+import dayjs from "dayjs"
 
 import { styled } from "@mui/system";
 import TablePaginationUnstyled from "@mui/base/TablePaginationUnstyled";
@@ -104,15 +104,14 @@ const CustomTablePagination = styled(TablePaginationUnstyled)(
 );
 
 export function Table() {
+  const { rents } = useRent()
+
   const [search, setSearch] = useState<string>("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
-
-  const { rents } = useRent()
   const [rentToEdited, setRentToEdited] = useState(rents[0]);
   const [rentToDelete, setRentToDelete] = useState({} as Rent);
 
@@ -169,6 +168,32 @@ export function Table() {
   const handleDeleteVerification = (rent: Rent) => {
     return <Delete rent={rent} onFinish={handleModalDeleteClose} />;
   };
+
+  const handleSituationRent = (rent: Rent) => {
+    const todayDate = new Date().toLocaleDateString('en', {timeZone: 'UTC'})
+
+    const today = dayjs(todayDate)
+    const dev = dayjs(rent.data_devolucao)
+    const prazo = dayjs(rent.data_previsao)
+    
+    const returned = today.diff(dev)
+    const dif = dev.diff(prazo)
+
+    if(returned > 0 ){
+      if(rent.data_devolucao !== undefined){
+        if(dif > 0 ){
+          return("edevolvido em atraso")
+        }else if(dif < 0 ||dif === 0){
+          return("devolvido no prazo")
+        }
+        return("devolvido no prazo")
+      }
+    }else if(returned < 0 || returned === 0){
+      return("Não devolvido")
+    }
+    return("devolvido no prazo")
+
+  }
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rents.length) : 0;
@@ -244,6 +269,7 @@ export function Table() {
                 const dateRentFormated = dateRent.toLocaleDateString('pt-BR', {timeZone: 'UTC'})
                 const dateReturnFormated = dateReturn.toLocaleDateString('pt-BR', {timeZone: 'UTC'})
                 const dateExpectedFormated = dateExpected.toLocaleDateString('pt-BR', {timeZone: 'UTC'})
+
                 return (
                   <tr key={data.id}>
                     <td style={{ width: 80 }}>#{data.id}</td>
@@ -263,7 +289,7 @@ export function Table() {
                       {dateExpectedFormated}
                     </td>
                     <td style={{ width: 120 }} align="right">
-                      pendente...
+                      {handleSituationRent(data)}
                     </td>
                     <td style={{ width: 120 }} align="right">
                       <button

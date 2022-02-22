@@ -1,37 +1,37 @@
-import { useBook } from "../../../../hooks/useBook";
 import { useRent } from "../../../../hooks/useRent";
-import { Book } from "../../../../interfaces/ResponseAPI";
+import { useUser } from "../../../../hooks/useUser";
+import { User } from "../../../../interfaces/ResponseAPI";
 import { DeleteContainer } from "./style";
 
 interface DeleteProps {
-  book: Book;
+  user: User;
   onFinish: () => void;
 }
 
-export const Delete = ({ book, onFinish }: DeleteProps) => {
+export const Delete = ({ user, onFinish }: DeleteProps) => {
+  const { removeUser } = useUser();
   const { rents } = useRent();
-  const { removeBook } = useBook();
 
   function deleteBook() {
     console.log("tentando pelo menos");
-    removeBook(book);
+    removeUser(user);
     onFinish();
   }
 
   function deleteVerification() {
-    const canDelete = rents.find((rent) => rent.livro_id.id === book.id);
+    const canDelete = rents.find((rent) => rent.usuario_id.id === user.id);
     if (canDelete !== undefined) {
       return (
         <DeleteContainer>
           <h1 className="impediment">
-            This book cannot be deleted at the moment, as we have a rented copy
+            This book cannot be deleted at the moment, as we have a book rented
           </h1>
         </DeleteContainer>
       );
     }
     return (
       <DeleteContainer>
-        <h2>Are you sure you want to delete the record for this book?</h2>
+        <h2>Are you sure you want to delete the record for this User?</h2>
         <div className="buttons-container">
           <button className="btn-Delete" onClick={() => onFinish()}>
             No
