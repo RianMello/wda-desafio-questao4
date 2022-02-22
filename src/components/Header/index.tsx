@@ -42,7 +42,7 @@ export function Header() {
     },
   ];
   const [button, setButton] = useState(buttons);
-  useEffect(() => {}, [button]);
+  // useEffect(() => {}, [button]);
 
   const handleChangeSelectedPage = (id: number) => {
     setButton((old) =>

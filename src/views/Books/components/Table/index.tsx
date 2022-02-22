@@ -213,11 +213,11 @@ export function Table() {
       <TableStyle>
         <table aria-label="custom pagination table">
           <thead>
-            <tr>
+            <tr className="table-head">
               <th id="id">Id</th>
               <th id="name">Name</th>
               <th id="release">Release</th>
-              <th id="publisher-company">Publisher Company</th>
+              <th id="publisher-company">Publisher</th>
               <th id="author">Author</th>
               <th id="copies">Copies</th>
               <th id="rented">Rented</th>

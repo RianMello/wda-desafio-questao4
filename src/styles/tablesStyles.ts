@@ -10,6 +10,9 @@ export const TableContainer = styled.div`
     margin-top: 1rem;
     width: 100%;
     border-radius: 0.5rem;
+    .table-head{
+      height: 4rem;
+    }
     .header-table-actions{
         width: 90%;
         height: 5rem;
@@ -86,7 +89,8 @@ export const TableStyle = styled.div`
     th {
       background-color: #4394e0;
       color: white;
-      font-size: 0.90rem;
+      font-size: 1rem;
+      border: 1px solid #CDD2D7;
     }
     .pagination{
       border: 1px solid #CDD2D7;

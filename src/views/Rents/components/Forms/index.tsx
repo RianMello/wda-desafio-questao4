@@ -4,6 +4,12 @@ import { Rent, Book, User } from '../../../../interfaces/ResponseAPI'
 
 import { Formik, FormikHelpers, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useUser } from "../../../../hooks/useUser";
+import { useBook } from "../../../../hooks/useBook";
+import { Container } from "./style";
+import { SelectUser } from "./Select/userSelector";
+import { useState } from "react";
+import { SelectBook } from "./Select/bookSelector";
 
 interface FormRentProps{
     rent?: Rent;
@@ -21,6 +27,11 @@ interface initialProps {
 export function FormRent({rent, onFinish}: FormRentProps){
 
     const { addRent, editRent } = useRent()
+    const { users } = useUser()
+    const { books } = useBook()
+
+    const [user, setUser] = useState(rent?.id ? rent.usuario_id : {} as User[] )
+    const [book, setBook] = useState(rent?.id ? rent.livro_id : {} as Book)
 
     const schema = Yup.object().shape({
         id: Yup.number(),
@@ -53,7 +64,7 @@ export function FormRent({rent, onFinish}: FormRentProps){
       id: rent.id,
       data_aluguel:rent.data_aluguel,
       data_previsao: rent.data_previsao,
-      data_devolucao: rent.data_previsao,
+      data_devolucao: rent.data_devolucao,
       usuario_id: rent.usuario_id,
       livro_id: rent.livro_id,
     } : {
@@ -61,17 +72,23 @@ export function FormRent({rent, onFinish}: FormRentProps){
       data_aluguel:'',
       data_previsao: '',
       data_devolucao: '',
-      usuario_id: {} as User,
-      livro_id: {} as Book,
+      usuario_id: users[0],
+      livro_id: books[0],
     }
 
+    const handleUserChange = (user: User) => {
+      setUser(user);
+    }
+    const handleBookChange = (book: Book) => {
+      setBook(book);
+    }
 
   const handleSubmit = (values: initialProps) => {
     const rentFinish = {
       id: values.id,
       data_aluguel:values.data_aluguel,
       data_previsao: values.data_previsao,
-      data_devolucao: values.data_previsao,
+      data_devolucao: values.data_devolucao,
       usuario_id: values.usuario_id,
       livro_id: values.livro_id,
     };
@@ -84,7 +101,7 @@ export function FormRent({rent, onFinish}: FormRentProps){
     }
   };
     return(
-        <>
+        <Container>
             <Formik
         initialValues={initialValue}
         validationSchema={schema}
@@ -95,50 +112,34 @@ export function FormRent({rent, onFinish}: FormRentProps){
       >
         <Form>
           <fieldset>
-            <legend>{rent?.id ? 'Edit book' :'Add new book'}</legend>
-            <label htmlFor="nome">Book name:</label>
-            <Field id="nome" name="nome" placeholder="name..." type="text" />
+            <legend>{rent?.id ? 'Edit rental record' :'Add rental record'}</legend>
+            <SelectUser rent={rent} users={users} userChange={handleUserChange} />
+            <SelectBook rent={rent} books={books} bookChange={handleBookChange} />
+            <label htmlFor="data_aluguel">Rental date::</label>
+            <Field id="data_aluguel" name="data_aluguel" placeholder="dd/mm/aaaa" type="date" />
             <ErrorMessage
               component="span"
               className="errorMessage"
-              name="nome"
+              name="data_aluguel"
             />
-            <label htmlFor="autor">Author:</label>
-            <Field id="autor" name="autor" placeholder="autor..." type="text" />
+            <label htmlFor="data_devolucao">Return date:</label>
+            <Field id="data_devolucao" name="data_devolucao" placeholder="dd/mm/aaaa..." type="date" />
             <ErrorMessage
               component="span"
               className="errorMessage"
-              name="autor"
+              name="data_devolucao"
             />
-            <label htmlFor="lancamento">Release:</label>
+            <label htmlFor="data_previsao">Expected date:</label>
             <Field
-              id="lancamento"
-              name="lancamento"
-              placeholder="lançamento..."
-              type="text"
+              id="data_previsao"
+              name="data_previsao"
+              placeholder="dd/mm/aaaa..."
+              type="date"
             />
             <ErrorMessage
               component="span"
               className="errorMessage"
-              name="lancamento"
-            />
-            <label htmlFor="quantidade">Amount:</label>
-            <Field
-              id="quantidade"
-              name="quantidade"
-              placeholder="quantidade..."
-              type="number"
-            />
-            <ErrorMessage
-              component="span"
-              className="errorMessage"
-              name="quantidade"
-            />
-            {/* <Select book={rent} publishers={publishers} /> */}
-            <ErrorMessage
-              component="span"
-              className="errorMessage"
-              name="editora_id"
+              name="data_previsao"
             />
           </fieldset>
           <div className="control-modalForm">
@@ -151,6 +152,6 @@ export function FormRent({rent, onFinish}: FormRentProps){
           </div>
         </Form>
       </Formik>
-        </>
+        </Container>
     )
 }

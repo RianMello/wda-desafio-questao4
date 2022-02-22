@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRent } from '../../../../hooks/useRent'
 import { Rent } from "../../../../interfaces/ResponseAPI";
-import * as dayjs from "dayjs"
+// import * as dayjs from "dayjs"
 
 import { styled } from "@mui/system";
 import TablePaginationUnstyled from "@mui/base/TablePaginationUnstyled";
@@ -12,6 +12,7 @@ import AddCircleTwoToneIcon from '@mui/icons-material/AddCircleTwoTone';
 
 import { ModalComponent } from "../../../../components/Modal";
 import { Delete } from "../Delete";
+import { FormRent } from "../Forms";
 
 const blue = {
   200: "#A5D8FF",
@@ -172,7 +173,7 @@ export function Table() {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rents.length) : 0;
 
-  const dates = new Date()
+  // const dates = new Date()
 
   return (
     <TableContainer>
@@ -181,7 +182,7 @@ export function Table() {
         isOpen={isModalOpen}
         onRequestClose={handleModalFormClose}
       >
-        {/* <FormBook onFinish={handleModalFormClose} book={bookToEdited} /> */}
+        <FormRent onFinish={handleModalFormClose} rent={rentToEdited} />
       </ModalComponent>
       <ModalComponent
         isDeleteModal={true}
@@ -215,7 +216,7 @@ export function Table() {
       <TableStyle>
         <table aria-label="custom pagination table">
           <thead>
-            <tr>
+            <tr className="table-head">
               <th id="id">ID</th>
               <th id="author">User who rented</th>
               <th id="copies">Rented book</th>

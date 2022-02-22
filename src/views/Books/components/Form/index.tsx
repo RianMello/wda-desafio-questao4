@@ -13,7 +13,6 @@ interface PropsFormBook {
   onFinish: () => void;
   book?: Book;
 }
-
 interface initialProps {
   id?: number;
   nome?: string;
