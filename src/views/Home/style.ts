@@ -5,4 +5,8 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    .container-chart{
+        width: 40rem;
+        height: 40rem;
+    }
 `

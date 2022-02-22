@@ -44,21 +44,43 @@ export function Header() {
   const [button, setButton] = useState(buttons);
   // useEffect(() => {}, [button]);
 
-  const handleChangeSelectedPage = (id: number) => {
+  var currentPage = document.URL
+
+  const handleChangeSelectedPage = () => {
     setButton((old) =>
       old.map((el: IButton) => {
-        if (el.id === id) {
-          return { ...el, isSelected: true };
+        if(currentPage.includes('/publishers')){
+          if (el.navigate === '/publishers'){
+            return { ...el, isSelected: true };
+          }
         }
-
+        if(currentPage.includes('/books')){
+          if (el.navigate === '/books'){
+            return { ...el, isSelected: true };
+          }
+        }
+        if(currentPage.includes('/users')){
+          if (el.navigate === '/users'){
+            return { ...el, isSelected: true };
+          }
+        }
+        if(currentPage.includes('/rents')){
+          if (el.navigate === '/rents'){
+            return { ...el, isSelected: true };
+          }
+        }if(currentPage.substr(-1, 1) === '/'){
+          if (el.navigate === '/'){
+            return { ...el, isSelected: true };
+          }
+        }
         return { ...el, isSelected: false };
       })
     );
   };
 
   useEffect(() => {
-    handleChangeSelectedPage(3);
-  }, []);
+    handleChangeSelectedPage()
+  }, [currentPage]);
 
   const toNavigate = useNavigate();
 
@@ -71,7 +93,7 @@ export function Header() {
               selected={bt.isSelected}
               onClick={() => {
                 toNavigate(bt.navigate);
-                handleChangeSelectedPage(bt.id);
+                handleChangeSelectedPage();
               }}
             >
               {bt.label}

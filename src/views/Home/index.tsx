@@ -1,28 +1,66 @@
 import { useBook } from '../../hooks/useBook'
+
+import { Bar } from 'react-chartjs-2'
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+
 import { Container } from './style'
 export function Home(){
   const { moreRenteds } = useBook()
 
-  console.log(moreRenteds)
+  const topFiveRenteds = moreRenteds.slice(0, 5)
 
-  const renderMoreRenteds = () => {
-    
-  }
+  var cont = 0
 
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+  );
+
+  const labels = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+  ];
+
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'My First dataset',
+      backgroundColor: '#4394e0',
+      borderColor: '#4394e0',
+      data: [0, 10, 5, 2, 20, 30, 45],
+    }]
+  };
   return(
     <Container>
       <div>
-        {()=>{
-          for(var i = 0; i < 5; i++){
-            <p>{`${i + 1}º: ${moreRenteds[i].nome}`}</p>
-        }}}
-        <h2>Books More Renteds:</h2>
-        <p>1º: {moreRenteds[0].nome}</p>
-        <p>2º: {moreRenteds[1].nome}</p>
-        <p>3º: {moreRenteds[2].nome}</p>
-        <p>4º: {moreRenteds[3].nome}</p>
-        <p>5º: {moreRenteds[4].nome}</p>
-      </div>
+        <h2>Top Five Rented</h2>
+        {
+          topFiveRenteds.map(top => {
+            cont++
+            var position = cont
+            return <p>{`${position}º: ${top.nome}`}</p>
+          })
+        }
+    </div>
+   <div className="container-chart"> 
+       <Bar data={data} />
+   </div>
     </Container>
   )
 }

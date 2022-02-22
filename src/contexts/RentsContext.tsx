@@ -24,7 +24,7 @@ export function RentsProvider({children}: RentsProviderProps){
         .get('api/alugueis')
         .then(res => setRents(res.data))
         .catch(err => alert(err))
-    })
+    },[])
 
     function addRent(rent: Rent){
         api

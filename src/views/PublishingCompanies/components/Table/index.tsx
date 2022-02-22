@@ -202,7 +202,7 @@ export function Table() {
             setPublisherToDelete({} as PublisherCompany);
           }}
         >
-          <AddCircleTwoToneIcon /> <strong>Publisher Company</strong>
+          <AddCircleTwoToneIcon /> <strong>Publisher</strong>
         </button>
       </div>
 

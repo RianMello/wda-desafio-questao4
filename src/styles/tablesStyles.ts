@@ -3,7 +3,8 @@ import styled from 'styled-components'
 export const TableContainer = styled.div`
     display: flex;
     flex-direction: column;
-    height: 100rem;
+    min-height: 100rem;
+    height: 100%;
     justify-content: flex-start;
     background: white;
     align-items: center;
@@ -29,11 +30,12 @@ export const TableContainer = styled.div`
         justify-content: center;
 
         border: none;
-        border-radius: 0.15rem;
+        border-radius: 0.5rem;
         
         min-width: 6rem;
         max-width:12rem;
-        height: 2rem;
+        height: 3rem;
+        padding: 0.5rem;
 
         color: white;
         font-weight: bold;
@@ -66,6 +68,7 @@ export const TableStyle = styled.div`
       font-size: 0.875rem;
       border-collapse: collapse;
       width: 90%;
+      margin-top: 2rem;
       
       border: 1px solid #CDD2D7;
     }

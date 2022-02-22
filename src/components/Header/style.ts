@@ -11,15 +11,16 @@ export const Button = styled.button<PropType>`
     margin-right: 0.25rem;
 
     height: 5rem;
-    max-width: 15rem;
-    min-width: 10rem;
+    max-width: 20rem;
+    min-width: 12rem;
 
-    background: ${props => props.selected ? '#e6e6e6' : '#fcfcfc'};
+    background: ${props => props.selected ? '#e9eff5' : '#fcfcfc'};
 
     font-family:'Poppins', sans-serif;
-    font-size: 1.2rem;
+    font-size: ${props => props.selected ? '1.5rem' :'1.2rem'};
     font-weight: ${props=> props.selected ? 'bold' : 'normal'};
-    color: ${props => props.selected ? '#03d4ff' :'#000000'};
+    color: #00000;
+    text-shadow: ${props => props.selected ? '0 0 5px white': 'none'};
 
     transition: filter 0.2s, transform 0.2s;
     transform: ${props => props.selected ? 'scale(1.05)': 0};

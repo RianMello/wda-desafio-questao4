@@ -27,7 +27,9 @@ export function BooksProvider({ children }: BookProviderProps){
         .get('/api/livros')
         .then(res => setBooks(res.data))
         .catch(err => console.log(err))
+    },[])
 
+    useEffect(() => {
         api
         .get('/api/maisalugados')
         .then(res => setMoreRenteds(res.data))
