@@ -20,7 +20,6 @@ export function Select({book, publishers, pubChange}: SelectProps){
           as="select"
           id="editora_id"
           name={publisher.id}
-          placeholder="editora..."
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             publishers.map((pub) => {
               if (pub.id === Number(e.target.value)) {
@@ -30,6 +29,7 @@ export function Select({book, publishers, pubChange}: SelectProps){
             });
           }}
         >
+          <option className="placeholder-select" >editora...</option>
           {publishers.map((pub) => {
             if (book?.id && book?.editora.id === pub.id) {
               return (

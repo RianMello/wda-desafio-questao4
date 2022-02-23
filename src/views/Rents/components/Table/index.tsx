@@ -239,6 +239,7 @@ export function Table() {
       </div>
 
       <TableStyle>
+        
         <table aria-label="custom pagination table">
           <thead>
             <tr className="table-head">

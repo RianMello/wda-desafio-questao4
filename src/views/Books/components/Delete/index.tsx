@@ -16,6 +16,7 @@ export const Delete = ({ book, onFinish }: DeleteProps) => {
     console.log("tentando pelo menos");
     removeBook(book);
     onFinish();
+    return
   }
 
   function deleteVerification() {

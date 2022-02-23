@@ -5,8 +5,8 @@ import api from "../services/api";
 
 interface UserContextProps{
     users: User[];
-    addUser: (user: User) => void;
-    editUser: (user: User) => void;
+    addUser: (user: User, onFinish: () => void) => void;
+    editUser: (user: User, onFinish: () => void) => void;
     removeUser: (user: User)=> void;
 }
 interface UserProviderProps{
@@ -25,13 +25,13 @@ export function UserProvider({children}: UserProviderProps){
         .then(response => setUsers(response.data))
     })
 
-    function addUser(user: User){
+    function addUser(user: User, onFinish: () => void){
         api.post('/api/usuario', user)
-        .then(response => console.log(response.data))
-        .catch(response => console.log(response.data))
+        .then(()=> onFinish())
+        .catch(()=> alert("Não deu"))
     }
 
-    function editUser(user: User){
+    function editUser(user: User, onFinish: () => void){
         api.put('/api/usuario', user)
     }
 

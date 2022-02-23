@@ -1,10 +1,10 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
     :root {
         --background: #f0f2f5;
         --letter: #000000;
-        --details: #1cc8eb;
+        --details: #4394e0;
     }
     * {
         margin: 0;
@@ -28,11 +28,10 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        background: var(--background);
         display: flex;
         -webkit-font-smoothing: antialiased;
         justify-content: center;
-        max-height: 100rem;
+        background: #fafcff;
     }
 
     body, input, button, textarea {

@@ -2,64 +2,67 @@ import { createContext, useState, ReactNode, useEffect } from "react";
 import { Book } from "../interfaces/ResponseAPI";
 import api from "../services/api";
 
-
-interface BookProviderProps{
-    children: ReactNode;
+interface BookProviderProps {
+  children: ReactNode;
 }
 
-interface BookContextProps{
-    books: Book[]
-    moreRenteds: Book[]
-    addBook: (book: Book) => void;
-    removeBook: (book: Book) => void;
-    editBook: (book: Book) => void;
+interface BookContextProps {
+  books: Book[];
+  moreRenteds: Book[];
+  addBook: (book: Book, onFinish: () => void) => void;
+  removeBook: (book: Book) => void;
+  editBook: (book: Book, onFinish: () => void) => void;
 }
 
-export const BooksContext = createContext<BookContextProps>({} as BookContextProps)
+export const BooksContext = createContext<BookContextProps>(
+  {} as BookContextProps
+);
 
-export function BooksProvider({ children }: BookProviderProps){
-    const [books, setBooks] = useState<Book[]>([])
-    const [moreRenteds, setMoreRenteds] = useState([])
+export function BooksProvider({ children }: BookProviderProps) {
+  const [books, setBooks] = useState<Book[]>([]);
+  const [moreRenteds, setMoreRenteds] = useState([]);
 
-    useEffect(()=>{
-        api
-        .get('/api/livros')
-        .then(res => setBooks(res.data))
-        .catch(err => console.log(err))
-    },[])
+  useEffect(() => {
+    api
+      .get("/api/livros")
+      .then((res) => setBooks(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
-    useEffect(() => {
-        api
-        .get('/api/maisalugados')
-        .then(res => setMoreRenteds(res.data))
-        .catch(err => console.log(err))
-    },[])
-    function addBook(book:Book){
-        api.post('/api/livro', book)
-        .then(()=> alert("Sucesso!"))
-        .catch(err => alert("Ops! Algo de errado não deu certo"))
-    }
+  useEffect(() => {
+    api
+      .get("/api/maisalugados")
+      .then((res) => setMoreRenteds(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+  function addBook(book: Book, onFinish: () => void) {
+    api
+      .post("/api/livro", book)
+      .then(() => {
+        onFinish();
+      })
+      .catch((err) => alert("Ops! Algo de errado não deu certo"));
+  }
 
-    function removeBook(book:Book){
-        api.delete('/api/livro', { data: book})
-        // .then(res => console.log(res))
-        // .catch(err => {
-        //     console.log( book as AxiosRequestConfig<Book>)
-        //     console.log(err.request)
-        // })
-    }
+  function removeBook(book: Book) {
+    api.delete("/api/livro", { data: book });
+  }
 
-    function editBook(book: Book){
-        api.put('/api/livro', book)
-    }
+  function editBook(book: Book, onFinish: () => void) {
+    api.put("/api/livro", book);
+  }
 
-    return(
-        <BooksContext.Provider 
-            value={{
-                books, addBook, removeBook, editBook, moreRenteds
-            }}
-        >
-            {children}
-        </BooksContext.Provider>
-    )
+  return (
+    <BooksContext.Provider
+      value={{
+        books,
+        addBook,
+        removeBook,
+        editBook,
+        moreRenteds,
+      }}
+    >
+      {children}
+    </BooksContext.Provider>
+  );
 }

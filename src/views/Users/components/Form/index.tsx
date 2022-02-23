@@ -55,11 +55,9 @@ export function FormUser({ onFinish, user }: PropsFormBook) {
 
     console.log(userFinish)
     if (user?.id !== undefined) {
-      editUser(userFinish as User)
-      onFinish()
+      editUser(userFinish as User, onFinish)
     } else {
-      addUser(userFinish as User);
-      onFinish()
+      addUser(userFinish as User, onFinish);
     }
   };
 

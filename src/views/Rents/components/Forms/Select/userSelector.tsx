@@ -2,7 +2,6 @@ import { ErrorMessage, Field } from "formik";
 import { useState } from "react";
 import { Rent, User } from "../../../../../interfaces/ResponseAPI";
 import { SelectContainer } from "./style";
-// import { SelectContainer } from "./style";
 
 interface SelectProps{
     rent?: Rent;
@@ -21,7 +20,6 @@ export function SelectUser({ rent, users, userChange }: SelectProps){
           as="select"
           id="usuario_id"
           name={user.id}
-          placeholder="editora..."
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             users.map((user) => {
               if (user.id === Number(e.target.value)) {
@@ -32,6 +30,7 @@ export function SelectUser({ rent, users, userChange }: SelectProps){
             });
           }}
         >
+          <option></option>
           {users.map((user) => {
             if (rent?.id && rent?.usuario_id.id === user.id) {
               return (

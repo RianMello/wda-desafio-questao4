@@ -214,7 +214,7 @@ export function Table() {
         
         <table aria-label="custom pagination table">
           <thead>
-            <tr>
+            <tr key="thead" className="table-head">
               <th id="id">Id</th>
               <th id="nome">Name</th>
               <th id="endereco">Address</th>

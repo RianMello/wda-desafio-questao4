@@ -76,9 +76,9 @@ export function Header() {
     );
   };
 
-  useEffect(() => {
+  useEffect(()=> {
     handleChangeSelectedPage()
-  });
+  },[button]);
 
   const toNavigate = useNavigate();
 
@@ -88,6 +88,7 @@ export function Header() {
         {button.map((bt: IButton) => {
           return (
             <Button
+            key={bt.id}
               selected={bt.isSelected}
               onClick={() => {
                 toNavigate(bt.navigate);

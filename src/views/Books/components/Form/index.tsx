@@ -1,5 +1,5 @@
 import { useBook } from "../../../../hooks/useBook";
-
+import dayjs from "dayjs";
 import { Book, PublisherCompany } from "../../../../interfaces/ResponseAPI";
 
 import { Container } from "./style";
@@ -28,8 +28,8 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
   const schema = Yup.object().shape({
     id: Yup.number(),
     nome: Yup.string().required("Voçê deve informar o nome do livro"),
-    lancamento: Yup.number().required(
-      "Voê deve informar apenas o ano de lançamento"
+    lancamento: Yup.string().required(
+      "Voê deve informar a data de lançamento"
     ),
     autor: Yup.string().required("Voê deve informar o nome do autor do livro"),
     quantidade: Yup.number()
@@ -47,6 +47,8 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
   const { addBook, editBook } = useBook();
   const { publishers } = usePublisher();
 
+  const today = dayjs().format('YYYY-MM-DD')
+  console.log(today);
   const[ publisher, setPublisher] = useState<PublisherCompany>(book?.id ? book.editora : publishers[0]);
 
   const handlePublisherChange = (pub: PublisherCompany) => {
@@ -67,7 +69,7 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
     : {
         id: 0,
         nome: "",
-        lancamento: "",
+        lancamento: '',
         autor: "",
         quantidade: 1,
         editora_id: 0,
@@ -76,10 +78,11 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
       };
 
   const handleSubmit = (values: initialProps) => {
+    const release = dayjs(values.lancamento).get('year');
     const bookFinish = {
       id: values.id,
       nome: values.nome,
-      lancamento: Number(values.lancamento),
+      lancamento: release,
       autor: values.autor,
       quantidade: values.quantidade,
       editora: publisher,
@@ -88,11 +91,11 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
 
     console.log(bookFinish)
     if (book?.id !== undefined) {
-      editBook(bookFinish as Book)
+      editBook(bookFinish as Book, onFinish)
       onFinish()
     } else {
-      addBook(bookFinish as Book);
-      onFinish()
+      addBook(bookFinish as Book, onFinish);
+      console.log(values.lancamento)
     }
   };
 
@@ -117,7 +120,7 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
               name="nome"
             />
             <label htmlFor="autor">Author:</label>
-            <Field id="autor" name="autor" placeholder="autor..." type="text" />
+            <Field id="autor" name="autor" placeholder="author..." type="text" />
             <ErrorMessage
               component="span"
               className="errorMessage"
@@ -128,7 +131,8 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
               id="lancamento"
               name="lancamento"
               placeholder="lançamento..."
-              type="text"
+              type="date"
+              max={today}
             />
             <ErrorMessage
               component="span"
@@ -147,7 +151,7 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
               className="errorMessage"
               name="quantidade"
             />
-            <Select book={book} publishers={publishers} pubChange={handlePublisherChange}/>
+            <Select key={book?.id} book={book} publishers={publishers} pubChange={handlePublisherChange}/>
             <ErrorMessage
               component="span"
               className="errorMessage"

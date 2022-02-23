@@ -119,7 +119,7 @@ export function Table() {
     if (books) {
       setLoading(false);
     }
-  }, [books]);
+  },[books]);
 
   const searched = useMemo(
     () =>
@@ -163,6 +163,7 @@ export function Table() {
   };
   const handleModalDeleteClose = () => {
     setIsModalDeleteOpen(false);
+    document.location.reload();
   };
 
   const handleDeleteVerification = (book: Book) => {
@@ -213,7 +214,7 @@ export function Table() {
       <TableStyle>
         <table aria-label="custom pagination table">
           <thead>
-            <tr className="table-head">
+            <tr key="thead" className="table-head">
               <th id="id">Id</th>
               <th id="name">Name</th>
               <th id="release">Release</th>
@@ -226,7 +227,8 @@ export function Table() {
           </thead>
           <tbody>
             {loading === true ? (
-              <p>Please wait for the data to load...</p>
+              <tr key="load"><td>Please wait for the data to load...</td></tr>
+              
             ) : (
               (rowsPerPage > 0
                 ? searched.slice(

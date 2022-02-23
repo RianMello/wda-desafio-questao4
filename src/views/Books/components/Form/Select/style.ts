@@ -16,4 +16,8 @@ export const SelectContainer = styled.div`
     padding-left: 0.25rem;
     margin: 0.5rem;
   }
+  .placeholder-select {
+    font-size: 0.5rem;
+    color: #fafafa;
+  }
 `;

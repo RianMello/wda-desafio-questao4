@@ -54,7 +54,7 @@ export function Home(){
           topFiveRenteds.map(top => {
             cont++
             var position = cont
-            return <p>{`${position}º: ${top.nome}`}</p>
+            return <p key={top.id}>{`${position}º: ${top.nome}`}</p>
           })
         }
     </div>
