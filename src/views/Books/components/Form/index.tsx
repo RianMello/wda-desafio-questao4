@@ -2,7 +2,9 @@ import { useBook } from "../../../../hooks/useBook";
 import dayjs from "dayjs";
 import { Book, PublisherCompany } from "../../../../interfaces/ResponseAPI";
 
-import { Container } from "./style";
+
+
+import { ContainerForm } from "../../../../styles/formsStyles";
 import { usePublisher }from "../../../../hooks/usePublisher";
 import { Formik, FormikHelpers, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -100,7 +102,7 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
   };
 
   return (
-    <Container>
+    <ContainerForm>
       <Formik
         initialValues={initialValue}
         validationSchema={schema}
@@ -113,14 +115,14 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
           <fieldset>
             <legend>{book?.id ? 'Edit book' :'Add new book'}</legend>
             <label htmlFor="nome">Book name:</label>
-            <Field id="nome" name="nome" placeholder="name..." type="text" />
+            <Field id="nome" name="nome" type="text" />
             <ErrorMessage
               component="span"
               className="errorMessage"
               name="nome"
             />
             <label htmlFor="autor">Author:</label>
-            <Field id="autor" name="autor" placeholder="author..." type="text" />
+            <Field id="autor" name="autor" type="text" />
             <ErrorMessage
               component="span"
               className="errorMessage"
@@ -130,7 +132,6 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
             <Field
               id="lancamento"
               name="lancamento"
-              placeholder="lançamento..."
               type="date"
               max={today}
             />
@@ -143,7 +144,6 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
             <Field
               id="quantidade"
               name="quantidade"
-              placeholder="quantidade..."
               type="number"
             />
             <ErrorMessage
@@ -168,6 +168,6 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
           </div>
         </Form>
       </Formik>
-    </Container>
+    </ContainerForm>
   );
 }

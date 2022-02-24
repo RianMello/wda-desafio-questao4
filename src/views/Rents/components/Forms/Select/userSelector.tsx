@@ -15,18 +15,17 @@ export function SelectUser({ rent, users, userChange }: SelectProps){
 
     return (
       <SelectContainer>
-        <label htmlFor="usuario_id">Responsible:</label>
+        <label htmlFor="user_id">Responsible:</label>
         <Field
           as="select"
-          id="usuario_id"
+          id="user_id"
           name={user.id}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             users.map((user) => {
               if (user.id === Number(e.target.value)) {
-                setUser(user)
                 userChange(user)
+                setUser(user)
               }
-              return user
             });
           }}
         >

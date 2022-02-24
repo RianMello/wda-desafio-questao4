@@ -14,10 +14,10 @@ export function SelectBook({ rent, books, bookChange }: SelectProps) {
 
   return (
     <SelectContainer>
-      <label htmlFor="livro_id">Book:</label>
+      <label htmlFor="book_id">Book:</label>
       <Field
         as="select"
-        id="livro_id"
+        id="book_id"
         name={book.id}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           books.map((book) => {

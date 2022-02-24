@@ -1,14 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
-import { useRent } from '../../../../hooks/useRent'
+import { useRent } from "../../../../hooks/useRent";
 import { Rent } from "../../../../interfaces/ResponseAPI";
-import dayjs from "dayjs"
 
 import { styled } from "@mui/system";
 import TablePaginationUnstyled from "@mui/base/TablePaginationUnstyled";
 import { TableContainer, TableStyle } from "../../../../styles/tablesStyles";
-import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
-import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone';
-import AddCircleTwoToneIcon from '@mui/icons-material/AddCircleTwoTone';
+import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
+import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
+import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 
 import { ModalComponent } from "../../../../components/Modal";
 import { Delete } from "../Delete";
@@ -104,7 +103,7 @@ const CustomTablePagination = styled(TablePaginationUnstyled)(
 );
 
 export function Table() {
-  const { rents } = useRent()
+  const { rents, handleSituationRent } = useRent();
 
   const [search, setSearch] = useState<string>("");
   const [page, setPage] = useState(0);
@@ -123,15 +122,14 @@ export function Table() {
 
   const searched = useMemo(
     () =>
-    rents.filter(
+      rents.filter(
         (data: Rent) =>
           data.data_aluguel.toString().includes(search.toLowerCase()) ||
           data.data_previsao.toString().includes(search.toLowerCase()) ||
           data.data_devolucao.toString().includes(search.toLowerCase()) ||
-          data.id.toString().includes(search.toLowerCase()) ||   
+          data.id.toString().includes(search.toLowerCase()) ||
           data.livro_id.nome.toLowerCase().includes(search.toLowerCase()) ||
           data.usuario_id.nome.toLowerCase().includes(search.toLowerCase())
-          
       ),
     [search, rents]
   );
@@ -169,31 +167,30 @@ export function Table() {
     return <Delete rent={rent} onFinish={handleModalDeleteClose} />;
   };
 
-  const handleSituationRent = (rent: Rent) => {
-    const todayDate = new Date().toLocaleDateString('en', {timeZone: 'UTC'})
+  // const handleSituationRent = (rent: Rent) => {
+  //   const todayDate = new Date().toLocaleDateString("en", { timeZone: "UTC" });
 
-    const today = dayjs(todayDate)
-    const dev = dayjs(rent.data_devolucao)
-    const prazo = dayjs(rent.data_previsao)
-    
-    const returned = today.diff(dev)
-    const dif = dev.diff(prazo)
+  //   const today = dayjs(todayDate);
+  //   const dev = dayjs(rent.data_devolucao);
+  //   const prazo = dayjs(rent.data_previsao);
 
-    if(returned > 0 ){
-      if(rent.data_devolucao !== undefined){
-        if(dif > 0 ){
-          return("edevolvido em atraso")
-        }else if(dif < 0 ||dif === 0){
-          return("devolvido no prazo")
-        }
-        return("devolvido no prazo")
-      }
-    }else if(returned < 0 || returned === 0){
-      return("Não devolvido")
-    }
-    return("devolvido no prazo")
+  //   const returned = today.diff(dev);
+  //   const dif = dev.diff(prazo);
 
-  }
+  //   if (returned > 0) {
+  //     if (rent.data_devolucao !== undefined) {
+  //       if (dif > 0) {
+  //         return "edevolvido em atraso";
+  //       } else if (dif < 0 || dif === 0) {
+  //         return "devolvido no prazo";
+  //       }
+  //       return "devolvido no prazo";
+  //     }
+  //   } else if (returned < 0 || returned === 0) {
+  //     return "Não devolvido";
+  //   }
+  //   return "devolvido no prazo";
+  // };
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rents.length) : 0;
@@ -239,12 +236,11 @@ export function Table() {
       </div>
 
       <TableStyle>
-        
         <table aria-label="custom pagination table">
           <thead>
             <tr className="table-head">
               <th id="id">ID</th>
-              <th id="author">User who rented</th>
+              <th id="author">Responsible</th>
               <th id="copies">Rented book</th>
               <th id="rentalDate">Rental date</th>
               <th id="returnDate">Return date</th>
@@ -255,7 +251,11 @@ export function Table() {
           </thead>
           <tbody>
             {loading === true ? (
-              <p>Please wait for the data to load...</p>
+              <tr key="load" className="loading">
+                <td colSpan={8}>
+                  Please wait for the data to load<img className="gif" src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif" alt="loadingGIF" />
+                </td>
+              </tr>
             ) : (
               (rowsPerPage > 0
                 ? searched.slice(
@@ -264,12 +264,20 @@ export function Table() {
                   )
                 : searched
               ).map((data: Rent) => {
-                const dateRent = new Date(data.data_aluguel)
-                const dateReturn = new Date(data.data_devolucao)
-                const dateExpected = new Date(data.data_previsao)
-                const dateRentFormated = dateRent.toLocaleDateString('pt-BR', {timeZone: 'UTC'})
-                const dateReturnFormated = dateReturn.toLocaleDateString('pt-BR', {timeZone: 'UTC'})
-                const dateExpectedFormated = dateExpected.toLocaleDateString('pt-BR', {timeZone: 'UTC'})
+                const dateRent = new Date(data.data_aluguel);
+                const dateReturn = new Date(data.data_devolucao);
+                const dateExpected = new Date(data.data_previsao);
+                const dateRentFormated = dateRent.toLocaleDateString("pt-BR", {
+                  timeZone: "UTC",
+                });
+                const dateReturnFormated = dateReturn.toLocaleDateString(
+                  "pt-BR",
+                  { timeZone: "UTC" }
+                );
+                const dateExpectedFormated = dateExpected.toLocaleDateString(
+                  "pt-BR",
+                  { timeZone: "UTC" }
+                );
 
                 return (
                   <tr key={data.id}>
@@ -294,7 +302,7 @@ export function Table() {
                     </td>
                     <td style={{ width: 120 }} align="right">
                       <button
-                      className="btn-edit"
+                        className="btn-edit"
                         onClick={() => {
                           handleModalFormOpen();
                           setRentToEdited(data);
@@ -327,7 +335,7 @@ export function Table() {
             <tr className="pagination">
               <CustomTablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                colSpan={rents.length + 1}
+                colSpan={8}
                 count={rents.length}
                 rowsPerPage={rowsPerPage}
                 page={page}

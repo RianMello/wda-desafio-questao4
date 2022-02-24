@@ -12,7 +12,8 @@ import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 import { ModalComponent } from "../../../../components/Modal";
 
 import { FormUser } from "../Form";
-// import { Delete } from "../Delete";
+import { Delete } from "../Delete";
+
 
 const blue = {
   200: "#A5D8FF",
@@ -165,8 +166,7 @@ export function Table() {
   };
 
   const handleDeleteVerification = (user: User) => {
-    return "delete";
-    // return <Delete book={book} onFinish={handleModalDeleteClose} />;
+    return <Delete user={user} onFinish={handleModalDeleteClose} />
   };
 
   const emptyRows =
@@ -211,7 +211,6 @@ export function Table() {
       </div>
 
       <TableStyle>
-        
         <table aria-label="custom pagination table">
           <thead>
             <tr key="thead" className="table-head">
@@ -225,7 +224,11 @@ export function Table() {
           </thead>
           <tbody>
             {loading === true ? (
-              <p>Aguarde enquanto os dados são carregados</p>
+              <tr key="load" className="loading">
+                 <td colSpan={8}>
+                  Please wait for the data to load<img className="gif" src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif" alt="loadingGIF" />
+                </td>
+              </tr>
             ) : (
               (rowsPerPage > 0
                 ? searched.slice(
@@ -281,6 +284,7 @@ export function Table() {
           <tfoot>
             <tr>
               <CustomTablePagination
+                className="pagination"
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                 colSpan={7}
                 count={users.length}

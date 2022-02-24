@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { ErrorMessage, Field } from "formik";
 import { useState } from "react";
 import { Book, PublisherCompany } from "../../../../../interfaces/ResponseAPI";
@@ -13,6 +14,8 @@ export function Select({book, publishers, pubChange}: SelectProps){
 
     const [publisher, setPublisher] = useState(publishers[0])
 
+    const today = dayjs().format('YYYY-MM-DD')
+    console.log(today);
     return (
       <SelectContainer>
         <label htmlFor="editora_id">Publisher Company:</label>
@@ -20,6 +23,7 @@ export function Select({book, publishers, pubChange}: SelectProps){
           as="select"
           id="editora_id"
           name={publisher.id}
+          max={today}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             publishers.map((pub) => {
               if (pub.id === Number(e.target.value)) {
@@ -29,7 +33,7 @@ export function Select({book, publishers, pubChange}: SelectProps){
             });
           }}
         >
-          <option className="placeholder-select" >editora...</option>
+          <option className="placeholder-select" ></option>
           {publishers.map((pub) => {
             if (book?.id && book?.editora.id === pub.id) {
               return (

@@ -31,7 +31,7 @@ export const GlobalStyle = createGlobalStyle`
         display: flex;
         -webkit-font-smoothing: antialiased;
         justify-content: center;
-        background: #fafcff;
+        background: #f5f9ff;
     }
 
     body, input, button, textarea {
@@ -56,30 +56,30 @@ export const GlobalStyle = createGlobalStyle`
         justify-content: center;
         align-items: center;
 
-        background-color: rgba(0, 0, 0, 0.5);
-
+        background-color: rgba(0, 0, 0, 0.8);
+        
         position: fixed;
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
     }
-    .modal-content{
+    .modal-content{;
         width: 100%;
-        height: 100%;
+        min-height: 15rem;
         max-height: 35rem;
         max-width: 30rem;
-        background:  #dfe4e6;
+        background: white;
         padding: 2rem;
         position: relative;
-        border-radius: 0.4rem;
+        border-radius: 0.2rem;
     }
     .modalDelete-content{
         width: 100%;
-        height: 100%;
-        max-height: 15rem;
+        max-height: 20rem;
+        min-height: 15rem;
         max-width: 30rem;
-        background:  #dfe4e6;
+        background:  white;
         padding: 2rem;
         position: relative;
         border-radius: 0.4rem;
@@ -89,7 +89,7 @@ export const GlobalStyle = createGlobalStyle`
         justify-content: center;
         align-items: center;
 
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.8);
 
         position: fixed;
         top: 0;

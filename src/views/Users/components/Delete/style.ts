@@ -58,3 +58,21 @@ export const DeleteContainer = styled.div`
         height: 100%;
     }
 `
+
+export const InpedimentDelete = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .impediment{
+        text-align: justify;
+        color: orange;
+    }
+
+    .iconInpediment{
+        font-size: 3rem;
+        color: red;
+    }
+
+`

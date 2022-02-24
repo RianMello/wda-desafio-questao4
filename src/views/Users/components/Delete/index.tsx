@@ -1,7 +1,8 @@
 import { useRent } from "../../../../hooks/useRent";
 import { useUser } from "../../../../hooks/useUser";
 import { User } from "../../../../interfaces/ResponseAPI";
-import { DeleteContainer } from "./style";
+import GppMaybeIcon from '@mui/icons-material/GppMaybe';
+import { DeleteContainer, InpedimentDelete } from "./style";
 
 interface DeleteProps {
   user: User;
@@ -10,23 +11,23 @@ interface DeleteProps {
 
 export const Delete = ({ user, onFinish }: DeleteProps) => {
   const { removeUser } = useUser();
-  const { rents } = useRent();
+  const { rents, handleSituationRent } = useRent();
 
-  function deleteBook() {
-    console.log("tentando pelo menos");
-    removeUser(user);
-    onFinish();
+  function deleteUser() {
+    removeUser(user, onFinish);
+    ;
   }
 
   function deleteVerification() {
-    const canDelete = rents.find((rent) => rent.usuario_id.id === user.id);
+    const canDelete = rents.find((rent) => rent.usuario_id.id === user.id && handleSituationRent(rent) === "Não devolvido" );
     if (canDelete !== undefined) {
       return (
-        <DeleteContainer>
+        <InpedimentDelete>
+          <GppMaybeIcon className="iconInpediment" />
           <h1 className="impediment">
-            This book cannot be deleted at the moment, as we have a book rented
+            This user's record cannot be deleted yet as he has an unreturned book
           </h1>
-        </DeleteContainer>
+        </InpedimentDelete>
       );
     }
     return (
@@ -36,7 +37,7 @@ export const Delete = ({ user, onFinish }: DeleteProps) => {
           <button className="btn-Delete" onClick={() => onFinish()}>
             No
           </button>
-          <button className="btn-noDelete" onClick={() => deleteBook()}>
+          <button className="btn-noDelete" onClick={() => deleteUser()}>
             Yes
           </button>
         </div>

@@ -112,6 +112,15 @@ export const TableStyle = styled.div`
         filter: brightness(0.9) ;
       }
     }
+    .loading{
+      height: 5rem;
+      font-size: 1.5rem;
+      text-align: start;
+      .gif{
+        width: 2rem;
+        height: 2rem;
+      }
+    }
     .pagination{
       border: 1px solid #CDD2D7;
       background-color: #4394e0;

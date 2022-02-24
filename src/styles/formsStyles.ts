@@ -1,23 +1,26 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const ContainerForm = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     height: 100%;
+
     fieldset{
         display: flex;
         flex-direction: column;
-        border: 0.5px solid #57b4d9;
+        border: 0.5px solid #ebf4f7;
         border-radius: 0.5rem;
         padding: 0.5rem;
+        background-color: #fafdff;
     }
 
     legend{
         margin-left: 1rem;
         font-weight: bold;
         font-size: 1.5rem;
+        color: silver;
     }
 
     form{
@@ -26,41 +29,52 @@ export const Container = styled.div`
         justify-content: space-between;
         width: 100%;
         height: 100%;
-
+        
         input{
             height: 2.3rem;
             padding: 0.5rem;
-            border: none;
-            border-radius: 0.5rem;
-            opacity: 0.5;
+            border-width: 0;
+            color: black;
+            
+            border-radius: 0.2rem;
+            border-bottom: 1px solid black;
+
         }
         label{
             font-weight: bold;
             padding-left: 0.25rem;
-            margin: 0.2rem;
+            margin: 0rem;
+            opacity: 0.7;
         }
     }
 
     .btn-cancel{
-        width: 7rem;
-        height: 2.5rem;
+        width: 7.5rem;
+        height: 3rem;
         background-color:#e34f4f;
         color: white;
-        font-weight: bold;
+        font-weight: 600;
+        font-size: 1.2rem;
         border: none;
         border-radius:0.25rem;
         transition: filter 0.2s;
         &:hover{
             filter: brightness(0.9) ;
         }
+        margin-left: 1rem;
     }
 
     .btn-save{
-        width: 7rem;
-        height: 2.5rem;
+        width: 7.5rem;
+        height: 3rem;
+        margin-right: 1rem;
+
         background-color:#4fe39c;
+
         color: white;
-        font-weight: bold;
+        font-weight: 600;
+        font-size: 1.2rem;
+
         border: none;
         border-radius:0.25rem;
         transition: filter 0.2s;
@@ -78,7 +92,6 @@ export const Container = styled.div`
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        padding: 1rem;
-        
+        margin-top: 2rem;
     }
 `

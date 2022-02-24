@@ -7,7 +7,7 @@ interface UserContextProps{
     users: User[];
     addUser: (user: User, onFinish: () => void) => void;
     editUser: (user: User, onFinish: () => void) => void;
-    removeUser: (user: User)=> void;
+    removeUser: (user: User, onFinish: () => void)=> void;
 }
 interface UserProviderProps{
     children: ReactNode;
@@ -33,10 +33,12 @@ export function UserProvider({children}: UserProviderProps){
 
     function editUser(user: User, onFinish: () => void){
         api.put('/api/usuario', user)
+        .then(()=> onFinish())
     }
 
-    function removeUser(user: User){
+    function removeUser(user: User, onFinish: () => void){
         api.delete('/api/usuario', {data: user})
+        .then(()=> onFinish())
     }
 
     return(

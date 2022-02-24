@@ -5,13 +5,13 @@ import { PublisherCompany } from "../../../../interfaces/ResponseAPI";
 import { styled } from "@mui/system";
 import TablePaginationUnstyled from "@mui/base/TablePaginationUnstyled";
 import { TableContainer, TableStyle } from "../../../../styles/tablesStyles";
-import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
-import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone';
-import AddCircleTwoToneIcon from '@mui/icons-material/AddCircleTwoTone';
+import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
+import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
+import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 
 import { ModalComponent } from "../../../../components/Modal";
-// import { FormBook } from "../Form";
-// import { Delete } from "../Delete";
+import { FormPublisher } from "../Form";
+import { Delete } from '../Delete';
 
 const blue = {
   200: "#A5D8FF",
@@ -111,19 +111,17 @@ export function Table() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
 
-  const { publishers } = usePublisher();
-  // const [publisherToEdited, setPublisherToEdited] = useState(publishers[0]);
-  // const [publisherToDelete, setPublisherToDelete] = useState({} as PublisherCompany);
+  const { publishers, load } = usePublisher();
+  const [publisherToEdited, setPublisherToEdited] = useState(publishers[0]);
+  const [publisherToDelete, setPublisherToDelete] = useState(publishers[0]);
 
   useEffect(() => {
-    if (publishers) {
-      setLoading(false);
-    }
-  }, [publishers]);
+    setLoading(load)
+  }, [load]);
 
   const searched = useMemo(
     () =>
-    publishers.filter(
+      publishers.filter(
         (data: PublisherCompany) =>
           data.nome.toLowerCase().includes(search.toLowerCase()) ||
           data.id.toString().includes(search.toLowerCase()) ||
@@ -159,11 +157,12 @@ export function Table() {
   };
   const handleModalDeleteClose = () => {
     setIsModalDeleteOpen(false);
+    document.location.reload();
   };
 
-  // const handleDeleteVerification = (publisher: PublisherCompany) => {
-  //   // return <Delete book={book} onFinish={handleModalDeleteClose} />;
-  // };
+  const handleDeleteVerification = (publisher: PublisherCompany) => {
+    return <Delete publisher={publisher} onFinish={handleModalDeleteClose} />;
+  };
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - publishers.length) : 0;
@@ -175,14 +174,17 @@ export function Table() {
         onRequestClose={handleModalFormClose}
         isDeleteModal={false}
       >
-        {/* <FormBook onFinish={handleModalFormClose} book={bookToEdited} /> */}
+        <FormPublisher
+          onFinish={handleModalFormClose}
+          publisher={publisherToEdited}
+        />
       </ModalComponent>
       <ModalComponent
         isDeleteModal={true}
         isOpen={isModalDeleteOpen}
         onRequestClose={handleModalDeleteClose}
       >
-        {/* {handleDeleteVerification(bookToDelete)} */}
+        {handleDeleteVerification(publisherToDelete)}
       </ModalComponent>
       <div className="header-table-actions">
         <input
@@ -199,7 +201,7 @@ export function Table() {
           className="btn-new"
           onClick={() => {
             handleModalFormOpen();
-            // setPublisherToDelete({} as PublisherCompany);
+            setPublisherToEdited({} as PublisherCompany);
           }}
         >
           <AddCircleTwoToneIcon /> <strong>Publisher</strong>
@@ -212,14 +214,18 @@ export function Table() {
             <tr className="table-head">
               <th id="id">ID</th>
               <th id="nome">Name</th>
-              <th id={"cidade"}>City</th>
+              <th id="cidade">City</th>
               <th id="actions">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {loading === true ? (
-              <p>Please wait for the data to load...</p>
-            ) : (
+            {loading === true ? 
+              <tr key="load" className="loading">
+                <td colSpan={8}>
+                  Please wait for the data to load<img className="gif" src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif" alt="loadingGIF" />
+                </td>
+              </tr>
+               : (
               (rowsPerPage > 0
                 ? searched.slice(
                     page * rowsPerPage,
@@ -238,10 +244,10 @@ export function Table() {
                     </td>
                     <td style={{ width: 120 }} align="right">
                       <button
-                      className="btn-edit"
+                        className="btn-edit"
                         onClick={() => {
                           handleModalFormOpen();
-                          // setPublisherToEdited(data);
+                          setPublisherToEdited(data);
                         }}
                       >
                         <EditTwoToneIcon color="primary" fontSize="large" />
@@ -249,7 +255,7 @@ export function Table() {
                       <button
                         className="btn-delete"
                         onClick={() => {
-                          // setPublisherToDelete(data);
+                          setPublisherToDelete(data);
                           handleModalDeleteOpen();
                         }}
                       >
@@ -271,7 +277,7 @@ export function Table() {
             <tr className="pagination">
               <CustomTablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                colSpan={publishers.length + 1}
+                colSpan={4}
                 count={publishers.length}
                 rowsPerPage={rowsPerPage}
                 page={page}

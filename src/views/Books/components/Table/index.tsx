@@ -2,12 +2,13 @@ import { useEffect, useMemo, useState } from "react";
 import { useBook } from "../../../../hooks/useBook";
 import { Book } from "../../../../interfaces/ResponseAPI";
 
+
 import { styled } from "@mui/system";
 import TablePaginationUnstyled from "@mui/base/TablePaginationUnstyled";
 import { TableContainer, TableStyle } from "../../../../styles/tablesStyles";
-import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
-import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone';
-import AddCircleTwoToneIcon from '@mui/icons-material/AddCircleTwoTone';
+import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
+import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
+import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 
 import { ModalComponent } from "../../../../components/Modal";
 import { FormBook } from "../Form";
@@ -111,15 +112,13 @@ export function Table() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
 
-  const { books } = useBook();
+  const { books, load } = useBook();
   const [bookToEdited, setBookToEdited] = useState(books[0]);
   const [bookToDelete, setBookToDelete] = useState({} as Book);
 
   useEffect(() => {
-    if (books) {
-      setLoading(false);
-    }
-  },[books]);
+    setLoading(load)
+  },[load])
 
   const searched = useMemo(
     () =>
@@ -226,10 +225,13 @@ export function Table() {
             </tr>
           </thead>
           <tbody>
-            {loading === true ? (
-              <tr key="load"><td>Please wait for the data to load...</td></tr>
-              
-            ) : (
+            {loading === true ? 
+              <tr key="load" className="loading">
+                <td colSpan={8}>
+                  Please wait for the data to load<img className="gif" src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif" alt="loadingGIF" />
+                </td>
+              </tr>
+             : (
               (rowsPerPage > 0
                 ? searched.slice(
                     page * rowsPerPage,
@@ -260,7 +262,7 @@ export function Table() {
                     </td>
                     <td style={{ width: 120 }} align="right">
                       <button
-                      className="btn-edit"
+                        className="btn-edit"
                         onClick={() => {
                           handleModalFormOpen();
                           setBookToEdited(data);
@@ -293,7 +295,7 @@ export function Table() {
             <tr className="pagination">
               <CustomTablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                colSpan={books.length + 1}
+                colSpan={8}
                 count={books.length}
                 rowsPerPage={rowsPerPage}
                 page={page}

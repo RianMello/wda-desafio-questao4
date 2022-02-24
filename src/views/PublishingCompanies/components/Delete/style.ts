@@ -8,13 +8,10 @@ export const DeleteContainer = styled.div`
     height: 100%;
     width: 100%;
     font-family:'Poppins', sans-serif;
-    h1{
-        text-align: left;
-        margin: 0.5rem;
-    }
     h2{
         text-align: left;
         margin: 0.5rem;
+        font-size: 1.5rem;
     }
     .btn-noDelete{
         width: 100%;
@@ -57,22 +54,4 @@ export const DeleteContainer = styled.div`
         width: 100%;
         height: 100%;
     }
-`
-
-export const InpedimentDelete = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    .impediment{
-        text-align: justify;
-        color: orange;
-    }
-
-    .iconInpediment{
-        font-size: 3rem;
-        color: red;
-    }
-
 `

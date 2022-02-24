@@ -5,7 +5,7 @@ import { Formik, FormikHelpers, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useUser } from "../../../../hooks/useUser";
 import { useBook } from "../../../../hooks/useBook";
-import { Container } from "./style";
+import { ContainerForm } from "../../../../styles/formsStyles";
 import { SelectUser } from "./Select/userSelector";
 import { useState } from "react";
 import { SelectBook } from "./Select/bookSelector";
@@ -20,6 +20,8 @@ interface initialProps {
   data_aluguel: string;
   data_previsao: string;
   data_devolucao: string;
+  user_id: number,
+  book_id: number,
   usuario_id: User;
   livro_id: Book;
 }
@@ -27,10 +29,10 @@ interface initialProps {
 export function FormRent({ rent, onFinish }: FormRentProps) {
   const { addRent, editRent } = useRent();
   const { users } = useUser();
-  const { books, editBook } = useBook();
+  const { editBook, available } = useBook();
 
-  const [user, setUser] = useState(rent?.id ? rent.usuario_id : ({} as User));
-  const [book, setBook] = useState(rent?.id ? rent.livro_id : ({} as Book));
+  const [user, setUser] = useState(rent?.id ? rent.usuario_id : users[0]);
+  const [book, setBook] = useState(rent?.id ? rent.livro_id : available[0]);
 
   const schema = Yup.object().shape({
     id: Yup.number(),
@@ -70,15 +72,19 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
         data_previsao: rent.data_previsao,
         data_devolucao: rent.data_devolucao,
         usuario_id: rent.usuario_id,
+        user_id: rent.usuario_id.id,
         livro_id: rent.livro_id,
+        book_id: rent.livro_id.id
       }
     : {
         id: 0,
         data_aluguel: "",
         data_previsao: "",
         data_devolucao: "",
-        usuario_id: user,
-        livro_id: book,
+        user_id: 0,
+        book_id: 0,
+        usuario_id: users[0],
+        livro_id: available[0],
       };
 
   const handleUserChange = (user: User) => {
@@ -88,30 +94,32 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
     setBook(book);
   };
 
-  const today = dayjs().format('DD-MM-YYYY')
-  console.log(today);
+  const today = dayjs().format('YYYY-MM-DD')
+
   const handleSubmit = (values: initialProps) => {
     const rentFinish = {
       id: values.id,
       data_aluguel: values.data_aluguel,
       data_previsao: values.data_previsao,
       data_devolucao: values.data_devolucao,
-      usuario_id: values.usuario_id,
-      livro_id: values.livro_id,
+      usuario_id: user,
+      livro_id: book,
     };
     if (rent?.id !== undefined) {
-      editRent(rentFinish as Rent);
-
-      // return onFinish();
+      editRent(rentFinish as Rent, onFinish);
+      console.log(rentFinish)
+      return;
     } else {
-      editBook({ ...book, totalalugado: book.totalalugado + 1 }, onFinish);
-      addRent(rentFinish as Rent);
-      // return onFinish();
+      let renteded = book.totalalugado + 1
+      editBook({ ...book, totalalugado: renteded }, onFinish);
+      addRent(rentFinish as Rent, onFinish);
+      console.log(rentFinish)
+      return 
     }
   };
 
   return (
-    <Container>
+    <ContainerForm>
       <Formik
         initialValues={initialValue}
         validationSchema={schema}
@@ -132,7 +140,7 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
             />
             <SelectBook
               rent={rent}
-              books={books}
+              books={available}
               bookChange={handleBookChange}
             />
             <label htmlFor="data_aluguel">Rental date::</label>
@@ -165,6 +173,7 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
               name="data_previsao"
               placeholder="dd/mm/aaaa..."
               type="date"
+              min={today}
             />
             <ErrorMessage
               component="span"
@@ -182,6 +191,6 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
           </div>
         </Form>
       </Formik>
-    </Container>
+    </ContainerForm>
   );
 }

@@ -1,6 +1,6 @@
 import { User } from "../../../../interfaces/ResponseAPI";
 
-import { Container } from "./style";
+import { ContainerForm } from "../../../../styles/formsStyles";
 import { Formik, FormikHelpers, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useUser } from "../../../../hooks/useUser";
@@ -62,7 +62,7 @@ export function FormUser({ onFinish, user }: PropsFormBook) {
   };
 
   return (
-    <Container>
+    <ContainerForm>
       <Formik
         initialValues={initialValue}
         validationSchema={schema}
@@ -123,6 +123,6 @@ export function FormUser({ onFinish, user }: PropsFormBook) {
           </div>
         </Form>
       </Formik>
-    </Container>
+    </ContainerForm>
   );
 }

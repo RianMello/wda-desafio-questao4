@@ -1,7 +1,8 @@
 import { useBook } from "../../../../hooks/useBook";
 import { useRent } from "../../../../hooks/useRent";
 import { Book } from "../../../../interfaces/ResponseAPI";
-import { DeleteContainer } from "./style";
+import { DeleteContainer, InpedimentDelete } from "./style";
+import GppMaybeIcon from '@mui/icons-material/GppMaybe';
 
 interface DeleteProps {
   book: Book;
@@ -23,11 +24,12 @@ export const Delete = ({ book, onFinish }: DeleteProps) => {
     const canDelete = rents.find((rent) => rent.livro_id.id === book.id);
     if (canDelete !== undefined) {
       return (
-        <DeleteContainer>
+        <InpedimentDelete>
+          <GppMaybeIcon className="iconInpediment" fontSize="inherit"/>
           <h1 className="impediment">
-            This book cannot be deleted at the moment, as we have a rented copy
+          Attention: This book is currently rented, so it cannot be deleted.
           </h1>
-        </DeleteContainer>
+        </InpedimentDelete>
       );
     }
     return (

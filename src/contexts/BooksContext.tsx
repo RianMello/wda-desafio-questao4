@@ -7,8 +7,10 @@ interface BookProviderProps {
 }
 
 interface BookContextProps {
+  load: boolean;
   books: Book[];
   moreRenteds: Book[];
+  available: Book[];
   addBook: (book: Book, onFinish: () => void) => void;
   removeBook: (book: Book) => void;
   editBook: (book: Book, onFinish: () => void) => void;
@@ -21,11 +23,17 @@ export const BooksContext = createContext<BookContextProps>(
 export function BooksProvider({ children }: BookProviderProps) {
   const [books, setBooks] = useState<Book[]>([]);
   const [moreRenteds, setMoreRenteds] = useState([]);
+  const [available, setAvailable] = useState([]);
+
+  const [load, setLoad] = useState(true)
 
   useEffect(() => {
     api
       .get("/api/livros")
-      .then((res) => setBooks(res.data))
+      .then((res) => {
+        setLoad(false)
+        setBooks(res.data)
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -35,13 +43,24 @@ export function BooksProvider({ children }: BookProviderProps) {
       .then((res) => setMoreRenteds(res.data))
       .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() =>{
+    api
+    .get("/api/disponiveis")
+    .then((res) => setAvailable(res.data))
+    .catch((err) => console.log(err));
+  })
   function addBook(book: Book, onFinish: () => void) {
     api
       .post("/api/livro", book)
       .then(() => {
         onFinish();
       })
-      .catch((err) => alert("Ops! Algo de errado não deu certo"));
+      .catch(err =>{ 
+        if(err.message === 'Request failed with status code 400'){
+          alert('Book already registered! Check the data and try again');
+        }
+      })
   }
 
   function removeBook(book: Book) {
@@ -55,6 +74,8 @@ export function BooksProvider({ children }: BookProviderProps) {
   return (
     <BooksContext.Provider
       value={{
+        available,
+        load,
         books,
         addBook,
         removeBook,
