@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useBook } from "../../../../hooks/useBook";
 import { Book } from "../../../../interfaces/ResponseAPI";
 
@@ -10,7 +11,8 @@ import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 import { Tooltip } from "@mui/material";
-import { useNavigate } from "react-router";
+
+
 
 import { ModalComponent } from "../../../../components/Modal";
 import { FormBook } from "../Form";
@@ -159,16 +161,16 @@ export function Table() {
 
   const handleModalFormClose = () => {
     setIsModalOpen(false);
-    document.location.reload();
-    navigate('/books')
+    window.location.reload();
+    //navigate('/books')
   };
   const handleModalDeleteOpen = () => {
     setIsModalDeleteOpen(true);
   };
   const handleModalDeleteClose = () => {
     setIsModalDeleteOpen(false);
-    document.location.reload();
-    navigate('/books')
+    window.location.reload();
+    //navigate('/books')
   };
 
   const handleDeleteVerification = (book: Book) => {
