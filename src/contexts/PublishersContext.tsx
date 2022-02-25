@@ -36,7 +36,7 @@ export function PublishersProvider({ children }: ProviderProps) {
     api
       .post("/api/editora", publisher)
       .then(() => onFinish())
-      .catch((err) => console.log(err));
+      .catch((err) => alert("Incorrect data, check it and try again"));
   }
   function removePublisher(publisher: PublisherCompany, onFinish: () => void) {
     api

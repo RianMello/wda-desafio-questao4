@@ -143,11 +143,12 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
               books={available}
               bookChange={handleBookChange}
             />
-            <label htmlFor="data_aluguel">Rental date::</label>
+            <label htmlFor="data_aluguel">Rental date:</label>
             <Field
               id="data_aluguel"
               name="data_aluguel"
               type="date"
+              min={today}
             />
             <ErrorMessage
               component="span"

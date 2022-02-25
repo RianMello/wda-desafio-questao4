@@ -25,7 +25,6 @@ export function SelectBook({ rent, books, bookChange }: SelectProps) {
               setBook(book);
               bookChange(book);
             }
-            return book;
           });
         }}
       >

@@ -12,6 +12,7 @@ import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 import { ModalComponent } from "../../../../components/Modal";
 import { Delete } from "../Delete";
 import { FormRent } from "../Forms";
+import dayjs from "dayjs";
 
 const blue = {
   200: "#A5D8FF",
@@ -103,7 +104,7 @@ const CustomTablePagination = styled(TablePaginationUnstyled)(
 );
 
 export function Table() {
-  const { rents, handleSituationRent } = useRent();
+  const { load, rents, handleSituationRent } = useRent();
 
   const [search, setSearch] = useState<string>("");
   const [page, setPage] = useState(0);
@@ -116,9 +117,9 @@ export function Table() {
 
   useEffect(() => {
     if (rents) {
-      setLoading(false);
+      setLoading(load);
     }
-  }, [rents]);
+  }, [load]);
 
   const searched = useMemo(
     () =>
@@ -161,41 +162,15 @@ export function Table() {
   };
   const handleModalDeleteClose = () => {
     setIsModalDeleteOpen(false);
+    document.location.reload();
   };
 
   const handleDeleteVerification = (rent: Rent) => {
     return <Delete rent={rent} onFinish={handleModalDeleteClose} />;
   };
 
-  // const handleSituationRent = (rent: Rent) => {
-  //   const todayDate = new Date().toLocaleDateString("en", { timeZone: "UTC" });
-
-  //   const today = dayjs(todayDate);
-  //   const dev = dayjs(rent.data_devolucao);
-  //   const prazo = dayjs(rent.data_previsao);
-
-  //   const returned = today.diff(dev);
-  //   const dif = dev.diff(prazo);
-
-  //   if (returned > 0) {
-  //     if (rent.data_devolucao !== undefined) {
-  //       if (dif > 0) {
-  //         return "edevolvido em atraso";
-  //       } else if (dif < 0 || dif === 0) {
-  //         return "devolvido no prazo";
-  //       }
-  //       return "devolvido no prazo";
-  //     }
-  //   } else if (returned < 0 || returned === 0) {
-  //     return "Não devolvido";
-  //   }
-  //   return "devolvido no prazo";
-  // };
-
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rents.length) : 0;
-
-  // const dates = new Date()
 
   return (
     <TableContainer>
@@ -264,21 +239,11 @@ export function Table() {
                   )
                 : searched
               ).map((data: Rent) => {
-                const dateRent = new Date(data.data_aluguel);
-                const dateReturn = new Date(data.data_devolucao);
-                const dateExpected = new Date(data.data_previsao);
-                const dateRentFormated = dateRent.toLocaleDateString("pt-BR", {
-                  timeZone: "UTC",
-                });
-                const dateReturnFormated = dateReturn.toLocaleDateString(
-                  "pt-BR",
-                  { timeZone: "UTC" }
-                );
-                const dateExpectedFormated = dateExpected.toLocaleDateString(
-                  "pt-BR",
-                  { timeZone: "UTC" }
-                );
-
+                const dateRent = dayjs(data.data_aluguel).format('DD/MM/YYYY')
+                const dateReturn = dayjs(data.data_devolucao).format('DD/MM/YYYY')
+                const dateExpected = dayjs(data.data_devolucao).format('DD/MM/YYYY')
+                console.log(dateExpected)
+                console.log(dateReturn)
                 return (
                   <tr key={data.id}>
                     <td style={{ width: 80 }}>#{data.id}</td>
@@ -289,13 +254,13 @@ export function Table() {
                       {data.livro_id.nome}
                     </td>
                     <td style={{ width: 120 }} align="right">
-                      {dateRentFormated}
+                      {dateRent}
                     </td>
                     <td style={{ width: 120 }} align="right">
-                      {dateReturnFormated}
+                      {dateReturn === 'Invalid Date' ? "dd/mm/aaaa" : dateReturn}
                     </td>
                     <td style={{ width: 120 }} align="right">
-                      {dateExpectedFormated}
+                      {dateExpected === 'Invalid Date' ? "dd/mm/aaaa" : dateExpected}
                     </td>
                     <td style={{ width: 120 }} align="right">
                       {handleSituationRent(data)}

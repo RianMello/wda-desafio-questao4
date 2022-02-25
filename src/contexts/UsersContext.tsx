@@ -28,7 +28,7 @@ export function UserProvider({children}: UserProviderProps){
     function addUser(user: User, onFinish: () => void){
         api.post('/api/usuario', user)
         .then(()=> onFinish())
-        .catch(()=> alert("Não deu"))
+        .catch(()=> alert("Incorrect data, check it and try again"))
     }
 
     function editUser(user: User, onFinish: () => void){

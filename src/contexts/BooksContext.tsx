@@ -34,21 +34,17 @@ export function BooksProvider({ children }: BookProviderProps) {
         setBooks(res.data)
       })
       .catch((err) => console.log(err));
-  }, []);
 
-  useEffect(() => {
     api
       .get("/api/maisalugados")
       .then((res) => setMoreRenteds(res.data))
+      .catch((err) => console.log(err)); 
+
+    api
+      .get("/api/disponiveis")
+      .then((res) => setAvailable(res.data))
       .catch((err) => console.log(err));
   }, []);
-
-  useEffect(() =>{
-    api
-    .get("/api/disponiveis")
-    .then((res) => setAvailable(res.data))
-    .catch((err) => console.log(err));
-  })
 
   function addBook(book: Book, onFinish: () => void) {
     api
@@ -75,7 +71,8 @@ export function BooksProvider({ children }: BookProviderProps) {
   }
 
   function editBook(book: Book) {
-    api.put("/api/livro", book);
+    api.put("/api/livro", book)
+    .then(()=> console.log('Book updated'))
   }
 
   return (

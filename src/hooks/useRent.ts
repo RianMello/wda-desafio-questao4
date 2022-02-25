@@ -3,7 +3,7 @@ import { useContext } from "react";
 
 export function useRent(){
     const context = useContext(RentsContext)
-    const { rents, addRent, removeRent, editRent, handleSituationRent} = context;
+    const { load, rents, addRent, removeRent, editRent, handleSituationRent} = context;
 
-    return { rents, addRent, removeRent, editRent, handleSituationRent }
+    return { load, rents, addRent, removeRent, editRent, handleSituationRent }
 }
