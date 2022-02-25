@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { useBook } from "../../../../hooks/useBook";
 import { Book } from "../../../../interfaces/ResponseAPI";
 
@@ -162,7 +162,7 @@ export function Table() {
   const handleModalFormClose = () => {
     setIsModalOpen(false);
     window.location.reload();
-    //navigate('/books')
+    <Navigate to="/books" />
   };
   const handleModalDeleteOpen = () => {
     setIsModalDeleteOpen(true);
@@ -170,7 +170,7 @@ export function Table() {
   const handleModalDeleteClose = () => {
     setIsModalDeleteOpen(false);
     window.location.reload();
-    //navigate('/books')
+    <Navigate to="/books" />
   };
 
   const handleDeleteVerification = (book: Book) => {
