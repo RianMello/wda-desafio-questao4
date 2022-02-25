@@ -1,7 +1,7 @@
 import { useRent } from "../../../../hooks/useRent";
 import { useUser } from "../../../../hooks/useUser";
 import { User } from "../../../../interfaces/ResponseAPI";
-import GppMaybeIcon from '@mui/icons-material/GppMaybe';
+import GppMaybeIcon from "@mui/icons-material/GppMaybe";
 import { DeleteContainer, InpedimentDelete } from "./style";
 
 interface DeleteProps {
@@ -15,17 +15,21 @@ export const Delete = ({ user, onFinish }: DeleteProps) => {
 
   function deleteUser() {
     removeUser(user, onFinish);
-    ;
   }
 
   function deleteVerification() {
-    const canDelete = rents.find((rent) => rent.usuario_id.id === user.id && handleSituationRent(rent) === "Não devolvido" );
+    const canDelete = rents.find(
+      (rent) =>
+        rent.usuario_id.id === user.id &&
+        handleSituationRent(rent) === "Não devolvido"
+    );
     if (canDelete !== undefined) {
       return (
         <InpedimentDelete>
           <GppMaybeIcon className="iconInpediment" />
           <h1 className="impediment">
-            This user's record cannot be deleted yet as he has an unreturned book
+            This user's record cannot be deleted yet as he has an unreturned
+            book
           </h1>
         </InpedimentDelete>
       );

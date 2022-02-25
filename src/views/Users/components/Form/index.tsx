@@ -10,18 +10,18 @@ interface PropsFormBook {
   user?: User;
 }
 interface initialProps {
-    cidade?: string;
-    email?:string;
-    endereco?:string;
-    id?: number;
-    nome?: string;
+  cidade?: string;
+  email?: string;
+  endereco?: string;
+  id?: number;
+  nome?: string;
 }
 
 export function FormUser({ onFinish, user }: PropsFormBook) {
   const schema = Yup.object().shape({
     cidade: Yup.string().required("Você deve informar a cidade do usuário"),
-    email:Yup.string().required("Você deve informar a email do usuário"),
-    endereco:Yup.string().required("Você deve informar a endereço do usuário"),
+    email: Yup.string().required("Você deve informar a email do usuário"),
+    endereco: Yup.string().required("Você deve informar a endereço do usuário"),
     id: Yup.number(),
     nome: Yup.string().required("Você deve informar a nome do usuário"),
   });
@@ -31,31 +31,31 @@ export function FormUser({ onFinish, user }: PropsFormBook) {
   const initialValue = user?.id
     ? {
         cidade: user?.cidade,
-        email:user?.email,
-        endereco:user?.endereco,
+        email: user?.email,
+        endereco: user?.endereco,
         id: user?.id,
-        nome: user?.nome
+        nome: user?.nome,
       }
     : {
-        cidade: '',
-        email:'',
-        endereco:'',
+        cidade: "",
+        email: "",
+        endereco: "",
         id: 0,
-        nome: ''
+        nome: "",
       };
 
   const handleSubmit = (values: initialProps) => {
     const userFinish = {
-        cidade: values.cidade,
-        email:values.email,
-        endereco:values.endereco,
-        id: values.id,
-        nome: values.nome
+      cidade: values.cidade,
+      email: values.email,
+      endereco: values.endereco,
+      id: values.id,
+      nome: values.nome,
     };
 
-    console.log(userFinish)
+    console.log(userFinish);
     if (user?.id !== undefined) {
-      editUser(userFinish as User, onFinish)
+      editUser(userFinish as User, onFinish);
     } else {
       addUser(userFinish as User, onFinish);
     }
@@ -73,16 +73,16 @@ export function FormUser({ onFinish, user }: PropsFormBook) {
       >
         <Form>
           <fieldset>
-            <legend>{user?.id ? 'Edit user record' :'Add new user'}</legend>
+            <legend>{user?.id ? "Edit user record" : "Add new user"}</legend>
             <label htmlFor="nome">User name:</label>
-            <Field id="nome" name="nome" placeholder="name..." type="text" />
+            <Field id="nome" name="nome" type="text" />
             <ErrorMessage
               component="span"
               className="errorMessage"
               name="nome"
             />
             <label htmlFor="cidade">City:</label>
-            <Field id="cidade" name="cidade" placeholder="cidade..." type="text" />
+            <Field id="cidade" name="cidade" type="text" />
             <ErrorMessage
               component="span"
               className="errorMessage"
@@ -101,12 +101,7 @@ export function FormUser({ onFinish, user }: PropsFormBook) {
               name="email"
             />
             <label htmlFor="endereco">Address:</label>
-            <Field
-              id="endereco"
-              name="endereco"
-              placeholder="endereço..."
-              type="text"
-            />
+            <Field id="endereco" name="endereco" type="text" />
             <ErrorMessage
               component="span"
               className="errorMessage"

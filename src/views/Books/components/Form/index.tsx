@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { Book, PublisherCompany } from "../../../../interfaces/ResponseAPI";
 
 
-
+import { ModalComponent } from "../../../../components/Modal";
 import { ContainerForm } from "../../../../styles/formsStyles";
 import { usePublisher }from "../../../../hooks/usePublisher";
 import { Formik, FormikHelpers, Form, Field, ErrorMessage } from "formik";
@@ -50,8 +50,7 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
   const { publishers } = usePublisher();
 
   const today = dayjs().format('YYYY-MM-DD')
-  console.log(today);
-  const[ publisher, setPublisher] = useState<PublisherCompany>(book?.id ? book.editora : publishers[0]);
+  const [ publisher, setPublisher] = useState<PublisherCompany>(book?.id ? book.editora : publishers[0]);
 
   const handlePublisherChange = (pub: PublisherCompany) => {
       setPublisher(pub)
@@ -93,7 +92,7 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
 
     console.log(bookFinish)
     if (book?.id !== undefined) {
-      editBook(bookFinish as Book, onFinish)
+      editBook(bookFinish as Book)
       onFinish()
     } else {
       addBook(bookFinish as Book, onFinish);

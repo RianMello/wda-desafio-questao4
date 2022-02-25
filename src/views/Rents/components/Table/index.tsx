@@ -308,7 +308,8 @@ export function Table() {
                           setRentToEdited(data);
                         }}
                       >
-                        <EditTwoToneIcon color="primary" fontSize="large" />
+                        <div className="descriptionEdit" >Edit</div>
+                        <EditTwoToneIcon fontSize="large" />
                       </button>
                       <button
                         className="btn-delete"
@@ -317,6 +318,7 @@ export function Table() {
                           handleModalDeleteOpen();
                         }}
                       >
+                        <div className="descriptionDelete" >Delete</div>
                         <DeleteForeverTwoToneIcon fontSize="large" />
                       </button>
                     </td>

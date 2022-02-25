@@ -214,7 +214,7 @@ export function Table() {
         <table aria-label="custom pagination table">
           <thead>
             <tr key="thead" className="table-head">
-              <th id="id">Id</th>
+              <th id="id">ID</th>
               <th id="name">Name</th>
               <th id="release">Release</th>
               <th id="publisher-company">Publisher</th>
@@ -261,15 +261,18 @@ export function Table() {
                       {data.totalalugado}
                     </td>
                     <td style={{ width: 120 }} align="right">
-                      <button
+                    <button
                         className="btn-edit"
                         onClick={() => {
                           handleModalFormOpen();
                           setBookToEdited(data);
                         }}
                       >
-                        <EditTwoToneIcon color="primary" fontSize="large" />
+                      <div className="descriptionEdit" >Edit</div>
+                        <EditTwoToneIcon fontSize="large" />
                       </button>
+
+                      
                       <button
                         className="btn-delete"
                         onClick={() => {
@@ -277,6 +280,7 @@ export function Table() {
                           handleModalDeleteOpen();
                         }}
                       >
+                        <div className="descriptionDelete" >Delete</div>
                         <DeleteForeverTwoToneIcon fontSize="large" />
                       </button>
                     </td>

@@ -32,8 +32,10 @@ export function RentsProvider({ children }: RentsProviderProps) {
   function addRent(rent: Rent, onFinish: ()=> void) {
     api
       .post("api/aluguel", rent)
-      .then(() => onFinish())
-      .catch(() => console.log("deu erro aqui em"));
+      .then(() =>{ 
+        onFinish()
+      })
+      .catch(() => console.log(rent));
   }
   function removeRent(rent: Rent, onFinish: ()=> void) {
     api

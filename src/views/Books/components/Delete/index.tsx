@@ -15,8 +15,7 @@ export const Delete = ({ book, onFinish }: DeleteProps) => {
 
   function deleteBook() {
     console.log("tentando pelo menos");
-    removeBook(book);
-    onFinish();
+    removeBook(book, onFinish);
     return
   }
 

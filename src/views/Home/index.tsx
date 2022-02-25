@@ -1,4 +1,7 @@
 import { useBook } from '../../hooks/useBook'
+import { useUser } from '../../hooks/useUser';
+import { usePublisher } from '../../hooks/usePublisher';
+import { useRent } from '../../hooks/useRent';
 
 import { Bar } from 'react-chartjs-2'
 import {
@@ -11,14 +14,16 @@ import {
   Legend,
 } from 'chart.js';
 
-import { Container } from './style'
+import { Container, CardView, VierContent } from './style'
 export function Home(){
-  const { moreRenteds } = useBook()
+  const { moreRenteds, books } = useBook()
+  const { rents } = useRent()
+  const { publishers } = usePublisher();
+  const { users } = useUser()
+
 
   const topFiveRenteds = moreRenteds.slice(0, 5)
-
-  var cont = 0
-
+  
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -28,37 +33,48 @@ export function Home(){
     Legend
   );
 
-  const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-  ];
-
+  const labels = topFiveRenteds.map((label)=>{
+    return [label.nome]
+  });
+  console.log(labels)
+  
   const data = {
     labels: labels,
     datasets: [{
-      label: 'My First dataset',
+      label: 'More Rented',
       backgroundColor: '#4394e0',
       borderColor: '#4394e0',
-      data: [0, 10, 5, 2, 20, 30, 45],
-    }]
+      data: topFiveRenteds.map((data)=>{
+        return [data.totalalugado]
+      }),
+    }],
+    options: {
+      indexAxis: 'y',
+    },
   };
   return(
     <Container>
-      <div>
-        <h2>Top Five Rented</h2>
-        {
-          topFiveRenteds.map(top => {
-            cont++
-            var position = cont
-            return <p key={top.id}>{`${position}º: ${top.nome}`}</p>
-          })
-        }
-    </div>
-   <div className="container-chart"> 
+      <VierContent>
+      <CardView>
+          <h1>Publisher' Records</h1>
+          <h3>{publishers.length}</h3>
+        </CardView>
+        <CardView>
+          <h1>Book Records</h1>
+          <h3>{books.length}</h3>
+        </CardView>
+        <CardView>
+          <h1>User Records</h1>
+          <h3>{users.length}</h3>
+        </CardView>
+        <CardView>
+          <h1>Rental Records</h1>
+          <h3>{rents.length}</h3>
+        </CardView>
+
+      </VierContent>
+   <div className="container-chart">
+     <h1> Top 5 Books Rented </h1>
        <Bar data={data} />
    </div>
     </Container>

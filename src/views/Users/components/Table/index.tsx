@@ -14,7 +14,6 @@ import { ModalComponent } from "../../../../components/Modal";
 import { FormUser } from "../Form";
 import { Delete } from "../Delete";
 
-
 const blue = {
   200: "#A5D8FF",
   400: "#3399FF",
@@ -166,7 +165,7 @@ export function Table() {
   };
 
   const handleDeleteVerification = (user: User) => {
-    return <Delete user={user} onFinish={handleModalDeleteClose} />
+    return <Delete user={user} onFinish={handleModalDeleteClose} />;
   };
 
   const emptyRows =
@@ -214,7 +213,7 @@ export function Table() {
         <table aria-label="custom pagination table">
           <thead>
             <tr key="thead" className="table-head">
-              <th id="id">Id</th>
+              <th id="id">ID</th>
               <th id="nome">Name</th>
               <th id="endereco">Address</th>
               <th id="email">Email</th>
@@ -225,8 +224,13 @@ export function Table() {
           <tbody>
             {loading === true ? (
               <tr key="load" className="loading">
-                 <td colSpan={8}>
-                  Please wait for the data to load<img className="gif" src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif" alt="loadingGIF" />
+                <td colSpan={8}>
+                  Please wait for the data to load
+                  <img
+                    className="gif"
+                    src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif"
+                    alt="loadingGIF"
+                  />
                 </td>
               </tr>
             ) : (
@@ -259,7 +263,8 @@ export function Table() {
                         setUserToEdited(data);
                       }}
                     >
-                      <EditTwoToneIcon color="primary" fontSize="large" />
+                      <div className="descriptionEdit" >Edit</div>
+                      <EditTwoToneIcon fontSize="large" />
                     </button>
                     <button
                       className="btn-delete"
@@ -268,6 +273,7 @@ export function Table() {
                         handleModalDeleteOpen();
                       }}
                     >
+                      <div className="descriptionDelete" >Delete</div>
                       <DeleteForeverTwoToneIcon fontSize="large" />
                     </button>
                   </td>

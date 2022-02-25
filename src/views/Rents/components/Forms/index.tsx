@@ -20,8 +20,8 @@ interface initialProps {
   data_aluguel: string;
   data_previsao: string;
   data_devolucao: string;
-  user_id: number,
-  book_id: number,
+  user_id: number;
+  book_id: number;
   usuario_id: User;
   livro_id: Book;
 }
@@ -74,7 +74,7 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
         usuario_id: rent.usuario_id,
         user_id: rent.usuario_id.id,
         livro_id: rent.livro_id,
-        book_id: rent.livro_id.id
+        book_id: rent.livro_id.id,
       }
     : {
         id: 0,
@@ -94,7 +94,7 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
     setBook(book);
   };
 
-  const today = dayjs().format('YYYY-MM-DD')
+  const today = dayjs().format("YYYY-MM-DD");
 
   const handleSubmit = (values: initialProps) => {
     const rentFinish = {
@@ -107,14 +107,14 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
     };
     if (rent?.id !== undefined) {
       editRent(rentFinish as Rent, onFinish);
-      console.log(rentFinish)
+      console.log(rentFinish);
       return;
     } else {
-      let renteded = book.totalalugado + 1
-      editBook({ ...book, totalalugado: renteded }, onFinish);
+      let renteded = book.totalalugado + 1;
+      editBook({ ...book, totalalugado: renteded })
       addRent(rentFinish as Rent, onFinish);
-      console.log(rentFinish)
-      return 
+      console.log(rentFinish);
+      return;
     }
   };
 
@@ -147,7 +147,6 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
             <Field
               id="data_aluguel"
               name="data_aluguel"
-              placeholder="dd/mm/aaaa"
               type="date"
             />
             <ErrorMessage
@@ -159,7 +158,6 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
             <Field
               id="data_devolucao"
               name="data_devolucao"
-              placeholder="dd/mm/aaaa..."
               type="date"
             />
             <ErrorMessage
@@ -171,7 +169,6 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
             <Field
               id="data_previsao"
               name="data_previsao"
-              placeholder="dd/mm/aaaa..."
               type="date"
               min={today}
             />
