@@ -219,13 +219,18 @@ export function Table() {
             </tr>
           </thead>
           <tbody>
-            {loading === true ? 
+            {loading === true ? (
               <tr key="load" className="loading">
                 <td colSpan={8}>
-                  Please wait for the data to load<img className="gif" src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif" alt="loadingGIF" />
+                  Please wait for the data to load
+                  <img
+                    className="gif"
+                    src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif"
+                    alt="loadingGIF"
+                  />
                 </td>
               </tr>
-               : (
+            ) : searched.length !== 0 ? (
               (rowsPerPage > 0
                 ? searched.slice(
                     page * rowsPerPage,
@@ -250,7 +255,7 @@ export function Table() {
                           setPublisherToEdited(data);
                         }}
                       >
-                        <div className="descriptionEdit" >Edit</div>
+                        <div className="descriptionEdit">Edit</div>
                         <EditTwoToneIcon fontSize="large" />
                       </button>
                       <button
@@ -260,13 +265,17 @@ export function Table() {
                           handleModalDeleteOpen();
                         }}
                       >
-                        <div className="descriptionDelete" >Delete</div>
-                        <DeleteForeverTwoToneIcon fontSize="large" />         
+                        <div className="descriptionDelete">Delete</div>
+                        <DeleteForeverTwoToneIcon fontSize="large" />
                       </button>
                     </td>
                   </tr>
                 );
               })
+            ) : (
+              <tr key="load" className="loading">
+                <td colSpan={8}>Object not found!</td>
+              </tr>
             )}
 
             {emptyRows > 0 && (

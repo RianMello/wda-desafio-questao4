@@ -116,18 +116,16 @@ export function Table() {
   const [rentToDelete, setRentToDelete] = useState({} as Rent);
 
   useEffect(() => {
-    if (rents) {
       setLoading(load);
-    }
   }, [load]);
 
   const searched = useMemo(
     () =>
       rents.filter(
         (data: Rent) =>
-          data.data_aluguel.toString().includes(search.toLowerCase()) ||
-          data.data_previsao.toString().includes(search.toLowerCase()) ||
-          data.data_devolucao.toString().includes(search.toLowerCase()) ||
+          data.data_aluguel?.toString().includes(search.toLowerCase()) ||
+          data.data_previsao?.toString().includes(search.toLowerCase()) ||
+          data.data_devolucao?.toString().includes(search.toLowerCase()) ||
           data.id.toString().includes(search.toLowerCase()) ||
           data.livro_id.nome.toLowerCase().includes(search.toLowerCase()) ||
           data.usuario_id.nome.toLowerCase().includes(search.toLowerCase())
@@ -192,7 +190,7 @@ export function Table() {
         <input
           className="search-input"
           type="text"
-          placeholder={"Search..."}
+          placeholder="Search..."
           value={search}
           onInput={(e) => {
             const target = e.target as HTMLInputElement;
@@ -228,10 +226,15 @@ export function Table() {
             {loading === true ? (
               <tr key="load" className="loading">
                 <td colSpan={8}>
-                  Please wait for the data to load<img className="gif" src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif" alt="loadingGIF" />
+                  Please wait for the data to load
+                  <img
+                    className="gif"
+                    src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif"
+                    alt="loadingGIF"
+                  />
                 </td>
               </tr>
-            ) : (
+            ) : searched.length !== 0 ? (
               (rowsPerPage > 0
                 ? searched.slice(
                     page * rowsPerPage,
@@ -239,11 +242,15 @@ export function Table() {
                   )
                 : searched
               ).map((data: Rent) => {
-                const dateRent = dayjs(data.data_aluguel).format('DD/MM/YYYY')
-                const dateReturn = dayjs(data.data_devolucao).format('DD/MM/YYYY')
-                const dateExpected = dayjs(data.data_devolucao).format('DD/MM/YYYY')
-                console.log(dateExpected)
-                console.log(dateReturn)
+                const dateRent = dayjs(data.data_aluguel).format("DD/MM/YYYY");
+                const dateReturn = dayjs(data.data_devolucao).format(
+                  "DD/MM/YYYY"
+                );
+                const dateExpected = dayjs(data.data_devolucao).format(
+                  "DD/MM/YYYY"
+                );
+                console.log(dateExpected);
+                console.log(dateReturn);
                 return (
                   <tr key={data.id}>
                     <td style={{ width: 80 }}>#{data.id}</td>
@@ -257,10 +264,14 @@ export function Table() {
                       {dateRent}
                     </td>
                     <td style={{ width: 120 }} align="right">
-                      {dateReturn === 'Invalid Date' ? "dd/mm/aaaa" : dateReturn}
+                      {dateReturn === "Invalid Date"
+                        ? "dd/mm/aaaa"
+                        : dateReturn}
                     </td>
                     <td style={{ width: 120 }} align="right">
-                      {dateExpected === 'Invalid Date' ? "dd/mm/aaaa" : dateExpected}
+                      {dateExpected === "Invalid Date"
+                        ? "dd/mm/aaaa"
+                        : dateExpected}
                     </td>
                     <td style={{ width: 120 }} align="right">
                       {handleSituationRent(data)}
@@ -273,7 +284,7 @@ export function Table() {
                           setRentToEdited(data);
                         }}
                       >
-                        <div className="descriptionEdit" >Edit</div>
+                        <div className="descriptionEdit">Edit</div>
                         <EditTwoToneIcon fontSize="large" />
                       </button>
                       <button
@@ -283,13 +294,17 @@ export function Table() {
                           handleModalDeleteOpen();
                         }}
                       >
-                        <div className="descriptionDelete" >Delete</div>
+                        <div className="descriptionDelete">Delete</div>
                         <DeleteForeverTwoToneIcon fontSize="large" />
                       </button>
                     </td>
                   </tr>
                 );
               })
+            ) : (
+              <tr key="load" className="loading">
+                <td colSpan={8}>Object not found</td>
+              </tr>
             )}
 
             {emptyRows > 0 && (

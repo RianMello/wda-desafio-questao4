@@ -77,8 +77,6 @@ export const TableStyle = styled.div`
       max-width: 90%;
       min-width: 50%;
       margin-bottom: 2rem;
-      
-      border: 1px solid #CDD2D7;
     }
   
     td,
@@ -100,7 +98,6 @@ export const TableStyle = styled.div`
         }
       }
     }
-
     th {
       background-color: #4394e0;
       color: white;

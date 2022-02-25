@@ -195,7 +195,8 @@ export function Table() {
           placeholder={"Search..."}
           value={search}
           onInput={(e) => {
-            const target = e.target as HTMLInputElement;
+            const target = e.target as HTMLInputElement;  
+            console.log(searched)
             setSearch(target.value);
           }}
         />
@@ -231,63 +232,66 @@ export function Table() {
                   Please wait for the data to load<img className="gif" src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif" alt="loadingGIF" />
                 </td>
               </tr>
-             : (
-              (rowsPerPage > 0
-                ? searched.slice(
-                    page * rowsPerPage,
-                    page * rowsPerPage + rowsPerPage
-                  )
-                : searched
-              ).map((data: Book) => {
-                return (
-                  <tr key={data.id}>
-                    <td style={{ width: 80 }}> #{data.id}</td>
-                    <td style={{ width: 120 }} align="right">
-                      {data.nome}
-                    </td>
-                    <td style={{ width: 120 }} align="right">
-                      {data.lancamento}
-                    </td>
-                    <td style={{ width: 120 }} align="right">
-                      {data.editora.nome}
-                    </td>
-                    <td style={{ width: 120 }} align="right">
-                      {data.autor}
-                    </td>
-                    <td style={{ width: 120 }} align="right">
-                      {data.quantidade}
-                    </td>
-                    <td style={{ width: 120 }} align="right">
-                      {data.totalalugado}
-                    </td>
-                    <td style={{ width: 120 }} align="right">
+             : searched.length !== 0 ? (rowsPerPage > 0
+              ? searched.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : searched
+            ).map((data: Book) => {
+              return (
+                <tr key={data.id}>
+                  <td style={{ width: 80 }}> #{data.id}</td>
+                  <td style={{ width: 120 }} align="right">
+                    {data.nome}
+                  </td>
+                  <td style={{ width: 120 }} align="right">
+                    {data.lancamento}
+                  </td>
+                  <td style={{ width: 120 }} align="right">
+                    {data.editora.nome}
+                  </td>
+                  <td style={{ width: 120 }} align="right">
+                    {data.autor}
+                  </td>
+                  <td style={{ width: 120 }} align="right">
+                    {data.quantidade}
+                  </td>
+                  <td style={{ width: 120 }} align="right">
+                    {data.totalalugado}
+                  </td>
+                  <td style={{ width: 120 }} align="right">
+                  <button
+                      className="btn-edit"
+                      onClick={() => {
+                        handleModalFormOpen();
+                        setBookToEdited(data);
+                      }}
+                    >
+                    <div className="descriptionEdit" >Edit</div>
+                      <EditTwoToneIcon fontSize="large" />
+                    </button>             
                     <button
-                        className="btn-edit"
-                        onClick={() => {
-                          handleModalFormOpen();
-                          setBookToEdited(data);
-                        }}
-                      >
-                      <div className="descriptionEdit" >Edit</div>
-                        <EditTwoToneIcon fontSize="large" />
-                      </button>
-
-                      
-                      <button
-                        className="btn-delete"
-                        onClick={() => {
-                          setBookToDelete(data);
-                          handleModalDeleteOpen();
-                        }}
-                      >
-                        <div className="descriptionDelete" >Delete</div>
-                        <DeleteForeverTwoToneIcon fontSize="large" />
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })
-            )}
+                      className="btn-delete"
+                      onClick={() => {
+                        setBookToDelete(data);
+                        handleModalDeleteOpen();
+                      }}
+                    >
+                      <div className="descriptionDelete" >Delete</div>
+                      <DeleteForeverTwoToneIcon fontSize="large" />
+                    </button>
+                  </td>
+                </tr>
+              );
+            }) : 
+            <tr key="load" className="loading">
+              <td colSpan={8}>
+                Object not found
+              </td>
+            </tr> 
+          }
+              
 
             {emptyRows > 0 && (
               <tr style={{ height: 41 * emptyRows }}>

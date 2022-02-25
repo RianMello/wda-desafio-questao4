@@ -233,7 +233,7 @@ export function Table() {
                   />
                 </td>
               </tr>
-            ) : (
+            ) : searched.length !== 0 ? (
               (rowsPerPage > 0
                 ? searched.slice(
                     page * rowsPerPage,
@@ -263,7 +263,7 @@ export function Table() {
                         setUserToEdited(data);
                       }}
                     >
-                      <div className="descriptionEdit" >Edit</div>
+                      <div className="descriptionEdit">Edit</div>
                       <EditTwoToneIcon fontSize="large" />
                     </button>
                     <button
@@ -273,12 +273,16 @@ export function Table() {
                         handleModalDeleteOpen();
                       }}
                     >
-                      <div className="descriptionDelete" >Delete</div>
+                      <div className="descriptionDelete">Delete</div>
                       <DeleteForeverTwoToneIcon fontSize="large" />
                     </button>
                   </td>
                 </tr>
               ))
+            ) : (
+              <tr key="load" className="loading">
+                <td colSpan={8}>Object not found!</td>
+              </tr>
             )}
 
             {emptyRows > 0 && (
