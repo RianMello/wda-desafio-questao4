@@ -9,6 +9,8 @@ import { TableContainer, TableStyle } from "../../../../styles/tablesStyles";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
+import { Tooltip } from "@mui/material";
+
 
 import { ModalComponent } from "../../../../components/Modal";
 import { FormBook } from "../Form";
@@ -261,16 +263,17 @@ export function Table() {
                     {data.totalalugado}
                   </td>
                   <td style={{ width: 120 }} align="right">
-                  <button
+                    <button
                       className="btn-edit"
                       onClick={() => {
                         handleModalFormOpen();
                         setBookToEdited(data);
                       }}
                     >
-                    <div className="descriptionEdit" >Edit</div>
+                    <Tooltip title="Edit">
                       <EditTwoToneIcon fontSize="large" />
-                    </button>             
+                    </Tooltip>
+                    </button>
                     <button
                       className="btn-delete"
                       onClick={() => {
@@ -278,9 +281,10 @@ export function Table() {
                         handleModalDeleteOpen();
                       }}
                     >
-                      <div className="descriptionDelete" >Delete</div>
+                      <Tooltip title="Delete">
                       <DeleteForeverTwoToneIcon fontSize="large" />
-                    </button>
+                      </Tooltip>
+                    </button>       
                   </td>
                 </tr>
               );

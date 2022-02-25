@@ -123,12 +123,6 @@ export const TableStyle = styled.div`
       background-color: #4394e0;
       color: #ffefeb;
     }
-    .descriptionEdit{
-      visibility: hidden;
-      background-color:#8ac5ff;
-      color: black;
-      position: absolute;
-    }
     .btn-edit{
         border-radius: 1.5rem;
         border: none;
@@ -138,18 +132,6 @@ export const TableStyle = styled.div`
         margin: 0.25rem;
         align-items: center;
         color: #8ac5ff;
-        &:hover{
-          .descriptionEdit{
-            visibility: visible;
-          }
-         
-        }
-    }
-    .descriptionDelete{
-      visibility: hidden;
-      background-color:#fa938c;
-      color: white;
-      position: absolute;
     }
     .btn-delete{
         border-radius: 1.5rem;
@@ -160,12 +142,6 @@ export const TableStyle = styled.div`
         margin: 0.25rem;
         align-items: center;
         color: #fa938c;
-        &:hover{
-          .descriptionDelete{
-            visibility: visible;
-          }
-         
-        }
     }
   );
 `;

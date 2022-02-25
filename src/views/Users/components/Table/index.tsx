@@ -13,6 +13,7 @@ import { ModalComponent } from "../../../../components/Modal";
 
 import { FormUser } from "../Form";
 import { Delete } from "../Delete";
+import { Tooltip } from "@mui/material";
 
 const blue = {
   200: "#A5D8FF",
@@ -263,8 +264,9 @@ export function Table() {
                         setUserToEdited(data);
                       }}
                     >
-                      <div className="descriptionEdit">Edit</div>
-                      <EditTwoToneIcon fontSize="large" />
+                      <Tooltip title="Edit">
+                        <EditTwoToneIcon fontSize="large" />
+                      </Tooltip>
                     </button>
                     <button
                       className="btn-delete"
@@ -273,8 +275,9 @@ export function Table() {
                         handleModalDeleteOpen();
                       }}
                     >
-                      <div className="descriptionDelete">Delete</div>
-                      <DeleteForeverTwoToneIcon fontSize="large" />
+                      <Tooltip title="Delete">
+                        <DeleteForeverTwoToneIcon fontSize="large" />
+                      </Tooltip>
                     </button>
                   </td>
                 </tr>

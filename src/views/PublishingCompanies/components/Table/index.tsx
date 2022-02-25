@@ -12,6 +12,7 @@ import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 import { ModalComponent } from "../../../../components/Modal";
 import { FormPublisher } from "../Form";
 import { Delete } from '../Delete';
+import { Tooltip } from "@mui/material";
 
 const blue = {
   200: "#A5D8FF",
@@ -248,26 +249,28 @@ export function Table() {
                       {data.cidade}
                     </td>
                     <td style={{ width: 120 }} align="right">
-                      <button
-                        className="btn-edit"
-                        onClick={() => {
-                          handleModalFormOpen();
-                          setPublisherToEdited(data);
-                        }}
-                      >
-                        <div className="descriptionEdit">Edit</div>
-                        <EditTwoToneIcon fontSize="large" />
-                      </button>
-                      <button
-                        className="btn-delete"
-                        onClick={() => {
-                          setPublisherToDelete(data);
-                          handleModalDeleteOpen();
-                        }}
-                      >
-                        <div className="descriptionDelete">Delete</div>
+                    <button
+                      className="btn-edit"
+                      onClick={() => {
+                        handleModalFormOpen();
+                        setPublisherToEdited(data);
+                      }}
+                    >
+                    <Tooltip title="Edit">
+                      <EditTwoToneIcon fontSize="large" />
+                    </Tooltip>
+                    </button>
+                    <button
+                      className="btn-delete"
+                      onClick={() => {
+                        setPublisherToDelete(data);
+                        handleModalDeleteOpen();
+                      }}
+                    >
+                      <Tooltip title="Delete">
                         <DeleteForeverTwoToneIcon fontSize="large" />
-                      </button>
+                      </Tooltip>
+                    </button>   
                     </td>
                   </tr>
                 );

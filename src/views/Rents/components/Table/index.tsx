@@ -13,6 +13,7 @@ import { ModalComponent } from "../../../../components/Modal";
 import { Delete } from "../Delete";
 import { FormRent } from "../Forms";
 import dayjs from "dayjs";
+import { Tooltip } from "@mui/material";
 
 const blue = {
   200: "#A5D8FF",
@@ -284,8 +285,9 @@ export function Table() {
                           setRentToEdited(data);
                         }}
                       >
-                        <div className="descriptionEdit">Edit</div>
+                        <Tooltip title="Edit">
                         <EditTwoToneIcon fontSize="large" />
+                        </Tooltip>
                       </button>
                       <button
                         className="btn-delete"
@@ -294,8 +296,9 @@ export function Table() {
                           handleModalDeleteOpen();
                         }}
                       >
-                        <div className="descriptionDelete">Delete</div>
-                        <DeleteForeverTwoToneIcon fontSize="large" />
+                        <Tooltip title="Delete">
+                          <DeleteForeverTwoToneIcon fontSize="large" />
+                        </Tooltip>
                       </button>
                     </td>
                   </tr>
