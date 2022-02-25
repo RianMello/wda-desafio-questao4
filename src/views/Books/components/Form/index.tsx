@@ -3,7 +3,6 @@ import dayjs from "dayjs";
 import { Book, PublisherCompany } from "../../../../interfaces/ResponseAPI";
 
 
-import { ModalComponent } from "../../../../components/Modal";
 import { ContainerForm } from "../../../../styles/formsStyles";
 import { usePublisher }from "../../../../hooks/usePublisher";
 import { Formik, FormikHelpers, Form, Field, ErrorMessage } from "formik";

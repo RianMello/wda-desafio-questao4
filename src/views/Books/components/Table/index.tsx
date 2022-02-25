@@ -10,7 +10,7 @@ import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 import { Tooltip } from "@mui/material";
-
+import { useNavigate } from "react-router";
 
 import { ModalComponent } from "../../../../components/Modal";
 import { FormBook } from "../Form";
@@ -118,6 +118,8 @@ export function Table() {
   const [bookToEdited, setBookToEdited] = useState(books[0]);
   const [bookToDelete, setBookToDelete] = useState({} as Book);
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     setLoading(load)
   },[load])
@@ -158,6 +160,7 @@ export function Table() {
   const handleModalFormClose = () => {
     setIsModalOpen(false);
     document.location.reload();
+    navigate('/books')
   };
   const handleModalDeleteOpen = () => {
     setIsModalDeleteOpen(true);
@@ -165,6 +168,7 @@ export function Table() {
   const handleModalDeleteClose = () => {
     setIsModalDeleteOpen(false);
     document.location.reload();
+    navigate('/books')
   };
 
   const handleDeleteVerification = (book: Book) => {
