@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useBook } from "../../../../hooks/useBook";
 import { Book } from "../../../../interfaces/ResponseAPI";
 
@@ -120,8 +120,6 @@ export function Table() {
   const [bookToEdited, setBookToEdited] = useState(books[0]);
   const [bookToDelete, setBookToDelete] = useState({} as Book);
 
-  const navigate = useNavigate()
-
   useEffect(() => {
     setLoading(load)
   },[load])
@@ -141,6 +139,7 @@ export function Table() {
     [search, books]
   );
 
+  const navigate = useNavigate()
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
@@ -161,16 +160,14 @@ export function Table() {
 
   const handleModalFormClose = () => {
     setIsModalOpen(false);
-    window.location.reload();
-    <Navigate to="/books" />
+    navigate('/')
   };
   const handleModalDeleteOpen = () => {
     setIsModalDeleteOpen(true);
   };
   const handleModalDeleteClose = () => {
     setIsModalDeleteOpen(false);
-    window.location.reload();
-    <Navigate to="/books" />
+    navigate('/')
   };
 
   const handleDeleteVerification = (book: Book) => {
@@ -247,6 +244,7 @@ export function Table() {
                 )
               : searched
             ).map((data: Book) => {
+              
               return (
                 <tr key={data.id}>
                   <td style={{ width: 80 }}> #{data.id}</td>
