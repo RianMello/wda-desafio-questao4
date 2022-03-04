@@ -15,13 +15,16 @@ import {
 } from 'chart.js';
 
 import { Container, CardView, VierContent } from './style'
+import { useTranslation } from 'react-i18next';
+
+
 export function Home(){
   const { moreRenteds, books } = useBook()
   const { rents } = useRent()
   const { publishers } = usePublisher();
   const { users } = useUser()
 
-
+  const { t } = useTranslation()
   const topFiveRenteds = moreRenteds.slice(0, 5)
   
   ChartJS.register(
@@ -56,25 +59,25 @@ export function Home(){
     <Container>
       <VierContent>
       <CardView>
-          <h1>Publisher' Records</h1>
+          <h1>{t('pubRecords')}</h1>
           <h3>{publishers.length}</h3>
         </CardView>
         <CardView>
-          <h1>Book Records</h1>
+          <h1>{t('bokRecords')}</h1>
           <h3>{books.length}</h3>
         </CardView>
         <CardView>
-          <h1>User Records</h1>
+          <h1>{t('userRecords')}</h1>
           <h3>{users.length}</h3>
         </CardView>
         <CardView>
-          <h1>Rental Records</h1>
+          <h1>{t('rentRecords')}</h1>
           <h3>{rents.length}</h3>
         </CardView>
 
       </VierContent>
    <div className="container-chart">
-     <h1> Top 5 Books Rented </h1>
+     <h1>{t('topFiveRented')}</h1>
        <Bar data={data} />
    </div>
     </Container>

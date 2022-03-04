@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Container } from "./style";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next"
+import { SelectLanguage } from '../SelectLanguage/index'
 
 interface IButton {
   id: number;
@@ -8,35 +10,38 @@ interface IButton {
   navigate: string;
   isSelected: boolean;
 }
+
 export function Header() {
+
+  const { t, i18n } = useTranslation()
   const buttons = [
     {
       id: 1,
-      label: "Publishing Companies",
+      label: "publishers",
       navigate: "/publishers",
       isSelected: false,
     },
     {
       id: 2,
-      label: "Books",
+      label: "books",
       navigate: "/books",
       isSelected: false,
     },
     {
       id: 3,
-      label: "Dashboard",
+      label: "dashboard",
       navigate: "/",
       isSelected: false,
     },
     {
       id: 4,
-      label: "Users",
+      label: "users",
       navigate: "/users",
       isSelected: false,
     },
     {
       id: 5,
-      label: "Rents",
+      label: "rents",
       navigate: "/rents",
       isSelected: false,
     },
@@ -78,7 +83,7 @@ export function Header() {
 
   useEffect(()=> {
     handleChangeSelectedPage()
-  },[button]);
+  },[currentPage]);
 
   const toNavigate = useNavigate();
 
@@ -92,14 +97,15 @@ export function Header() {
               selected={bt.isSelected}
               onClick={() => {
                 toNavigate(bt.navigate);
-                handleChangeSelectedPage();
+                
               }}
             >
-              {bt.label}
+              {t(bt.label)}
             </Button>
           );
         })}
       </div>
+      <SelectLanguage />
     </Container>
   );
 }

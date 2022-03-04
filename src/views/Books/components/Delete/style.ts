@@ -66,13 +66,17 @@ export const InpedimentDelete = styled.div`
     align-items: center;
 
     .impediment{
-        text-align: justify;
+        text-align: center;
+        font-size: 1.5rem;
         color: orange;
+        margin-top: 1rem;
     }
 
     .iconInpediment{
-        font-size: 3rem;
-        color: red;
+        font-size: 5rem;
+        color: #ff4747;
+        border: 1px solid #ff4747;
+        border-radius: 50%;
     }
 
 `

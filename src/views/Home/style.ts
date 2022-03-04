@@ -21,7 +21,7 @@ export const CardView = styled.div`
     align-items: center;
     background-color: silver;
     min-width: 12rem;
-    max-width: 17rem;
+    max-width: 25rem;
     height: 5rem;
     border-radius: 0.5rem;
     margin: 0.5rem;

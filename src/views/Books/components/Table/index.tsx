@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useBook } from "../../../../hooks/useBook";
 import { Book } from "../../../../interfaces/ResponseAPI";
 
@@ -139,7 +139,7 @@ export function Table() {
     [search, books]
   );
 
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
@@ -160,14 +160,14 @@ export function Table() {
 
   const handleModalFormClose = () => {
     setIsModalOpen(false);
-    navigate('/')
+    document.location.reload()
   };
   const handleModalDeleteOpen = () => {
     setIsModalDeleteOpen(true);
   };
   const handleModalDeleteClose = () => {
     setIsModalDeleteOpen(false);
-    navigate('/')
+    document.location.reload()
   };
 
   const handleDeleteVerification = (book: Book) => {

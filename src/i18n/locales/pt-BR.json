@@ -1,0 +1,17 @@
+{
+    "translation": {
+        "french": "Francês",
+        "portuguese": "Português",
+        "english": "Inglês",
+        "dashboard": "Painel",
+        "books":"Livros",
+        "publishers": "Editoras",
+        "users": "Usuários",
+        "rents": "Aluguéis",
+        "pubRecords": "Registros de Editoras",
+        "bokRecords": "Registros de Livros",
+        "rentRecords": "Registros de Aluguéis",
+        "userRecords": "Registros de Usuários",
+        "topFiveRented": "Os Mais Alugados"
+    }
+}

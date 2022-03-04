@@ -26,7 +26,7 @@ export const Delete = ({ book, onFinish }: DeleteProps) => {
         <InpedimentDelete>
           <GppMaybeIcon className="iconInpediment" fontSize="inherit"/>
           <h1 className="impediment">
-          Attention: This book is currently rented, so it cannot be deleted.
+          This book is currently rented, so it cannot be deleted.
           </h1>
         </InpedimentDelete>
       );

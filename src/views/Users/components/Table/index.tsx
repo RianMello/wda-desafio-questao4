@@ -113,15 +113,13 @@ export function Table() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
 
-  const { users } = useUser();
+  const { users, load } = useUser();
   const [userToEdited, setUserToEdited] = useState(users[0]);
   const [userToDelete, setUserToDelete] = useState({} as User);
 
   useEffect(() => {
-    if (users) {
-      setLoading(false);
-    }
-  }, [users]);
+    setLoading(load);
+  }, [load]);
 
   const searched = useMemo(
     () =>

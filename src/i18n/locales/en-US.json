@@ -1,0 +1,17 @@
+{
+    "translation":{
+        "french": "French",
+        "portuguese": "Portuguese",
+        "english": "English",
+        "dashboard": "Dashboard",
+        "books":"Books",
+        "publishers": "Publishing Company",
+        "users": "Users",
+        "rents": "Rents",
+        "pubRecords": "Publishers' Records",
+        "bokRecords": "Book Records",
+        "rentRecords": "Rental Records",
+        "userRecords": "User Records",
+        "topFiveRented": "The More Rented"
+    }
+}
