@@ -14,6 +14,7 @@ import { Delete } from "../Delete";
 import { FormRent } from "../Forms";
 import dayjs from "dayjs";
 import { Tooltip } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const blue = {
   200: "#A5D8FF",
@@ -116,6 +117,8 @@ export function Table() {
   const [rentToEdited, setRentToEdited] = useState(rents[0]);
   const [rentToDelete, setRentToDelete] = useState({} as Rent);
 
+  const { t } = useTranslation()
+
   useEffect(() => {
       setLoading(load);
   }, [load]);
@@ -214,13 +217,13 @@ export function Table() {
           <thead>
             <tr className="table-head">
               <th id="id">ID</th>
-              <th id="author">Responsible</th>
-              <th id="copies">Rented book</th>
-              <th id="rentalDate">Rental date</th>
-              <th id="returnDate">Return date</th>
-              <th id="expectedDate">Expected date</th>
-              <th id="situation">Situation</th>
-              <th id="actions">Actions</th>
+              <th id="author">{t('responsible')}</th>
+              <th id="copies">{t('rentedBook')}</th>
+              <th id="rentalDate">{t('rentalDate')}</th>
+              <th id="returnDate">{t('returnDate')}</th>
+              <th id="expectedDate">{t('expectedDate')}</th>
+              <th id="situation">{t('situation')}</th>
+              <th id="actions">{t('actions')}</th>
             </tr>
           </thead>
           <tbody>

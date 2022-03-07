@@ -12,6 +12,25 @@
         "bokRecords": "Registros de Livros",
         "rentRecords": "Registros de Aluguéis",
         "userRecords": "Registros de Usuários",
-        "topFiveRented": "Os Mais Alugados"
+        "topFiveRented": "Os Mais Alugados",
+        "actions":"Ações",
+        "name": "Nome",
+        "release":"Lançamento",
+        "publisher": "Editora",
+        "author":"Autor",
+        "copies": "Cópias",
+        "rented": "Alugados",
+        "cityMain": "Cidade Sede",
+        "city": "Cidade",
+        "email": "E-mail",
+        "address":"Endereço",
+        "rentedBook": "Livro alugado",
+        "returnDate":"Data de devolução",
+        "rentedDate":"Data do aluguel",
+        "expectedDate": "Data de prazo",
+        "situation": "Situação",
+        "responsible": "Responsavel",
+        "rowsPerPage":"Linhas por página"
+
     }
 }

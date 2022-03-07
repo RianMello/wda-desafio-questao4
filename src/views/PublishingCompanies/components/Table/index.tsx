@@ -13,6 +13,7 @@ import { ModalComponent } from "../../../../components/Modal";
 import { FormPublisher } from "../Form";
 import { Delete } from '../Delete';
 import { Tooltip } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const blue = {
   200: "#A5D8FF",
@@ -115,6 +116,7 @@ export function Table() {
   const { publishers, load } = usePublisher();
   const [publisherToEdited, setPublisherToEdited] = useState(publishers[0]);
   const [publisherToDelete, setPublisherToDelete] = useState(publishers[0]);
+  const { t } = useTranslation()
 
   useEffect(() => {
     setLoading(load)
@@ -214,9 +216,9 @@ export function Table() {
           <thead>
             <tr className="table-head">
               <th id="id">ID</th>
-              <th id="nome">Name</th>
-              <th id="cidade">City</th>
-              <th id="actions">Actions</th>
+              <th id="nome">{t('name')}</th>
+              <th id="cidade">{t('city')}</th>
+              <th id="actions">{t('actions')}</th>
             </tr>
           </thead>
           <tbody>

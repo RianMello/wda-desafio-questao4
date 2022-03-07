@@ -14,6 +14,7 @@ import { ModalComponent } from "../../../../components/Modal";
 import { FormUser } from "../Form";
 import { Delete } from "../Delete";
 import { Tooltip } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const blue = {
   200: "#A5D8FF",
@@ -116,6 +117,7 @@ export function Table() {
   const { users, load } = useUser();
   const [userToEdited, setUserToEdited] = useState(users[0]);
   const [userToDelete, setUserToDelete] = useState({} as User);
+  const { t } = useTranslation()
 
   useEffect(() => {
     setLoading(load);
@@ -213,11 +215,11 @@ export function Table() {
           <thead>
             <tr key="thead" className="table-head">
               <th id="id">ID</th>
-              <th id="nome">Name</th>
-              <th id="endereco">Address</th>
-              <th id="email">Email</th>
-              <th id="city">City</th>
-              <th id="actions">Actions</th>
+              <th id="nome">{t('name')}</th>
+              <th id="endereco">{t('address')}</th>
+              <th id="email">{t('email')}</th>
+              <th id="city">{t('city')}</th>
+              <th id="actions">{t('actions')}</th>
             </tr>
           </thead>
           <tbody>

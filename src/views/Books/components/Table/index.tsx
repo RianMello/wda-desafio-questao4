@@ -13,10 +13,10 @@ import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 import { Tooltip } from "@mui/material";
 
 
-
+import { useTranslation } from 'react-i18next'
 import { ModalComponent } from "../../../../components/Modal";
 import { FormBook } from "../Form";
-import { Delete } from "../Delete";
+import { Delete } from "../Delete"; 
 
 const blue = {
   200: "#A5D8FF",
@@ -120,6 +120,8 @@ export function Table() {
   const [bookToEdited, setBookToEdited] = useState(books[0]);
   const [bookToDelete, setBookToDelete] = useState({} as Book);
 
+  const { t } = useTranslation()
+
   useEffect(() => {
     setLoading(load)
   },[load])
@@ -221,13 +223,13 @@ export function Table() {
           <thead>
             <tr key="thead" className="table-head">
               <th id="id">ID</th>
-              <th id="name">Name</th>
-              <th id="release">Release</th>
-              <th id="publisher-company">Publisher</th>
-              <th id="author">Author</th>
-              <th id="copies">Copies</th>
-              <th id="rented">Rented</th>
-              <th id="actions">Actions</th>
+              <th id="name">{t('name')}</th>
+              <th id="release">{t('release')}</th>
+              <th id="publisher-company">{t('publisher')}</th>
+              <th id="author">{t('author')}</th>
+              <th id="copies">{t('copies')}</th>
+              <th id="rented">{t('rented')}</th>
+              <th id="actions">{t('actions')}</th>
             </tr>
           </thead>
           <tbody>

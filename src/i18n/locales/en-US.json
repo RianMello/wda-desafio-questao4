@@ -12,6 +12,24 @@
         "bokRecords": "Book Records",
         "rentRecords": "Rental Records",
         "userRecords": "User Records",
-        "topFiveRented": "The More Rented"
+        "topFiveRented": "The More Rented",
+        "actions":"Actions",
+        "name": "Name",
+        "release":"Release",
+        "publisher": "Publisher",
+        "author":"Author",
+        "copies": "Copies",
+        "rented": "Rented",
+        "cityMain": "Main City",
+        "city": "City",
+        "email": "E-mail",
+        "address":"Address",
+        "rentedBook": "Rented Book",
+        "returnDate":"Return date",
+        "rentedDate":"Rented date",
+        "expectedDate": "Expected date",
+        "situation": "Situation",
+        "responsible": "Responsible",
+        "rowsPerPage":"Rows per page"
     }
 }
