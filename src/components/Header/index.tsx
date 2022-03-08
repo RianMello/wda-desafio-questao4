@@ -13,7 +13,7 @@ interface IButton {
 
 export function Header() {
 
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const buttons = [
     {
       id: 1,

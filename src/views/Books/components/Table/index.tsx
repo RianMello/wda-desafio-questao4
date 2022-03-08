@@ -203,7 +203,7 @@ export function Table() {
         <input
           className="search-input"
           type="text"
-          placeholder={"Search..."}
+          placeholder={t('search')}
           value={search}
           onInput={(e) => {
             const target = e.target as HTMLInputElement;  

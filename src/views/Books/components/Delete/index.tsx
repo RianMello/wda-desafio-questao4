@@ -3,6 +3,7 @@ import { useRent } from "../../../../hooks/useRent";
 import { Book } from "../../../../interfaces/ResponseAPI";
 import { DeleteContainer, InpedimentDelete } from "./style";
 import GppMaybeIcon from '@mui/icons-material/GppMaybe';
+import { useTranslation } from "react-i18next";
 
 interface DeleteProps {
   book: Book;
@@ -12,6 +13,8 @@ interface DeleteProps {
 export const Delete = ({ book, onFinish }: DeleteProps) => {
   const { rents } = useRent();
   const { removeBook } = useBook();
+
+  const { t } = useTranslation()
 
   function deleteBook() {
     console.log("tentando pelo menos");
@@ -26,20 +29,20 @@ export const Delete = ({ book, onFinish }: DeleteProps) => {
         <InpedimentDelete>
           <GppMaybeIcon className="iconInpediment" fontSize="inherit"/>
           <h1 className="impediment">
-          This book is currently rented, so it cannot be deleted.
+          {t('impediment.impedimentBook')}
           </h1>
         </InpedimentDelete>
       );
     }
     return (
       <DeleteContainer>
-        <h2>Are you sure you want to delete the record for this book?</h2>
+        <h2>{t('sureDelete.deleteBook')}</h2>
         <div className="buttons-container">
           <button className="btn-Delete" onClick={() => onFinish()}>
-            No
+            {t('options.no')}
           </button>
           <button className="btn-noDelete" onClick={() => deleteBook()}>
-            Yes
+            {t('options.yes')}
           </button>
         </div>
       </DeleteContainer>

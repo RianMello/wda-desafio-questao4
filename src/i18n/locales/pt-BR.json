@@ -3,6 +3,7 @@
         "french": "Francês",
         "portuguese": "Português",
         "english": "Inglês",
+        "search": "Procurar",
         "dashboard": "Painel",
         "books":{
             "book": "Livro",
@@ -36,7 +37,21 @@
         "situation": "Situação",
         "responsible": "Responsavel",
         "rowsPerPage":"Linhas por página",
-        "moreRented": "Mais alugados"
+        "moreRented": "Mais alugados",
+        "impediment":{
+            "impedimentBook": "Este livro está alugado no momento, portanto, não pode ser excluído",
+            "impedimentUser": "O registro deste usuário ainda não pode ser excluído porque ele tem um livro não devolvido"
+        },
+        "sureDelete": {
+            "deleteBook":"Tem certeza de que deseja excluir o registro deste livro?",
+            "deleteUser": "Tem certeza de que deseja excluir o registro deste usuário?",
+            "deleteRent": "Tem certeza de que deseja excluir este registro de aluguel?",
+            "deletePublisher": "Tem certeza de que deseja excluir o registro desta editora?"
+        },
+        "options": {
+            "no": "Não",
+            "yes": "Sim"
+        }
 
     }
 }

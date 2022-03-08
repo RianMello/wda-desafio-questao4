@@ -2,6 +2,7 @@ import { PublisherCompany } from "../../../../interfaces/ResponseAPI";
 import { DeleteContainer } from './style'
 // import GppMaybeIcon from '@mui/icons-material/GppMaybe';
 import { usePublisher } from "../../../../hooks/usePublisher";
+import { useTranslation } from "react-i18next";
 
 interface DeleteProps {
   publisher: PublisherCompany;
@@ -10,6 +11,7 @@ interface DeleteProps {
 
 export const Delete = ({ publisher, onFinish }: DeleteProps) => {
   const { removePublisher } = usePublisher();
+  const { t } = useTranslation()
 
   function deleteBook() {
     console.log("tentando pelo menos");
@@ -20,13 +22,13 @@ export const Delete = ({ publisher, onFinish }: DeleteProps) => {
   function deleteVerification() {
     return (
       <DeleteContainer>
-        <h2>Are you sure you want to delete the record for this Publisher Company?</h2>
+        <h2>{t('sureDelete.deletePublisher')}</h2>
         <div className="buttons-container">
           <button className="btn-Delete" onClick={() => onFinish()}>
-            No
+            {t('options.no')}
           </button>
           <button className="btn-noDelete" onClick={() => deleteBook()}>
-            Yes
+            {t('options.yes')}
           </button>
         </div>
       </DeleteContainer>

@@ -3,6 +3,7 @@
         "french": "Français",
         "portuguese": "Portugais",
         "english": "Anglais",
+        "search": "Rechercher",
         "dashboard": "Panneau",
         "books":{
             "book": "Livre",
@@ -36,6 +37,20 @@
         "situation": "Situation",
         "rowsPerPage":"Lignes par page",
         "responsible": "Responsable",
-        "moreRented": "Le Plus Loué"
+        "moreRented": "Le Plus Loué",
+        "impediment":{
+            "impedimentBook": "Ce livre est actuellement loué, il ne peut donc pas être supprimé",
+            "impedimentUser": "L'enregistrement de cet utilisateur ne peut pas encore être supprimé car il a un livre non retourné"
+        },
+        "sureDelete": {
+            "deleteBook":"Voulez-vous vraiment supprimer l'enregistrement de ce livre ?",
+            "deleteUser": "Voulez-vous vraiment supprimer l'enregistrement de cet utilisateur ?",
+            "deleteRent": "Voulez-vous vraiment supprimer ce dossier de location ?",
+            "deletePublisher": "Voulez-vous vraiment supprimer l'enregistrement de cette société éditrice ?"
+        },
+        "options": {
+            "no": "Non",
+            "yes": "Ouais"
+        }
     }
 }

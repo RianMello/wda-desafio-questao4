@@ -3,6 +3,7 @@
         "french": "French",
         "portuguese": "Portuguese",
         "english": "English",
+        "search": "Search",
         "dashboard": "Dashboard",
         "books":{
             "book": "Book",
@@ -36,6 +37,20 @@
         "situation": "Situation",
         "responsible": "Responsible",
         "rowsPerPage":"Rows per page",
-        "moreRented": "More Renteds"
+        "moreRented": "More Renteds",
+        "impediment":{
+            "impedimentBook": "This book is currently rented, so it cannot be deleted",
+            "impedimentUser": "This user's record cannot be deleted yet as he has an unreturned book"
+        },
+        "sureDelete": {
+            "deleteBook":"Are you sure you want to delete the record for this book?",
+            "deleteUser": "Are you sure you want to delete the record for this User?",
+            "deleteRent": "Are you sure you want to delete this rental record?",
+            "deletePublisher": "Are you sure you want to delete the record for this Publisher Company?"
+        },
+        "options": {
+            "no": "No",
+            "yes": "Yes"
+        }
     }
 }

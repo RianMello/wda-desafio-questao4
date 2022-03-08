@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useRent } from "../../../../hooks/useRent";
 import { Rent } from "../../../../interfaces/ResponseAPI";
 import { DeleteContainer } from "./style";
@@ -8,6 +9,7 @@ interface DeleteProps {
 }
 export function Delete({ rent, onFinish }: DeleteProps) {
   const { removeRent } = useRent();
+  const { t } = useTranslation()
 
   function deleteBook() {
     console.log("tentando pelo menos");
@@ -16,13 +18,13 @@ export function Delete({ rent, onFinish }: DeleteProps) {
 
   return (
     <DeleteContainer>
-      <h2>Are you sure you want to delete this rental record?</h2>
+      <h2>{t('sureDelete.deleteRent')}</h2>
       <div className="buttons-container">
         <button className="btn-Delete" onClick={() => onFinish()}>
-          No
+          {t('options.no')}
         </button>
         <button className="btn-noDelete" onClick={() => deleteBook()}>
-          Yes
+          {t('options.yes')}
         </button>
       </div>
     </DeleteContainer>
