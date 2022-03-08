@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next'
 import { ModalComponent } from "../../../../components/Modal";
 import { FormBook } from "../Form";
 import { Delete } from "../Delete"; 
+import { useNavigate } from "react-router";
 
 const blue = {
   200: "#A5D8FF",
@@ -121,6 +122,7 @@ export function Table() {
   const [bookToDelete, setBookToDelete] = useState({} as Book);
 
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     setLoading(load)
@@ -162,6 +164,7 @@ export function Table() {
 
   const handleModalFormClose = () => {
     setIsModalOpen(false);
+    navigate('/books')
     document.location.reload()
   };
   const handleModalDeleteOpen = () => {
@@ -169,6 +172,7 @@ export function Table() {
   };
   const handleModalDeleteClose = () => {
     setIsModalDeleteOpen(false);
+    navigate('/books')
     document.location.reload()
   };
 
