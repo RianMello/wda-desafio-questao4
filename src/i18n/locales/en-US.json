@@ -4,10 +4,15 @@
         "portuguese": "Portuguese",
         "english": "English",
         "dashboard": "Dashboard",
-        "books":"Books",
+        "books":{
+            "book": "Book",
+            "books": "Books"
+        },
         "publishers": "Publishing Company",
         "users": "Users",
+        "user": "User",
         "rents": "Rents",
+        "rent": "Rent",
         "pubRecords": "Publishers' Records",
         "bokRecords": "Book Records",
         "rentRecords": "Rental Records",
@@ -30,6 +35,7 @@
         "expectedDate": "Expected date",
         "situation": "Situation",
         "responsible": "Responsible",
-        "rowsPerPage":"Rows per page"
+        "rowsPerPage":"Rows per page",
+        "moreRented": "More Renteds"
     }
 }

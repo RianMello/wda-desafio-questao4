@@ -4,10 +4,15 @@
         "portuguese": "Português",
         "english": "Inglês",
         "dashboard": "Painel",
-        "books":"Livros",
+        "books":{
+            "book": "Livro",
+            "books": "Livros"
+        },
         "publishers": "Editoras",
         "users": "Usuários",
+        "user": "Usuário",
         "rents": "Aluguéis",
+        "rent": "Aluguel",
         "pubRecords": "Registros de Editoras",
         "bokRecords": "Registros de Livros",
         "rentRecords": "Registros de Aluguéis",
@@ -30,7 +35,8 @@
         "expectedDate": "Data de prazo",
         "situation": "Situação",
         "responsible": "Responsavel",
-        "rowsPerPage":"Linhas por página"
+        "rowsPerPage":"Linhas por página",
+        "moreRented": "Mais alugados"
 
     }
 }

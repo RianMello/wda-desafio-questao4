@@ -44,7 +44,7 @@ export function Home(){
   const data = {
     labels: labels,
     datasets: [{
-      label: 'More Rented',
+      label: t('moreRented'),
       backgroundColor: '#4394e0',
       borderColor: '#4394e0',
       data: topFiveRenteds.map((data)=>{

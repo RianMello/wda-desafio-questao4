@@ -206,7 +206,7 @@ export function Table() {
             setUserToEdited({} as User);
           }}
         >
-          <AddCircleTwoToneIcon /> <strong>User</strong>
+          <AddCircleTwoToneIcon /> <strong>{t('user')}</strong>
         </button>
       </div>
 

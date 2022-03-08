@@ -23,7 +23,7 @@ export function Header() {
     },
     {
       id: 2,
-      label: "books",
+      label: "books.books",
       navigate: "/books",
       isSelected: false,
     },

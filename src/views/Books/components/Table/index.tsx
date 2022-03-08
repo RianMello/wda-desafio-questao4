@@ -214,7 +214,7 @@ export function Table() {
             setBookToEdited({} as Book);
           }}
         >
-          <AddCircleTwoToneIcon /> <strong>Book</strong>
+          <AddCircleTwoToneIcon /> <strong>{t('books.book')}</strong>
         </button>
       </div>
 

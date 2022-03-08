@@ -97,7 +97,7 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
   const today = dayjs().format("YYYY-MM-DD");
 
   const handleSubmit = (values: initialProps) => {
-    const rentFinish = {
+    const rentFinish: Rent = {
       id: values.id,
       data_aluguel: values.data_aluguel,
       data_previsao: values.data_previsao,
@@ -106,7 +106,7 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
       livro_id: book,
     };
     if (rent?.id !== undefined) {
-      editRent(rentFinish as Rent, onFinish);
+      editRent({...rentFinish, data_devolucao: today}, onFinish);
       console.log(rentFinish);
       return;
     } else {
@@ -160,6 +160,7 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
               id="data_devolucao"
               name="data_devolucao"
               type="date"
+              min={today}
             />
             <ErrorMessage
               component="span"

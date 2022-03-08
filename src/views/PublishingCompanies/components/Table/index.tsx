@@ -207,7 +207,7 @@ export function Table() {
             setPublisherToEdited({} as PublisherCompany);
           }}
         >
-          <AddCircleTwoToneIcon /> <strong>Publisher</strong>
+          <AddCircleTwoToneIcon /> <strong>{t('publisher')}</strong>
         </button>
       </div>
 

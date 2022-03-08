@@ -4,10 +4,15 @@
         "portuguese": "Portugais",
         "english": "Anglais",
         "dashboard": "Panneau",
-        "books":"Livres",
+        "books":{
+            "book": "Livre",
+            "books": "Livres"
+        },
         "publishers": "Éditeurs",
         "users": "Utilisateurs",
+        "user": "Utilisateur",
         "rents": "Les Loyers",
+        "rent": "Louer",
         "pubRecords": "Dossiers des éditeurs",
         "bokRecords": "Dossiers de livre",
         "rentRecords": "Dossiers de location",
@@ -30,6 +35,7 @@
         "expectedDate": "Date Prévue",
         "situation": "Situation",
         "rowsPerPage":"Lignes par page",
-        "responsible": "Responsable"
+        "responsible": "Responsable",
+        "moreRented": "Le Plus Loué"
     }
 }

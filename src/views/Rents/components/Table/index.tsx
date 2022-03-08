@@ -208,7 +208,7 @@ export function Table() {
             setRentToEdited({} as Rent);
           }}
         >
-          <AddCircleTwoToneIcon /> <strong>Rent</strong>
+          <AddCircleTwoToneIcon /> <strong>{t('rent')}</strong>
         </button>
       </div>
 
@@ -219,7 +219,7 @@ export function Table() {
               <th id="id">ID</th>
               <th id="author">{t('responsible')}</th>
               <th id="copies">{t('rentedBook')}</th>
-              <th id="rentalDate">{t('rentalDate')}</th>
+              <th id="rentalDate">{t('rentedDate')}</th>
               <th id="returnDate">{t('returnDate')}</th>
               <th id="expectedDate">{t('expectedDate')}</th>
               <th id="situation">{t('situation')}</th>
@@ -281,7 +281,7 @@ export function Table() {
                       {handleSituationRent(data)}
                     </td>
                     <td style={{ width: 120 }} align="right">
-                      <button
+                      {/* <button
                         className="btn-edit"
                         onClick={() => {
                           handleModalFormOpen();
@@ -291,7 +291,7 @@ export function Table() {
                         <Tooltip title="Edit">
                         <EditTwoToneIcon fontSize="large" />
                         </Tooltip>
-                      </button>
+                      </button> */}
                       <button
                         className="btn-delete"
                         onClick={() => {
