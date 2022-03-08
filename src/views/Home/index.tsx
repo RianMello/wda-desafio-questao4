@@ -19,10 +19,10 @@ import { useTranslation } from 'react-i18next';
 
 
 export function Home(){
-  const { moreRenteds, books } = useBook()
-  const { rents } = useRent()
-  const { publishers } = usePublisher();
-  const { users } = useUser()
+  const { moreRenteds, books, load } = useBook()
+  const { rents} = useRent()
+  const { publishers} = usePublisher();
+  const { users} = useUser()
 
   const { t } = useTranslation()
   const topFiveRenteds = moreRenteds.slice(0, 5)
@@ -60,19 +60,19 @@ export function Home(){
       <VierContent>
       <CardView>
           <h1>{t('pubRecords')}</h1>
-          <h3>{publishers.length}</h3>
+          {load ? <img className="gif" src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif" alt="loadingGIF" /> : <h3>{publishers.length}</h3>} 
         </CardView>
         <CardView>
           <h1>{t('bokRecords')}</h1>
-          <h3>{books.length}</h3>
+          {load ? <img className="gif" src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif" alt="loadingGIF" /> : <h3>{books.length}</h3>} 
         </CardView>
         <CardView>
           <h1>{t('userRecords')}</h1>
-          <h3>{users.length}</h3>
+          {load ? <img className="gif" src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif" alt="loadingGIF" /> : <h3>{users.length}</h3>}
         </CardView>
         <CardView>
           <h1>{t('rentRecords')}</h1>
-          <h3>{rents.length}</h3>
+          {load ? <img className="gif" src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif" alt="loadingGIF" /> : <h3>{rents.length}</h3>}
         </CardView>
 
       </VierContent>

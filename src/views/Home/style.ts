@@ -34,6 +34,11 @@ export const CardView = styled.div`
     h3{
         opacity: 0.5;
     }
+    .gif{
+        width: 2rem;
+        height: 2rem;
+        background-color: transparent;
+    }
 `
 
 export const VierContent = styled.div`
