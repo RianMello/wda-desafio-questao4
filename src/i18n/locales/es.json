@@ -1,0 +1,57 @@
+{
+    "translation":{
+        "french": "Francés",
+        "portuguese": "Portugués",
+        "english": "Inglés",
+        "spanish": "Español",
+        "search": "Búsqueda",
+        "dashboard": "Tablero",
+        "books":{
+            "book": "libro",
+            "books": "Libros"
+        },
+        "publishers": "Compañia de publicidad",
+        "users": "Usuarios",
+        "user": "Usuario",
+        "rents": "Renta",
+        "rent": "Alquila",
+        "pubRecords": "Registros de los editores",
+        "bokRecords": "Registros de libros",
+        "rentRecords": "Registros de alquiler",
+        "userRecords": "Registros de usuario",
+        "topFiveRented": "Los más alquilados",
+        "actions":"Comandos",
+        "name": "Nombre",
+        "release":"Lanzamiento",
+        "publisher": "Comp. de Publicidad",
+        "author":"Autor",
+        "copies": "Copias",
+        "rented": "Alquilado",
+        "cityMain": "Ciudad sede",
+        "city": "Cidade",
+        "email": "Correo electrónico",
+        "address":"Direccion de casa",
+        "rentedBook": "Libro Alquilado",
+        "returnDate":"Fecha de regreso",
+        "rentedDate":"Fecha de Alquiler",
+        "expectedDate": "Fecha de espera",
+        "situation": "Situación",
+        "responsible": "Responsable",
+        "rowsPerPage":"Rows per page",
+        "moreRented": "más alquilado",
+        "impediment":{
+            "impedimentBook": "Este libro está actualmente alquilado, por lo que no se puede eliminar",
+            "impedimentUser": "El registro de este usuario no se puede eliminar todavía porque tiene un libro sin devolver"
+        },
+        "sureDelete": {
+            "deleteBook":"¿Está seguro de que desea eliminar el registro de este libro?",
+            "deleteUser": "¿Está seguro de que desea eliminar el registro de este usuario?",
+            "deleteRent": "¿Está seguro de que desea eliminar este registro de alquiler?",
+            "deletePublisher": "¿Está seguro de que desea eliminar el registro de esta empresa editora?"
+        },
+        "options": {
+            "no": "No",
+            "yes": "Sí"
+        }
+    }
+}

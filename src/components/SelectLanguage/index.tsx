@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import './style.css'
 
@@ -17,6 +17,11 @@ const optionsLng = [
         name: "french",
         value: "fr",
         flag: "https://img.icons8.com/color/48/000000/france.png"
+    },
+    {
+        name: "spanish",
+        value: "es",
+        flag: "https://img.icons8.com/color/48/000000/spain-2.png"
     }
 ]
 
@@ -24,12 +29,13 @@ const optionsLng = [
 
 export const SelectLanguage = () => {
     const {t, i18n} = useTranslation()
-    const [lang, setLang] = useState(optionsLng)
+    const [lang, setLang] = useState('en')
 
-    const handleLanguageChange = (e: string) =>{
-        i18n.changeLanguage(e)
+    const handleLanguageChange = (vl: string) =>{
+        setLang(vl)
+        i18n.changeLanguage(vl)
     }
-
+    
     return(
         <div>
             <ul className="listLanguage">
