@@ -66,7 +66,11 @@ export const TableContainer = styled.div`
   }
 `;
 
-export const TableStyle = styled.div`
+
+type TableStyleProps = {
+  orderDir: boolean;
+}
+export const TableStyle = styled.div<TableStyleProps>`
     width: 100%;
     display: flex;
     justify-content: center;
@@ -107,6 +111,11 @@ export const TableStyle = styled.div`
       transition: filter 0.15s;
       &:hover{
         filter: brightness(0.9) ;
+      }
+      img{
+        width:1rem; 
+        height:1rem;
+        
       }
     }
     .loading{

@@ -3,7 +3,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useBook } from "../../../../hooks/useBook";
 import { Book } from "../../../../interfaces/ResponseAPI";
 
-
 import { styled } from "@mui/system";
 import TablePaginationUnstyled from "@mui/base/TablePaginationUnstyled";
 import { TableContainer, TableStyle } from "../../../../styles/tablesStyles";
@@ -12,11 +11,10 @@ import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 import { Tooltip } from "@mui/material";
 
-
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next";
 import { ModalComponent } from "../../../../components/Modal";
 import { FormBook } from "../Form";
-import { Delete } from "../Delete"; 
+import { Delete } from "../Delete";
 import { useNavigate } from "react-router";
 
 const blue = {
@@ -121,27 +119,17 @@ export function Table() {
   const [bookToEdited, setBookToEdited] = useState(books[0]);
   const [bookToDelete, setBookToDelete] = useState({} as Book);
 
-  const { t } = useTranslation()
-  const navigate = useNavigate()
+  const [sort, setSort] = useState<Book[]>(books);
+  const [typeSort, setTypeSort] = useState("");
+  const [asc, setAsc] = useState(true);
+  var ordered = false;
+
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(load)
-  },[load])
-
-  const searched = useMemo(
-    () =>
-      books.filter(
-        (data: Book) =>
-          data.nome.toLowerCase().includes(search.toLowerCase()) ||
-          data.id.toString().includes(search.toLowerCase()) ||
-          data.lancamento.toString().includes(search.toLowerCase()) ||
-          data.editora.nome.toLowerCase().includes(search.toLowerCase()) ||
-          data.quantidade.toString().includes(search.toLowerCase()) ||
-          data.autor.toLowerCase().includes(search.toLowerCase()) ||
-          data.totalalugado.toString().includes(search.toLowerCase())
-      ),
-    [search, books]
-  );
+    setLoading(load);
+  }, [load]);
 
   // const navigate = useNavigate()
   const handleChangePage = (
@@ -164,21 +152,93 @@ export function Table() {
 
   const handleModalFormClose = () => {
     setIsModalOpen(false);
-    navigate('/books')
-    document.location.reload()
+    navigate("/books");
+    document.location.reload();
   };
   const handleModalDeleteOpen = () => {
     setIsModalDeleteOpen(true);
   };
   const handleModalDeleteClose = () => {
     setIsModalDeleteOpen(false);
-    navigate('/books')
-    document.location.reload()
+    navigate("/books");
+    document.location.reload();
   };
 
   const handleDeleteVerification = (book: Book) => {
     return <Delete book={book} onFinish={handleModalDeleteClose} />;
   };
+
+  useEffect(() => {
+    const handleSortTable = (id: any) => {
+      var sorted = books;
+      if (id === "id") {
+        if (asc) {
+          sorted = [...books].sort((a, b) => a.id - b.id);
+        } else {
+          sorted = [...books].sort((a, b) => b.id - a.id);
+        }
+      } else if (id === "name") {
+        if (asc) {
+          console.log("Dir A-Z");
+          sorted = [...books].sort((a, b) => a.nome.localeCompare(b.nome));
+        } else {
+          console.log("Dir Z-A");
+          sorted = [...books].sort((a, b) => b.nome.localeCompare(a.nome));
+        }
+      } else if (id === "release") {
+        if (asc) {
+          sorted = [...books].sort((a, b) => a.lancamento - b.lancamento);
+        } else {
+          sorted = [...books].sort((a, b) => b.lancamento - a.lancamento);
+        }
+      } else if (id === "publisher-company") {
+        if (asc) {
+          sorted = [...books].sort((a, b) =>
+            a.editora.nome.localeCompare(b.editora.nome)
+          );
+        } else {
+          sorted = [...books].sort((a, b) =>
+            b.editora.nome.localeCompare(a.editora.nome)
+          );
+        }
+      } else if (id === "author") {
+        if (asc) {
+          sorted = [...books].sort((a, b) => b.autor.localeCompare(a.autor));
+        } else {
+          sorted = [...books].sort((a, b) => a.autor.localeCompare(b.autor));
+        }
+      } else if (id === "copies") {
+        if (asc) {
+          sorted = [...books].sort((a, b) => a.quantidade - b.quantidade);
+        } else {
+          sorted = [...books].sort((a, b) => b.quantidade - a.quantidade);
+        }
+      } else if (id === "rented") {
+        if (asc) {
+          sorted = [...books].sort((a, b) => a.totalalugado - b.totalalugado);
+        } else {
+          sorted = [...books].sort((a, b) => b.totalalugado - a.totalalugado);
+        }
+      }
+      setSort(sorted);
+    };
+    handleSortTable(typeSort);
+  }, [typeSort, books, asc]);
+
+  const searched = useMemo(
+    () =>
+      sort.filter(
+        (data: Book) =>
+          data.nome.toLowerCase().includes(search.toLowerCase()) ||
+          data.id.toString().includes(search.toLowerCase()) ||
+          data.lancamento.toString().includes(search.toLowerCase()) ||
+          data.editora.nome.toLowerCase().includes(search.toLowerCase()) ||
+          data.quantidade.toString().includes(search.toLowerCase()) ||
+          data.autor.toLowerCase().includes(search.toLowerCase()) ||
+          data.totalalugado.toString().includes(search.toLowerCase())
+      ),
+    [search, sort]
+  );
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - books.length) : 0;
@@ -203,11 +263,10 @@ export function Table() {
         <input
           className="search-input"
           type="text"
-          placeholder={t('search')}
+          placeholder={t("search")}
           value={search}
           onInput={(e) => {
-            const target = e.target as HTMLInputElement;  
-            console.log(searched)
+            const target = e.target as HTMLInputElement;
             setSearch(target.value);
           }}
         />
@@ -218,94 +277,154 @@ export function Table() {
             setBookToEdited({} as Book);
           }}
         >
-          <AddCircleTwoToneIcon /> <strong>{t('books.book')}</strong>
+          <AddCircleTwoToneIcon /> <strong>{t("books.book")}</strong>
         </button>
       </div>
 
-      <TableStyle>
+      <TableStyle orderDir={asc}>
         <table aria-label="custom pagination table">
           <thead>
             <tr key="thead" className="table-head">
-              <th id="id">ID</th>
-              <th id="name">{t('name')}</th>
-              <th id="release">{t('release')}</th>
-              <th id="publisher-company">{t('publisher')}</th>
-              <th id="author">{t('author')}</th>
-              <th id="copies">{t('copies')}</th>
-              <th id="rented">{t('rented')}</th>
-              <th id="actions">{t('actions')}</th>
+              <th
+                id="id"
+                onClick={(e) => {
+                  setTypeSort(e.currentTarget.id);
+                  setAsc(!asc);
+                }}
+              >
+                ID
+              </th>
+              <th
+                id="name"
+                onClick={(e) => {
+                  setTypeSort(e.currentTarget.id);
+                  setAsc(!asc);
+                }}
+              >
+                {t("name")}
+                <img src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/24/000000/external-arrow-arrows-those-icons-lineal-color-those-icons-6.png" />
+              </th>
+              <th
+                id="release"
+                onClick={(e) => {
+                  setTypeSort(e.currentTarget.id);
+                  setAsc(!asc);
+                }}
+              >
+                {t("release")}
+              </th>
+              <th
+                id="publisher-company"
+                onClick={(e) => {
+                  setTypeSort(e.currentTarget.id);
+                  setAsc(!asc);
+                }}
+              >
+                {t("publisher")}
+              </th>
+              <th
+                id="author"
+                onClick={(e) => {
+                  setTypeSort(e.currentTarget.id);
+                  setAsc(!asc);
+                }}
+              >
+                {t("author")}
+              </th>
+              <th
+                id="copies"
+                onClick={(e) => {
+                  setTypeSort(e.currentTarget.id);
+                  setAsc(!asc);
+                }}
+              >
+                {t("copies")}
+              </th>
+              <th
+                id="rented"
+                onClick={(e) => {
+                  setTypeSort(e.currentTarget.id);
+                  setAsc(!asc);
+                }}
+              >
+                {t("rented")}
+              </th>
+              <th id="actions">{t("actions")}</th>
             </tr>
           </thead>
           <tbody>
-            {loading === true ? 
+            {loading === true ? (
               <tr key="load" className="loading">
                 <td colSpan={8}>
-                  Please wait for the data to load<img className="gif" src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif" alt="loadingGIF" />
+                  Please wait for the data to load
+                  <img
+                    className="gif"
+                    src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif"
+                    alt="loadingGIF"
+                  />
                 </td>
               </tr>
-             : searched.length !== 0 ? (rowsPerPage > 0
-              ? searched.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
-              : searched
-            ).map((data: Book) => {
-              
-              return (
-                <tr key={data.id}>
-                  <td style={{ width: 80 }}> #{data.id}</td>
-                  <td style={{ width: 120 }} align="right">
-                    {data.nome}
-                  </td>
-                  <td style={{ width: 120 }} align="right">
-                    {data.lancamento}
-                  </td>
-                  <td style={{ width: 120 }} align="right">
-                    {data.editora.nome}
-                  </td>
-                  <td style={{ width: 120 }} align="right">
-                    {data.autor}
-                  </td>
-                  <td style={{ width: 120 }} align="right">
-                    {data.quantidade}
-                  </td>
-                  <td style={{ width: 120 }} align="right">
-                    {data.totalalugado}
-                  </td>
-                  <td style={{ width: 120 }} align="right">
-                    <button
-                      className="btn-edit"
-                      onClick={() => {
-                        handleModalFormOpen();
-                        setBookToEdited(data);
-                      }}
-                    >
-                    <Tooltip title="Edit">
-                      <EditTwoToneIcon fontSize="large" />
-                    </Tooltip>
-                    </button>
-                    <button
-                      className="btn-delete"
-                      onClick={() => {
-                        setBookToDelete(data);
-                        handleModalDeleteOpen();
-                      }}
-                    >
-                      <Tooltip title="Delete">
-                      <DeleteForeverTwoToneIcon fontSize="large" />
-                      </Tooltip>
-                    </button>       
-                  </td>
-                </tr>
-              );
-            }) : 
-            <tr key="load" className="loading">
-              <td colSpan={8}>
-                Object not found
-              </td>
-            </tr> 
-          }
-              
+            ) : searched.length !== 0 ? (
+              (rowsPerPage > 0
+                ? searched.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
+                : searched
+              ).map((data: Book) => {
+                return (
+                  <tr key={data.id}>
+                    <td style={{ width: 80 }}> #{data.id}</td>
+                    <td style={{ width: 120 }} align="right">
+                      {data.nome}
+                    </td>
+                    <td style={{ width: 120 }} align="right">
+                      {data.lancamento}
+                    </td>
+                    <td style={{ width: 120 }} align="right">
+                      {data.editora.nome}
+                    </td>
+                    <td style={{ width: 120 }} align="right">
+                      {data.autor}
+                    </td>
+                    <td style={{ width: 120 }} align="right">
+                      {data.quantidade}
+                    </td>
+                    <td style={{ width: 120 }} align="right">
+                      {data.totalalugado}
+                    </td>
+                    <td style={{ width: 120 }} align="right">
+                      <button
+                        className="btn-edit"
+                        onClick={() => {
+                          handleModalFormOpen();
+                          setBookToEdited(data);
+                        }}
+                      >
+                        <Tooltip title="Edit">
+                          <EditTwoToneIcon fontSize="large" />
+                        </Tooltip>
+                      </button>
+                      <button
+                        className="btn-delete"
+                        onClick={() => {
+                          setBookToDelete(data);
+                          handleModalDeleteOpen();
+                        }}
+                      >
+                        <Tooltip title="Delete">
+                          <DeleteForeverTwoToneIcon fontSize="large" />
+                        </Tooltip>
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr key="load" className="loading">
+                <td colSpan={8}>Object not found</td>
+              </tr>
+            )}
 
             {emptyRows > 0 && (
               <tr style={{ height: 41 * emptyRows }}>

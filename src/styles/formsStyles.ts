@@ -20,7 +20,7 @@ export const ContainerForm = styled.div`
         margin-left: 1rem;
         font-weight: bold;
         font-size: 1.5rem;
-        color: silver;
+        color: black;
     }
 
     form{
@@ -34,10 +34,12 @@ export const ContainerForm = styled.div`
             height: 2.3rem;
             padding: 0.5rem;
             border-width: 0;
-            color: black;
-            
+            color: #9c9c9c;
+
+            border: 1px solid #ebf4f7;
             border-radius: 0.2rem;
-            border-bottom: 1px solid black;
+            border-bottom: 1px dashed #9c9c9c;
+            margin-bottom: 1rem;
 
         }
         label{
@@ -45,6 +47,7 @@ export const ContainerForm = styled.div`
             padding-left: 0.25rem;
             margin: 0rem;
             opacity: 0.7;
+            color: #8a8a8a;
         }
     }
 

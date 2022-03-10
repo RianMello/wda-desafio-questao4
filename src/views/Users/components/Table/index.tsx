@@ -210,7 +210,7 @@ export function Table() {
         </button>
       </div>
 
-      <TableStyle>
+      <TableStyle orderDir={true}>
         <table aria-label="custom pagination table">
           <thead>
             <tr key="thead" className="table-head">
