@@ -7,4 +7,5 @@ export const Container = styled.div`
     flex-direction: column;
     background-color: var(--background);
     filter: grayscale(80%);
+    width: 100%;
 `

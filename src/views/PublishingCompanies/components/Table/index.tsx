@@ -5,6 +5,9 @@ import { PublisherCompany } from "../../../../interfaces/ResponseAPI";
 import { styled } from "@mui/system";
 import TablePaginationUnstyled from "@mui/base/TablePaginationUnstyled";
 import { TableContainer, TableStyle } from "../../../../styles/tablesStyles";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ShuffleIcon from "@mui/icons-material/Shuffle";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
@@ -143,12 +146,8 @@ export function Table() {
       label: "ID",
       ordered: false,
       direction: {
-        asc: (
-          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-up.png" />
-        ),
-        desc: (
-          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-down.png" />
-        ),
+        asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
+        desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
       },
     },
     {
@@ -156,8 +155,8 @@ export function Table() {
       label: t("name"),
       ordered: false,
       direction: {
-        asc: "A-Z",
-        desc: "Z-A",
+        asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
+        desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
       },
     },
     {
@@ -165,8 +164,8 @@ export function Table() {
       label: t("cityMain"),
       ordered: false,
       direction: {
-        asc: "A-Z",
-        desc: "Z-A",
+        asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
+        desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
       },
     },
   ];
@@ -280,7 +279,7 @@ export function Table() {
         } else if (desc) {
           sorted = [...publishers].sort((a, b) => b.nome.localeCompare(a.nome));
         }
-      } else if (id === "release") {
+      } else if (id === "cidade") {
         if (asc) {
           sorted = [...publishers].sort((a, b) =>
             a.cidade.localeCompare(b.cidade)
@@ -341,12 +340,25 @@ export function Table() {
         </button>
       </div>
 
-      <TableStyle asc={false} desc={false}>
+      <TableStyle asc={asc} desc={desc}>
         <table aria-label="custom pagination table">
           <thead>
             <tr key="thead" className="table-head">
               {sortSelector.map((th) => {
                 console.log(th.ordered);
+                const handleIcon = () => {
+                  if (th.ordered) {
+                    if (asc) {
+                      return th.direction.asc;
+                    }
+                    if (desc) {
+                      return th.direction.desc;
+                    }
+                  } else if (asc === false && desc === false) {
+                    return <ShuffleIcon sx={{ color: "black" }} />;
+                  }
+                  return <ShuffleIcon className="notSorted" />;
+                };
                 return (
                   <th
                     id={th.id}
@@ -354,32 +366,18 @@ export function Table() {
                       setTypeSort(e.currentTarget.id);
                       if (desc === false && asc === false) {
                         sortOrNo(e.currentTarget.id, "asc");
-                      } else if (asc === true && desc === false) {
+                      }
+                      if (asc === true && desc === false) {
                         sortOrNo(e.currentTarget.id, "desc");
-                      } else if (desc === true && asc === false) {
-                        sortOrNo(e.currentTarget.id, "asc");
-                      } else if (asc === true && desc === true) {
+                      }
+                      if (desc === true && asc === false) {
                         sortOrNo(e.currentTarget.id, "alt");
                       }
                     }}
                   >
                     <div className="sortIndicator">
                       {th.label}
-                      <span>
-                        {th.ordered ? (
-                          asc === true ? (
-                            th.direction.asc
-                          ) : (
-                            th.direction.desc
-                          )
-                        ) : (
-                          <img
-                            className={th.ordered ? "sorted" : "notSorted"}
-                            src="https://img.icons8.com/material-two-tone/24/000000/sorting-arrows.png"
-                            alt="^"
-                          />
-                        )}
-                      </span>
+                      <span>{handleIcon()}</span>
                     </div>
                   </th>
                 );

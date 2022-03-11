@@ -128,6 +128,7 @@ export const TableStyle = styled.div<TableStyleProps>`
     th {
       text-align: center;
       padding: 0.25rem;
+      width: 100%;
       max-width: 20rem;
       min-width: 2rem;
     }
@@ -151,8 +152,11 @@ export const TableStyle = styled.div<TableStyleProps>`
       color: white;
       font-size: 1.25rem;
       border: 0.5px solid #CDD2D7;
-      max-width: 15rem;    
+      max-width: 20rem;    
       transition: filter 0.15s;
+      .flip{
+        transform: scaleX(-1);
+      }
       .sorted{
         visibility: visible;
         }
@@ -166,19 +170,13 @@ export const TableStyle = styled.div<TableStyleProps>`
       img{
         width:1rem;
         height:1rem;
-        /* position: relative; 
-        bottom: 0;
-        right: 0; */
         margin: 0.5rem;
 
       }
       span{
         width:2rem;
         height:1rem;
-        visibility: ${props=> props.asc === true || props.desc === true ? 'visible' : 'hidden'};
-        /* position: relative; 
-        bottom: 0;
-        right: 0; */
+        visibility: ${props => props.asc === true || props.desc === true ? 'visible' : 'hidden'};
         color: #CDD2D7;
         font-size: 0.7rem;
         
