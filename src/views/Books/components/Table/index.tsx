@@ -394,7 +394,7 @@ export function Table() {
             setBookToEdited({} as Book);
           }}
         >
-          <AddCircleTwoToneIcon /> <strong>{t("books.book")}</strong>
+          <AddCircleTwoToneIcon className="add_icon" /> <strong>{t("books.book")}</strong>
         </button>
       </div>
 
@@ -458,26 +458,26 @@ export function Table() {
               ).map((data: Book) => {
                 return (
                   <tr key={data.id}>
-                    <td style={{ width: 80 }}> #{data.id}</td>
-                    <td style={{ width: 120 }} align="right">
+                    <td > #{data.id}</td>
+                    <td align="right">
                       {data.nome}
                     </td>
-                    <td style={{ width: 120 }} align="right">
+                    <td align="right">
                       {data.lancamento}
                     </td>
-                    <td style={{ width: 120 }} align="right">
+                    <td align="right">
                       {data.editora.nome}
                     </td>
-                    <td style={{ width: 120 }} align="right">
+                    <td align="right">
                       {data.autor}
                     </td>
-                    <td style={{ width: 120 }} align="right">
+                    <td align="right">
                       {data.quantidade}
                     </td>
-                    <td style={{ width: 120 }} align="right">
+                    <td align="right">
                       {data.totalalugado}
                     </td>
-                    <td style={{ width: 120 }} align="right">
+                    <td align="right">
                       <button
                         className="btn-edit"
                         onClick={() => {

@@ -12,12 +12,13 @@ export const Button = styled.button<PropType>`
 
     height: 5rem;
     max-width: 20rem;
-    min-width: 10rem;
+    min-width: 5rem;
+    width: 100%;
 
     background: ${props => props.selected ? '##fafcff' : '#fcfcfc'};
 
     font-family:'Poppins', sans-serif;
-    font-size: ${props => props.selected ? '1.5rem' :'1.2rem'};
+    font-size: ${props => props.selected ? '1.8rem' :'1.5rem'};
     font-weight: ${props=> props.selected ? '600' : '500'};
     color: ${props=> props.selected ? '#4394e0' : '#000000'};
     text-shadow: ${props => props.selected ? '0 0 5px white': 'none'};
@@ -38,16 +39,17 @@ export const Container = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 70rem;
-    height: 5rem;
+    width: 100%;
     background: white;
     box-shadow: 1px 3px 5px #ababab;
     border-radius: 0.5rem;
-    min-width: 40rem;
+    min-width: 90%;
 
     .navBar{
+        display: flex;
         align-items: center;
         justify-content: center;
         height: 100%;
+        width: 100%;
     }
 `

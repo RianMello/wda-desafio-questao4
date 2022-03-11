@@ -16,16 +16,26 @@ export const GlobalStyle = createGlobalStyle`
         flex-direction: column;
         align-items: center;
         height: 100%;
-        max-width: 100rem;
-        min-width: 70rem;
+        width: 100%;
+        max-width: 90%;
+        min-width: 50%;
     }
 
-    html{ 
-        @media (min-width: 1080px) {
-            font-size: 93.75%;
+    html{
+        @media (max-width: 1080px) {
+            font-size: 95.75%;
         }
         @media (max-width: 720px) {
             font-size: 87.5%;
+        }
+        @media (max-width: 520px){
+            font-size: 79.25%;
+        }
+        @media (max-width: 420px) {
+            font-size: 71%;
+        }
+        @media (max-width: 320px){
+            font-size: 62.75%; 
         }
     }
 

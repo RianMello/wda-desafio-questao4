@@ -20,6 +20,9 @@ export const TableContainer = styled.div`
   box-shadow: 1px 3px 5px #ababab;
   .table-head {
     height: 4rem;
+    @media (max-width: 420px) {
+      height: 2.5rem;
+    }
   }
   .header-table-actions {
     width: 90%;
@@ -29,6 +32,9 @@ export const TableContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     margin-top: 1rem;
+    @media (max-width: 420px) {
+      width: 90%;
+    }
   }
   .btn-new {
     display: flex;
@@ -53,6 +59,16 @@ export const TableContainer = styled.div`
     strong {
       margin-left: 0.2rem;
     }
+
+    @media (max-width: 420px) {
+      max-width: 6rem;
+      min-width: 3rem;
+      font-size: 0.8rem;
+      .add_icon{
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
   }
   .search-input {
     width: 25rem;
@@ -69,6 +85,10 @@ export const TableContainer = styled.div`
     padding: 0.5rem;
     margin-right: 2rem;
     background: transparent;
+
+    @media (max-width: 420px) {
+      max-width: 20rem;
+    }
   }
 `;
 
@@ -76,12 +96,31 @@ export const TableStyle = styled.div<TableStyleProps>`
     width: 100%;
     display: flex;
     justify-content: center;
+    max-width: 90%;
     table {
       font-family: Poppins, sans-serif;;
-      font-size: 0.875rem;
+      font-size: 1rem;
       border-collapse: collapse;
-      max-width: 90%;
-      min-width: 50%;
+      @media (max-width: 460px){
+        font-size: 0.8rem;
+        td{
+          max-width: 4rem;
+          min-width: 2rem;
+        }
+        thead{
+          th{
+            font-size: 0.8rem;
+            max-width: 4rem;
+            min-width: 2rem;
+          }
+          tr{
+            max-height: 1rem;
+          }
+        }
+        .pagination{
+          max-height: 2rem;
+        }
+      }
       margin-bottom: 2rem;
     }
   
@@ -89,16 +128,19 @@ export const TableStyle = styled.div<TableStyleProps>`
     th {
       text-align: center;
       padding: 0.25rem;
+      max-width: 20rem;
+      min-width: 2rem;
     }
     tr{ 
       background: #fafafa;
       transition: filter 0.15s;
       border-bottom: 1px solid #CDD2D7;
-      max-height: 2rem;
+     
     }
     tbody{
       tr{
         transition: filter 0.15s;
+      }
         &:hover{
           filter: brightness(0.9) ;
         }
@@ -107,9 +149,9 @@ export const TableStyle = styled.div<TableStyleProps>`
     th {
       background-color: #4394e0;
       color: white;
-      font-size: 1rem;
+      font-size: 1.25rem;
       border: 0.5px solid #CDD2D7;
-      min-width: 5rem;
+      max-width: 15rem;    
       transition: filter 0.15s;
       .sorted{
         visibility: visible;
@@ -176,6 +218,10 @@ export const TableStyle = styled.div<TableStyleProps>`
         margin: 0.25rem;
         align-items: center;
         color: #8ac5ff;
+        @media (max-width: 420px) {
+          width: 1rem;
+          height: 1rem;
+        }
     }
     .btn-delete{
         border-radius: 1.5rem;
@@ -186,6 +232,10 @@ export const TableStyle = styled.div<TableStyleProps>`
         margin: 0.25rem;
         align-items: center;
         color: #fa938c;
+        @media (max-width: 420px) {
+          width: 1rem;
+          height: 1rem;
+        }
     }
   );
 `;
