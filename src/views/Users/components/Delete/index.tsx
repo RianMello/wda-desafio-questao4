@@ -3,6 +3,7 @@ import { useUser } from "../../../../hooks/useUser";
 import { User } from "../../../../interfaces/ResponseAPI";
 import GppMaybeIcon from "@mui/icons-material/GppMaybe";
 import { DeleteContainer, InpedimentDelete } from "./style";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import { useTranslation } from "react-i18next";
 
 interface DeleteProps {
@@ -13,7 +14,7 @@ interface DeleteProps {
 export const Delete = ({ user, onFinish }: DeleteProps) => {
   const { removeUser } = useUser();
   const { rents, handleSituationRent } = useRent();
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   function deleteUser() {
     removeUser(user, onFinish);
@@ -23,27 +24,25 @@ export const Delete = ({ user, onFinish }: DeleteProps) => {
     const canDelete = rents.find(
       (rent) =>
         rent.usuario_id.id === user.id &&
-        handleSituationRent(rent) === "Não devolvido"
+        handleSituationRent(rent).icon === <CheckBoxOutlineBlankIcon />
     );
     if (canDelete !== undefined) {
       return (
         <InpedimentDelete>
           <GppMaybeIcon className="iconInpediment" />
-          <h1 className="impediment">
-            {t('impediment.impedimentUser')}
-          </h1>
+          <h1 className="impediment">{t("impediment.impedimentUser")}</h1>
         </InpedimentDelete>
       );
     }
     return (
       <DeleteContainer>
-        <h2>{t('sureDelete.deleteUser')}</h2>
+        <h2>{t("sureDelete.deleteUser")}</h2>
         <div className="buttons-container">
           <button className="btn-Delete" onClick={() => onFinish()}>
-            {t('options.no')}
+            {t("options.no")}
           </button>
           <button className="btn-noDelete" onClick={() => deleteUser()}>
-          {t('options.yes')}
+            {t("options.yes")}
           </button>
         </div>
       </DeleteContainer>

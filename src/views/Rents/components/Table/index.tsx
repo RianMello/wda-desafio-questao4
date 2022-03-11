@@ -5,8 +5,10 @@ import { Rent } from "../../../../interfaces/ResponseAPI";
 import { styled } from "@mui/system";
 import TablePaginationUnstyled from "@mui/base/TablePaginationUnstyled";
 import { TableContainer, TableStyle } from "../../../../styles/tablesStyles";
-import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
-import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ShuffleIcon from "@mui/icons-material/Shuffle";
+import SettingsBackupRestoreIcon from "@mui/icons-material/SettingsBackupRestore";
 import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 
 import { ModalComponent } from "../../../../components/Modal";
@@ -122,10 +124,10 @@ export function Table() {
   const [asc, setAsc] = useState(false);
   const [desc, setDesc] = useState(false);
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   useEffect(() => {
-      setLoading(load);
+    setLoading(load);
   }, [load]);
 
   type SortProps = {
@@ -144,12 +146,8 @@ export function Table() {
       label: "ID",
       ordered: false,
       direction: {
-        asc: (
-          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-up.png" />
-        ),
-        desc: (
-          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-down.png" />
-        ),
+        asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
+        desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
       },
     },
     {
@@ -157,8 +155,8 @@ export function Table() {
       label: t("rentedBook"),
       ordered: false,
       direction: {
-        asc: "A-Z",
-        desc: "Z-A",
+        asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
+        desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
       },
     },
     {
@@ -166,8 +164,8 @@ export function Table() {
       label: t("responsible"),
       ordered: false,
       direction: {
-        asc: "A-Z",
-        desc: "Z-A",
+        asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
+        desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
       },
     },
     {
@@ -175,12 +173,8 @@ export function Table() {
       label: t("rentedDate"),
       ordered: false,
       direction: {
-        asc: (
-          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-up.png" />
-        ),
-        desc: (
-          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-down.png" />
-        ),
+        asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
+        desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
       },
     },
     {
@@ -188,12 +182,8 @@ export function Table() {
       label: t("returnDate"),
       ordered: false,
       direction: {
-        asc: (
-          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-up.png" />
-        ),
-        desc: (
-          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-down.png" />
-        ),
+        asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
+        desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
       },
     },
     {
@@ -201,12 +191,8 @@ export function Table() {
       label: t("expectedDate"),
       ordered: false,
       direction: {
-        asc: (
-          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-up.png" />
-        ),
-        desc: (
-          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-down.png" />
-        ),
+        asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
+        desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
       },
     },
     {
@@ -214,14 +200,14 @@ export function Table() {
       label: t("situation"),
       ordered: false,
       direction: {
-        asc: "A-Z",
-        desc: "Z-A",
+        asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
+        desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
       },
     },
   ];
 
   const [sortSelector, setSortSelector] = useState(thSort);
-  
+
   const searched = useMemo(
     () =>
       sort.filter(
@@ -273,129 +259,130 @@ export function Table() {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rents.length) : 0;
 
-    const sortOrNo = useCallback((ref: string, ord: string) => {
-      console.log(ref);
-      console.log(ord);
-      if (ord === "asc") {
-        setAsc(true);
-        setSortSelector((oldState: SortProps[]) => {
-          return oldState.map((old) => {
-            if (old.id !== ref && old.ordered === true) {
-              return { ...old, ordered: false };
-            }
-            if (old.id === ref) {
-              return { ...old, ordered: true };
-            }
+  const sortOrNo = useCallback((ref: string, ord: string) => {
+    console.log(ref);
+    console.log(ord);
+    if (ord === "asc") {
+      setAsc(true);
+      setSortSelector((oldState: SortProps[]) => {
+        return oldState.map((old) => {
+          if (old.id !== ref && old.ordered === true) {
             return { ...old, ordered: false };
-          });
+          }
+          if (old.id === ref) {
+            return { ...old, ordered: true };
+          }
+          return { ...old, ordered: false };
         });
-      } else if (ord === "desc") {
-        setAsc(false);
-        setDesc(true);
-        setSortSelector((oldState: SortProps[]) => {
-          return oldState.map((old) => {
-            if (old.id !== ref && old.ordered === false) {
-              return { ...old, ordered: false };
-            }
-            if (old.id === ref) {
-              return { ...old, ordered: true };
-            }
+      });
+    } else if (ord === "desc") {
+      setAsc(false);
+      setDesc(true);
+      setSortSelector((oldState: SortProps[]) => {
+        return oldState.map((old) => {
+          if (old.id !== ref && old.ordered === false) {
             return { ...old, ordered: false };
-          });
+          }
+          if (old.id === ref) {
+            return { ...old, ordered: true };
+          }
+          return { ...old, ordered: false };
         });
-      } else if (ord === "alt") {
-        setAsc(false);
-        setDesc(false);
-        setSortSelector((oldState: SortProps[]) => {
-          return oldState.map((old) => {
-            if (old.id === ref && old.ordered === true) {
-              return { ...old, ordered: false };
-            }
+      });
+    } else if (ord === "alt") {
+      setAsc(false);
+      setDesc(false);
+      setSortSelector((oldState: SortProps[]) => {
+        return oldState.map((old) => {
+          if (old.id === ref && old.ordered === true) {
             return { ...old, ordered: false };
-          });
+          }
+          return { ...old, ordered: false };
         });
-      }
-    }, []);
-  
-    const handleSortTable = useCallback(
-      (id: any) => {
-        var sorted = rents;
-        if (id === "id") {
-          if (asc) {
-            sorted = [...rents].sort((a, b) => a.id - b.id);
-          } else if (desc) {
-            sorted = [...rents].sort((a, b) => b.id - a.id);
-          }
-        } else if (id === "responsible") {
-          if (asc) {
-            sorted = [...rents].sort((a, b) => a.usuario_id.nome.localeCompare(b.usuario_id.nome));
-          } else if (desc) {
-            sorted = [...rents].sort((a, b) => b.usuario_id.nome.localeCompare(a.usuario_id.nome));
-          }
-        }else if (id === "rentalDate") {
-          if (asc) {
-            sorted = [...rents].sort((a, b) => {
-              let dateRentalA = new Date(a.data_devolucao)
-              let dateRentalB = new Date(b.data_devolucao)
-              if((dateRentalA.valueOf() > dateRentalB.valueOf())){
-                return 1
-              }else if((dateRentalA.valueOf() < dateRentalB.valueOf())){
-                return -1
-              }
-              return 0
-            }
-            );
-          } else if (desc) {
-            sorted = [...rents].sort((a, b) =>
-              b.data_aluguel.localeCompare(a.data_aluguel)
-            );
-          }
-        }else if (id === "returnDate") {
-          if (asc) {
-            sorted = [...rents].sort((a, b) => {
-              let dateReturnA = new Date(a.data_devolucao)
-              let dateReturnB = new Date(b.data_devolucao)
-              if((dateReturnA.valueOf() > dateReturnB.valueOf())){
-                return 1
-              }else if((dateReturnA.valueOf() < dateReturnB.valueOf())){
-                return -1
-              }
-              return 0
-            }
-            );
-          } else if (desc) {
-            sorted = [...rents].sort((a, b) =>
-              b.data_aluguel.localeCompare(a.data_aluguel)
-            );
-          }
-        }else if (id === "expectedDate") {
-          if (asc) {
-            sorted = [...rents].sort((a, b) => {
-              let datePrevA = new Date(a.data_previsao)
-              let datePrevB = new Date(b.data_previsao)
-              if((datePrevA.valueOf() > datePrevA.valueOf())){
-                return 1
-              }else if((datePrevA.valueOf() < datePrevA.valueOf())){
-                return -1
-              }
-              return 0
-            }
-            );
-          } else if (desc) {
-            sorted = [...rents].sort((a, b) =>
-              b.data_aluguel.localeCompare(a.data_aluguel)
-            );
-          }
+      });
+    }
+  }, []);
+
+  const handleSortTable = useCallback(
+    (id: any) => {
+      var sorted = rents;
+      if (id === "id") {
+        if (asc) {
+          sorted = [...rents].sort((a, b) => a.id - b.id);
+        } else if (desc) {
+          sorted = [...rents].sort((a, b) => b.id - a.id);
         }
-        setSort(sorted);
-      },
-      [asc, desc, rents]
-    );
-  
-    useEffect(() => {
-      handleSortTable(typeSort);
-    }, [rents, asc, desc, typeSort, handleSortTable]);
-  
+      } else if (id === "responsible") {
+        if (asc) {
+          sorted = [...rents].sort((a, b) =>
+            a.usuario_id.nome.localeCompare(b.usuario_id.nome)
+          );
+        } else if (desc) {
+          sorted = [...rents].sort((a, b) =>
+            b.usuario_id.nome.localeCompare(a.usuario_id.nome)
+          );
+        }
+      } else if (id === "rentalDate") {
+        if (asc) {
+          sorted = [...rents].sort((a, b) => {
+            let dateRentalA = new Date(a.data_devolucao);
+            let dateRentalB = new Date(b.data_devolucao);
+            if (dateRentalA.valueOf() > dateRentalB.valueOf()) {
+              return 1;
+            } else if (dateRentalA.valueOf() < dateRentalB.valueOf()) {
+              return -1;
+            }
+            return 0;
+          });
+        } else if (desc) {
+          sorted = [...rents].sort((a, b) =>
+            b.data_aluguel.localeCompare(a.data_aluguel)
+          );
+        }
+      } else if (id === "returnDate") {
+        if (asc) {
+          sorted = [...rents].sort((a, b) => {
+            let dateReturnA = new Date(a.data_devolucao);
+            let dateReturnB = new Date(b.data_devolucao);
+            if (dateReturnA.valueOf() > dateReturnB.valueOf()) {
+              return 1;
+            } else if (dateReturnA.valueOf() < dateReturnB.valueOf()) {
+              return -1;
+            }
+            return 0;
+          });
+        } else if (desc) {
+          sorted = [...rents].sort((a, b) =>
+            b.data_aluguel.localeCompare(a.data_aluguel)
+          );
+        }
+      } else if (id === "expectedDate") {
+        if (asc) {
+          sorted = [...rents].sort((a, b) => {
+            let datePrevA = new Date(a.data_previsao);
+            let datePrevB = new Date(b.data_previsao);
+            if (datePrevA.valueOf() > datePrevB.valueOf()) {
+              return 1;
+            } else if (datePrevA.valueOf() < datePrevB.valueOf()) {
+              return -1;
+            }
+            return 0;
+          });
+        } else if (desc) {
+          sorted = [...rents].sort((a, b) =>
+            b.data_aluguel.localeCompare(a.data_aluguel)
+          );
+        }
+      }
+      setSort(sorted);
+    },
+    [asc, desc, rents]
+  );
+
+  useEffect(() => {
+    handleSortTable(typeSort);
+  }, [rents, asc, desc, typeSort, handleSortTable]);
+
   return (
     <TableContainer>
       <ModalComponent
@@ -416,7 +403,7 @@ export function Table() {
         <input
           className="search-input"
           type="text"
-          placeholder= {t('search')}
+          placeholder={t("search")}
           value={search}
           onInput={(e) => {
             const target = e.target as HTMLInputElement;
@@ -430,16 +417,29 @@ export function Table() {
             setRentToEdited({} as Rent);
           }}
         >
-          <AddCircleTwoToneIcon /> <strong>{t('rent')}</strong>
+          <AddCircleTwoToneIcon /> <strong>{t("rent")}</strong>
         </button>
       </div>
 
-      <TableStyle asc={false} desc={false}>
+      <TableStyle asc={asc} desc={desc}>
         <table aria-label="custom pagination table">
           <thead>
             <tr className="table-head">
-            {sortSelector.map((th) => {
+              {sortSelector.map((th) => {
                 console.log(th.ordered);
+                const handleIcon = () => {
+                  if (th.ordered) {
+                    if (asc) {
+                      return th.direction.asc;
+                    }
+                    if (desc) {
+                      return th.direction.desc;
+                    }
+                  } else if (asc === false && desc === false) {
+                    return <ShuffleIcon sx={{ color: "black" }} />;
+                  }
+                  return <ShuffleIcon className="notSorted" />;
+                };
                 return (
                   <th
                     id={th.id}
@@ -458,21 +458,7 @@ export function Table() {
                   >
                     <div className="sortIndicator">
                       {th.label}
-                      <span>
-                        {th.ordered ? (
-                          asc === true ? (
-                            th.direction.asc
-                          ) : (
-                            th.direction.desc
-                          )
-                        ) : (
-                          <img
-                            className={th.ordered ? "sorted" : "notSorted"}
-                            src="https://img.icons8.com/material-two-tone/24/000000/sorting-arrows.png"
-                            alt="^"
-                          />
-                        )}
-                      </span>
+                      <span>{handleIcon()}</span>
                     </div>
                   </th>
                 );
@@ -509,6 +495,7 @@ export function Table() {
                 );
                 console.log(dateExpected);
                 console.log(dateReturn);
+                const span = handleSituationRent(data);
                 return (
                   <tr key={data.id}>
                     <td style={{ width: 80 }}>#{data.id}</td>
@@ -532,7 +519,7 @@ export function Table() {
                         : dateExpected}
                     </td>
                     <td style={{ width: 120 }} align="right">
-                      {handleSituationRent(data)}
+                      <Tooltip title={span.label}>{span.icon}</Tooltip>
                     </td>
                     <td style={{ width: 120 }} align="right">
                       {/* <button
@@ -553,8 +540,8 @@ export function Table() {
                           handleModalDeleteOpen();
                         }}
                       >
-                        <Tooltip title="Delete">
-                          <DeleteForeverTwoToneIcon fontSize="large" />
+                        <Tooltip title={t("giveBack") as string}>
+                          <SettingsBackupRestoreIcon fontSize="large" />
                         </Tooltip>
                       </button>
                     </td>

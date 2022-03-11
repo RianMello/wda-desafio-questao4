@@ -1,6 +1,15 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useState,
+} from "react";
 import { Rent } from "../interfaces/ResponseAPI";
 import api from "../services/api";
+
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 interface RentsContextProps {
   rents: Rent[];
@@ -8,7 +17,7 @@ interface RentsContextProps {
   addRent: (rent: Rent, onFinish: () => void) => void;
   editRent: (rent: Rent, onFinish: () => void) => void;
   removeRent: (rent: Rent, onFinish: () => void) => void;
-  handleSituationRent: (rent: Rent) => string | undefined;
+  handleSituationRent: (rent: Rent) => { label: string; icon: ReactElement };
 }
 
 interface RentsProviderProps {
@@ -55,19 +64,31 @@ export function RentsProvider({ children }: RentsProviderProps) {
   }
 
   function handleSituationRent(rent: Rent) {
-    var situation = "devolvido no prazo";
+    var situation = {
+      label: "Não devolvido",
+      icon: <CheckBoxOutlineBlankIcon />,
+    };
 
     var dateRet = new Date(Date.parse(rent.data_devolucao));
     var datePrazo = new Date(Date.parse(rent.data_previsao));
 
     if (rent.data_devolucao) {
-      if (datePrazo < dateRet) {
-        situation = "devolvido em atraso";
-      } else {
-        situation = "devolvido no prazo";
+      if (datePrazo <= dateRet) {
+        situation = {
+          label: "Devolvido atrasado!",
+          icon: <CheckBoxIcon sx={{ color: "red" }} />,
+        };
+      } else if (datePrazo >= dateRet) {
+        situation = {
+          label: "Devolvido!",
+          icon: <CheckBoxIcon sx={{ color: "green" }} />,
+        };
       }
     } else {
-      situation = "Não devolvido";
+      situation = {
+        label: "Não devolvido",
+        icon: <CheckBoxOutlineBlankIcon />,
+      };
     }
     return situation;
   }

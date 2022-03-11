@@ -54,7 +54,7 @@ export const TableContainer = styled.div`
     font-weight: bold;
     font-size: 1rem;
 
-    background-color: #bce8c3;
+    background-color: #4394e0;
 
     strong {
       margin-left: 0.2rem;
@@ -101,26 +101,6 @@ export const TableStyle = styled.div<TableStyleProps>`
       font-family: Poppins, sans-serif;;
       font-size: 1rem;
       border-collapse: collapse;
-      @media (max-width: 460px){
-        font-size: 0.8rem;
-        td{
-          max-width: 4rem;
-          min-width: 2rem;
-        }
-        thead{
-          th{
-            font-size: 0.8rem;
-            max-width: 4rem;
-            min-width: 2rem;
-          }
-          tr{
-            max-height: 1rem;
-          }
-        }
-        .pagination{
-          max-height: 2rem;
-        }
-      }
       margin-bottom: 2rem;
     }
   
@@ -128,9 +108,7 @@ export const TableStyle = styled.div<TableStyleProps>`
     th {
       text-align: center;
       padding: 0.25rem;
-      width: 100%;
       max-width: 20rem;
-      min-width: 2rem;
     }
     tr{ 
       background: #fafafa;
@@ -141,18 +119,20 @@ export const TableStyle = styled.div<TableStyleProps>`
     tbody{
       tr{
         transition: filter 0.15s;
-      }
         &:hover{
           filter: brightness(0.9) ;
+        }
+        td{
+          width: 100%;
         }
       }
     }
     th {
       background-color: #4394e0;
       color: white;
+      width: 100%;
       font-size: 1.25rem;
-      border: 0.5px solid #CDD2D7;
-      max-width: 20rem;    
+      border: 0.5px solid #CDD2D7; 
       transition: filter 0.15s;
       .flip{
         transform: scaleX(-1);
@@ -235,5 +215,29 @@ export const TableStyle = styled.div<TableStyleProps>`
           height: 1rem;
         }
     }
+    @media (min-width: 320px) and (max-width: 1024px){
+      table{
+        font-size: 1rem;
+      }
+        thead{
+          th, td{
+            max-width: 10rem;
+            min-width: 3rem;
+            }
+          .table-head{
+            th{
+              font-size: 1.2rem;
+              max-width: 10rem;
+              min-width: 1rem;
+            }
+          }
+          tr{
+            max-height: 1rem;
+          }
+        }
+        .pagination{
+          max-height: 2rem;
+        }
+      }
   );
 `;

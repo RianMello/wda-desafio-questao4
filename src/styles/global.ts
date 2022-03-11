@@ -17,8 +17,7 @@ export const GlobalStyle = createGlobalStyle`
         align-items: center;
         height: 100%;
         width: 100%;
-        max-width: 90%;
-        min-width: 50%;
+        max-width: 100%;
     }
 
     html{
@@ -43,7 +42,7 @@ export const GlobalStyle = createGlobalStyle`
         display: flex;
         -webkit-font-smoothing: antialiased;
         justify-content: center;
-        background: #f5f9ff;
+        background: #435166;
     }
 
     body, input, button, textarea {
@@ -80,7 +79,7 @@ export const GlobalStyle = createGlobalStyle`
         width: 100%;
         min-height: 15rem;
         max-height: 35rem;
-        max-width: 30rem;
+        max-width: 50%;
         background: white;
         padding: 2rem;
         position: relative;
