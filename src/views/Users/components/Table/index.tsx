@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 import { useUser } from "../../../../hooks/useUser";
 import { User } from "../../../../interfaces/ResponseAPI";
 
@@ -117,15 +117,81 @@ export function Table() {
   const { users, load } = useUser();
   const [userToEdited, setUserToEdited] = useState(users[0]);
   const [userToDelete, setUserToDelete] = useState({} as User);
-  const { t } = useTranslation()
+
+  const [sort, setSort] = useState<User[]>(users);
+  const [typeSort, setTypeSort] = useState("");
+  const [asc, setAsc] = useState(false);
+  const [desc, setDesc] = useState(false)
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     setLoading(load);
   }, [load]);
 
+  type SortProps = {
+    id: string;
+    label: string;
+    ordered: boolean;
+    direction: {
+      asc: string | ReactElement;
+      desc: string | ReactElement;
+    };
+  }
+
+  const thSort: SortProps[] = [
+    {
+      id: 'id',
+      label: 'ID',
+      ordered: false,
+      direction: {
+        asc: <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-up.png"/>,
+        desc: <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-down.png"/>,
+      }
+    },
+    {
+      id: 'name',
+      label: t('name'),
+      ordered: false,
+      direction: {
+        asc: 'A-Z',
+        desc: 'Z-A',
+      }
+    },
+    {
+      id: 'address',
+      label: t("address"),
+      ordered: false,
+      direction: {
+        asc: 'A-Z',
+        desc: 'Z-A',
+      }
+    },
+    {
+      id: 'email',
+      label: t("email"),
+      ordered: false,
+      direction: {
+        asc: 'A-Z',
+        desc: 'Z-A',
+      }
+    },
+    {
+      id: 'city',
+      label: t('city'),
+      ordered: false,
+      direction: {
+        asc: 'A-Z',
+        desc: 'Z-A',
+      }
+    },
+  ];
+  
+  const [sortSelector, setSortSelector] = useState(thSort)
+
   const searched = useMemo(
     () =>
-      users.filter(
+      sort.filter(
         (data: User) =>
           data.nome.toLowerCase().includes(search.toLowerCase()) ||
           data.id.toString().includes(search.toLowerCase()) ||
@@ -133,7 +199,7 @@ export function Table() {
           data.email.toLowerCase().includes(search.toLowerCase()) ||
           data.cidade.toLowerCase().includes(search.toLowerCase())
       ),
-    [search, users]
+    [search, sort]
   );
 
   const handleChangePage = (
@@ -171,7 +237,91 @@ export function Table() {
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - users.length) : 0;
-
+    const sortOrNo = useCallback((ref: string, ord: string) => {
+      console.log(ref)
+      console.log(ord)
+      if(ord === 'asc'){
+        setAsc(true)
+        setSortSelector((oldState: SortProps[]) => {
+          return oldState.map((old) => {
+            if(old.id !== ref && old.ordered === true){
+              return { ...old, ordered: false}
+            }
+            if(old.id === ref){
+              return { ...old, ordered: true}
+            }
+            return { ...old, ordered: false}
+          })})
+      }else if(ord === 'desc'){
+        setAsc(false)
+        setDesc(true)
+        setSortSelector((oldState: SortProps[]) => {
+          return oldState.map((old) => {
+            if(old.id !== ref && old.ordered === false){
+              return { ...old, ordered: false}
+            }
+            if(old.id === ref){
+              return { ...old, ordered: true}
+            }
+            return { ...old, ordered: false}
+          })})
+      }else if(ord === 'alt'){
+        setAsc(false)
+        setDesc(false)
+        setSortSelector((oldState: SortProps[]) => {
+          return oldState.map((old) => {
+            if(old.id === ref && old.ordered === true){
+              return { ...old, ordered: false}
+            }
+            return { ...old, ordered: false}
+          })})
+      }
+    },[]);
+  
+    const handleSortTable = useCallback((id: any) => {
+      var sorted = users;
+      if (id === "id") {
+        if (asc) {
+          sorted = [...users].sort((a, b) => a.id - b.id);
+        } else if(desc){
+           sorted = [...users].sort((a, b) => b.id - a.id);
+        }
+      } else if (id === "name") {
+        if (asc) {
+          sorted = [...users].sort((a, b) => a.nome.localeCompare(b.nome));
+        } else if(desc){
+          sorted = [...users].sort((a, b) => b.nome.localeCompare(a.nome));
+        }
+      } else if (id === "address") {
+        if (asc) {
+          sorted = [...users].sort((a, b) => a.endereco.localeCompare(b.endereco));
+        } else if(desc){
+          sorted = [...users].sort((a, b) => b.endereco.localeCompare(a.endereco));
+        }
+      } else if (id === "email") {
+        if (asc) {
+          sorted = [...users].sort((a, b) =>
+            a.email.localeCompare(b.email)
+          );
+        } else if(desc) {
+          sorted = [...users].sort((a, b) =>
+            b.email.localeCompare(a.email)
+          );
+        }
+      } else if (id === "city") {
+        if (asc) {
+          sorted = [...users].sort((a, b) => a.cidade.localeCompare(b.cidade));
+        } else if(desc){
+          sorted = [...users].sort((a, b) => b.cidade.localeCompare(a.cidade));
+        }
+      }
+      setSort(sorted);
+    },[asc, desc, users]);
+  
+    useEffect(() => {
+      handleSortTable(typeSort);
+    }, [users, asc, desc, typeSort, handleSortTable]);
+  
   return (
     <TableContainer>
       <ModalComponent
@@ -210,16 +360,42 @@ export function Table() {
         </button>
       </div>
 
-      <TableStyle orderDir={true}>
+      <TableStyle asc={false} desc={false}>
         <table aria-label="custom pagination table">
           <thead>
             <tr key="thead" className="table-head">
-              <th id="id">ID</th>
-              <th id="nome">{t('name')}</th>
-              <th id="endereco">{t('address')}</th>
-              <th id="email">{t('email')}</th>
-              <th id="city">{t('city')}</th>
-              <th id="actions">{t('actions')}</th>
+            {
+              sortSelector.map(((th) => {
+                console.log(th.ordered);
+                return(
+                  <th
+                    id={th.id}
+                    onClick={(e) => {
+                      setTypeSort(e.currentTarget.id)
+                      if(desc === false && asc === false){ 
+                        sortOrNo(e.currentTarget.id, 'asc')
+                      }else if(asc === true && desc === false){
+                        sortOrNo(e.currentTarget.id,'desc')
+                      }else if(desc === true && asc === false){
+                        sortOrNo(e.currentTarget.id,'asc')
+                      }else if(asc === true && desc === true){
+                        sortOrNo(e.currentTarget.id,'alt')
+                      }
+                    }}
+                  >
+                  <div className="sortIndicator">
+                    {th.label}
+                    <span>{th.ordered ? (asc === true? th.direction.asc : th.direction.desc) : <img className={th.ordered? 'sorted' : 'notSorted'} src="https://img.icons8.com/material-two-tone/24/000000/sorting-arrows.png" alt="^"/>}</span>
+                  </div>
+                  </th>
+                )
+              }))
+            }
+            <th
+              id="actions"
+            >
+              {t('actions')}
+            </th>
             </tr>
           </thead>
           <tbody>

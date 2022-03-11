@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 import { useRent } from "../../../../hooks/useRent";
 import { Rent } from "../../../../interfaces/ResponseAPI";
 
@@ -117,15 +117,114 @@ export function Table() {
   const [rentToEdited, setRentToEdited] = useState(rents[0]);
   const [rentToDelete, setRentToDelete] = useState({} as Rent);
 
+  const [sort, setSort] = useState<Rent[]>(rents);
+  const [typeSort, setTypeSort] = useState("");
+  const [asc, setAsc] = useState(false);
+  const [desc, setDesc] = useState(false);
+
   const { t } = useTranslation()
 
   useEffect(() => {
       setLoading(load);
   }, [load]);
 
+  type SortProps = {
+    id: string;
+    label: string;
+    ordered: boolean;
+    direction: {
+      asc: string | ReactElement;
+      desc: string | ReactElement;
+    };
+  };
+
+  const thSort: SortProps[] = [
+    {
+      id: "id",
+      label: "ID",
+      ordered: false,
+      direction: {
+        asc: (
+          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-up.png" />
+        ),
+        desc: (
+          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-down.png" />
+        ),
+      },
+    },
+    {
+      id: "name",
+      label: t("rentedBook"),
+      ordered: false,
+      direction: {
+        asc: "A-Z",
+        desc: "Z-A",
+      },
+    },
+    {
+      id: "responsible",
+      label: t("responsible"),
+      ordered: false,
+      direction: {
+        asc: "A-Z",
+        desc: "Z-A",
+      },
+    },
+    {
+      id: "rentalDate",
+      label: t("rentedDate"),
+      ordered: false,
+      direction: {
+        asc: (
+          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-up.png" />
+        ),
+        desc: (
+          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-down.png" />
+        ),
+      },
+    },
+    {
+      id: "returnDate",
+      label: t("returnDate"),
+      ordered: false,
+      direction: {
+        asc: (
+          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-up.png" />
+        ),
+        desc: (
+          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-down.png" />
+        ),
+      },
+    },
+    {
+      id: "expectedDate",
+      label: t("expectedDate"),
+      ordered: false,
+      direction: {
+        asc: (
+          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-up.png" />
+        ),
+        desc: (
+          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-down.png" />
+        ),
+      },
+    },
+    {
+      id: "situation",
+      label: t("situation"),
+      ordered: false,
+      direction: {
+        asc: "A-Z",
+        desc: "Z-A",
+      },
+    },
+  ];
+
+  const [sortSelector, setSortSelector] = useState(thSort);
+  
   const searched = useMemo(
     () =>
-      rents.filter(
+      sort.filter(
         (data: Rent) =>
           data.data_aluguel?.toString().includes(search.toLowerCase()) ||
           data.data_previsao?.toString().includes(search.toLowerCase()) ||
@@ -134,7 +233,7 @@ export function Table() {
           data.livro_id.nome.toLowerCase().includes(search.toLowerCase()) ||
           data.usuario_id.nome.toLowerCase().includes(search.toLowerCase())
       ),
-    [search, rents]
+    [search, sort]
   );
 
   const handleChangePage = (
@@ -174,6 +273,129 @@ export function Table() {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rents.length) : 0;
 
+    const sortOrNo = useCallback((ref: string, ord: string) => {
+      console.log(ref);
+      console.log(ord);
+      if (ord === "asc") {
+        setAsc(true);
+        setSortSelector((oldState: SortProps[]) => {
+          return oldState.map((old) => {
+            if (old.id !== ref && old.ordered === true) {
+              return { ...old, ordered: false };
+            }
+            if (old.id === ref) {
+              return { ...old, ordered: true };
+            }
+            return { ...old, ordered: false };
+          });
+        });
+      } else if (ord === "desc") {
+        setAsc(false);
+        setDesc(true);
+        setSortSelector((oldState: SortProps[]) => {
+          return oldState.map((old) => {
+            if (old.id !== ref && old.ordered === false) {
+              return { ...old, ordered: false };
+            }
+            if (old.id === ref) {
+              return { ...old, ordered: true };
+            }
+            return { ...old, ordered: false };
+          });
+        });
+      } else if (ord === "alt") {
+        setAsc(false);
+        setDesc(false);
+        setSortSelector((oldState: SortProps[]) => {
+          return oldState.map((old) => {
+            if (old.id === ref && old.ordered === true) {
+              return { ...old, ordered: false };
+            }
+            return { ...old, ordered: false };
+          });
+        });
+      }
+    }, []);
+  
+    const handleSortTable = useCallback(
+      (id: any) => {
+        var sorted = rents;
+        if (id === "id") {
+          if (asc) {
+            sorted = [...rents].sort((a, b) => a.id - b.id);
+          } else if (desc) {
+            sorted = [...rents].sort((a, b) => b.id - a.id);
+          }
+        } else if (id === "responsible") {
+          if (asc) {
+            sorted = [...rents].sort((a, b) => a.usuario_id.nome.localeCompare(b.usuario_id.nome));
+          } else if (desc) {
+            sorted = [...rents].sort((a, b) => b.usuario_id.nome.localeCompare(a.usuario_id.nome));
+          }
+        }else if (id === "rentalDate") {
+          if (asc) {
+            sorted = [...rents].sort((a, b) => {
+              let dateRentalA = new Date(a.data_devolucao)
+              let dateRentalB = new Date(b.data_devolucao)
+              if((dateRentalA.valueOf() > dateRentalB.valueOf())){
+                return 1
+              }else if((dateRentalA.valueOf() < dateRentalB.valueOf())){
+                return -1
+              }
+              return 0
+            }
+            );
+          } else if (desc) {
+            sorted = [...rents].sort((a, b) =>
+              b.data_aluguel.localeCompare(a.data_aluguel)
+            );
+          }
+        }else if (id === "returnDate") {
+          if (asc) {
+            sorted = [...rents].sort((a, b) => {
+              let dateReturnA = new Date(a.data_devolucao)
+              let dateReturnB = new Date(b.data_devolucao)
+              if((dateReturnA.valueOf() > dateReturnB.valueOf())){
+                return 1
+              }else if((dateReturnA.valueOf() < dateReturnB.valueOf())){
+                return -1
+              }
+              return 0
+            }
+            );
+          } else if (desc) {
+            sorted = [...rents].sort((a, b) =>
+              b.data_aluguel.localeCompare(a.data_aluguel)
+            );
+          }
+        }else if (id === "expectedDate") {
+          if (asc) {
+            sorted = [...rents].sort((a, b) => {
+              let datePrevA = new Date(a.data_previsao)
+              let datePrevB = new Date(b.data_previsao)
+              if((datePrevA.valueOf() > datePrevA.valueOf())){
+                return 1
+              }else if((datePrevA.valueOf() < datePrevA.valueOf())){
+                return -1
+              }
+              return 0
+            }
+            );
+          } else if (desc) {
+            sorted = [...rents].sort((a, b) =>
+              b.data_aluguel.localeCompare(a.data_aluguel)
+            );
+          }
+        }
+        setSort(sorted);
+      },
+      [asc, desc, rents]
+    );
+  
+    useEffect(() => {
+      handleSortTable(typeSort);
+    }, [rents, asc, desc, typeSort, handleSortTable]);
+  
   return (
     <TableContainer>
       <ModalComponent
@@ -212,18 +434,50 @@ export function Table() {
         </button>
       </div>
 
-      <TableStyle orderDir={true}>
+      <TableStyle asc={false} desc={false}>
         <table aria-label="custom pagination table">
           <thead>
             <tr className="table-head">
-              <th id="id">ID</th>
-              <th id="author">{t('responsible')}</th>
-              <th id="copies">{t('rentedBook')}</th>
-              <th id="rentalDate">{t('rentedDate')}</th>
-              <th id="returnDate">{t('returnDate')}</th>
-              <th id="expectedDate">{t('expectedDate')}</th>
-              <th id="situation">{t('situation')}</th>
-              <th id="actions">{t('actions')}</th>
+            {sortSelector.map((th) => {
+                console.log(th.ordered);
+                return (
+                  <th
+                    id={th.id}
+                    onClick={(e) => {
+                      setTypeSort(e.currentTarget.id);
+                      if (desc === false && asc === false) {
+                        sortOrNo(e.currentTarget.id, "asc");
+                      } else if (asc === true && desc === false) {
+                        sortOrNo(e.currentTarget.id, "desc");
+                      } else if (desc === true && asc === false) {
+                        sortOrNo(e.currentTarget.id, "asc");
+                      } else if (asc === true && desc === true) {
+                        sortOrNo(e.currentTarget.id, "alt");
+                      }
+                    }}
+                  >
+                    <div className="sortIndicator">
+                      {th.label}
+                      <span>
+                        {th.ordered ? (
+                          asc === true ? (
+                            th.direction.asc
+                          ) : (
+                            th.direction.desc
+                          )
+                        ) : (
+                          <img
+                            className={th.ordered ? "sorted" : "notSorted"}
+                            src="https://img.icons8.com/material-two-tone/24/000000/sorting-arrows.png"
+                            alt="^"
+                          />
+                        )}
+                      </span>
+                    </div>
+                  </th>
+                );
+              })}
+              <th id="actions">{t("actions")}</th>
             </tr>
           </thead>
           <tbody>

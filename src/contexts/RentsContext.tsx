@@ -27,7 +27,6 @@ export function RentsProvider({ children }: RentsProviderProps) {
     api
       .get("api/alugueis")
       .then((res) => {
-        console.log(res.data[0]);
         setLoad(false);
         setRents(res.data);
       })

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 import { usePublisher } from "../../../../hooks/usePublisher";
 import { PublisherCompany } from "../../../../interfaces/ResponseAPI";
 
@@ -11,7 +11,7 @@ import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 
 import { ModalComponent } from "../../../../components/Modal";
 import { FormPublisher } from "../Form";
-import { Delete } from '../Delete';
+import { Delete } from "../Delete";
 import { Tooltip } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
@@ -116,21 +116,72 @@ export function Table() {
   const { publishers, load } = usePublisher();
   const [publisherToEdited, setPublisherToEdited] = useState(publishers[0]);
   const [publisherToDelete, setPublisherToDelete] = useState(publishers[0]);
-  const { t } = useTranslation()
+  const { t } = useTranslation();
+
+  const [sort, setSort] = useState<PublisherCompany[]>(publishers);
+  const [typeSort, setTypeSort] = useState("");
+  const [asc, setAsc] = useState(false);
+  const [desc, setDesc] = useState(false);
 
   useEffect(() => {
-    setLoading(load)
+    setLoading(load);
   }, [load]);
+
+  type SortProps = {
+    id: string;
+    label: string;
+    ordered: boolean;
+    direction: {
+      asc: string | ReactElement;
+      desc: string | ReactElement;
+    };
+  };
+
+  const thSort: SortProps[] = [
+    {
+      id: "id",
+      label: "ID",
+      ordered: false,
+      direction: {
+        asc: (
+          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-up.png" />
+        ),
+        desc: (
+          <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-down.png" />
+        ),
+      },
+    },
+    {
+      id: "name",
+      label: t("name"),
+      ordered: false,
+      direction: {
+        asc: "A-Z",
+        desc: "Z-A",
+      },
+    },
+    {
+      id: "cidade",
+      label: t("cityMain"),
+      ordered: false,
+      direction: {
+        asc: "A-Z",
+        desc: "Z-A",
+      },
+    },
+  ];
+
+  const [sortSelector, setSortSelector] = useState(thSort);
 
   const searched = useMemo(
     () =>
-      publishers.filter(
+      sort.filter(
         (data: PublisherCompany) =>
           data.nome.toLowerCase().includes(search.toLowerCase()) ||
           data.id.toString().includes(search.toLowerCase()) ||
           data.cidade.toLowerCase().includes(search.toLowerCase())
       ),
-    [search, publishers]
+    [search, sort]
   );
 
   const handleChangePage = (
@@ -170,6 +221,85 @@ export function Table() {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - publishers.length) : 0;
 
+  const sortOrNo = useCallback((ref: string, ord: string) => {
+    console.log(ref);
+    console.log(ord);
+    if (ord === "asc") {
+      setAsc(true);
+      setSortSelector((oldState: SortProps[]) => {
+        return oldState.map((old) => {
+          if (old.id !== ref && old.ordered === true) {
+            return { ...old, ordered: false };
+          }
+          if (old.id === ref) {
+            return { ...old, ordered: true };
+          }
+          return { ...old, ordered: false };
+        });
+      });
+    } else if (ord === "desc") {
+      setAsc(false);
+      setDesc(true);
+      setSortSelector((oldState: SortProps[]) => {
+        return oldState.map((old) => {
+          if (old.id !== ref && old.ordered === false) {
+            return { ...old, ordered: false };
+          }
+          if (old.id === ref) {
+            return { ...old, ordered: true };
+          }
+          return { ...old, ordered: false };
+        });
+      });
+    } else if (ord === "alt") {
+      setAsc(false);
+      setDesc(false);
+      setSortSelector((oldState: SortProps[]) => {
+        return oldState.map((old) => {
+          if (old.id === ref && old.ordered === true) {
+            return { ...old, ordered: false };
+          }
+          return { ...old, ordered: false };
+        });
+      });
+    }
+  }, []);
+
+  const handleSortTable = useCallback(
+    (id: any) => {
+      var sorted = publishers;
+      if (id === "id") {
+        if (asc) {
+          sorted = [...publishers].sort((a, b) => a.id - b.id);
+        } else if (desc) {
+          sorted = [...publishers].sort((a, b) => b.id - a.id);
+        }
+      } else if (id === "name") {
+        if (asc) {
+          sorted = [...publishers].sort((a, b) => a.nome.localeCompare(b.nome));
+        } else if (desc) {
+          sorted = [...publishers].sort((a, b) => b.nome.localeCompare(a.nome));
+        }
+      } else if (id === "release") {
+        if (asc) {
+          sorted = [...publishers].sort((a, b) =>
+            a.cidade.localeCompare(b.cidade)
+          );
+        } else if (desc) {
+          sorted = [...publishers].sort((a, b) =>
+            b.cidade.localeCompare(a.cidade)
+          );
+        }
+      }
+      setSort(sorted);
+    },
+    [asc, desc, publishers]
+  );
+
+  useEffect(() => {
+    handleSortTable(typeSort);
+  }, [publishers, asc, desc, typeSort, handleSortTable]);
+
   return (
     <TableContainer>
       <ModalComponent
@@ -193,7 +323,7 @@ export function Table() {
         <input
           className="search-input"
           type="text"
-          placeholder={t('search')}
+          placeholder={t("search")}
           value={search}
           onInput={(e) => {
             const target = e.target as HTMLInputElement;
@@ -207,18 +337,54 @@ export function Table() {
             setPublisherToEdited({} as PublisherCompany);
           }}
         >
-          <AddCircleTwoToneIcon /> <strong>{t('publisher')}</strong>
+          <AddCircleTwoToneIcon /> <strong>{t("publisher")}</strong>
         </button>
       </div>
 
-      <TableStyle orderDir={true}>
+      <TableStyle asc={false} desc={false}>
         <table aria-label="custom pagination table">
           <thead>
-            <tr className="table-head">
-              <th id="id">ID</th>
-              <th id="nome">{t('name')}</th>
-              <th id="cidade">{t('city')}</th>
-              <th id="actions">{t('actions')}</th>
+            <tr key="thead" className="table-head">
+              {sortSelector.map((th) => {
+                console.log(th.ordered);
+                return (
+                  <th
+                    id={th.id}
+                    onClick={(e) => {
+                      setTypeSort(e.currentTarget.id);
+                      if (desc === false && asc === false) {
+                        sortOrNo(e.currentTarget.id, "asc");
+                      } else if (asc === true && desc === false) {
+                        sortOrNo(e.currentTarget.id, "desc");
+                      } else if (desc === true && asc === false) {
+                        sortOrNo(e.currentTarget.id, "asc");
+                      } else if (asc === true && desc === true) {
+                        sortOrNo(e.currentTarget.id, "alt");
+                      }
+                    }}
+                  >
+                    <div className="sortIndicator">
+                      {th.label}
+                      <span>
+                        {th.ordered ? (
+                          asc === true ? (
+                            th.direction.asc
+                          ) : (
+                            th.direction.desc
+                          )
+                        ) : (
+                          <img
+                            className={th.ordered ? "sorted" : "notSorted"}
+                            src="https://img.icons8.com/material-two-tone/24/000000/sorting-arrows.png"
+                            alt="^"
+                          />
+                        )}
+                      </span>
+                    </div>
+                  </th>
+                );
+              })}
+              <th id="actions">{t("actions")}</th>
             </tr>
           </thead>
           <tbody>
@@ -251,28 +417,28 @@ export function Table() {
                       {data.cidade}
                     </td>
                     <td style={{ width: 120 }} align="right">
-                    <button
-                      className="btn-edit"
-                      onClick={() => {
-                        handleModalFormOpen();
-                        setPublisherToEdited(data);
-                      }}
-                    >
-                    <Tooltip title="Edit">
-                      <EditTwoToneIcon fontSize="large" />
-                    </Tooltip>
-                    </button>
-                    <button
-                      className="btn-delete"
-                      onClick={() => {
-                        setPublisherToDelete(data);
-                        handleModalDeleteOpen();
-                      }}
-                    >
-                      <Tooltip title="Delete">
-                        <DeleteForeverTwoToneIcon fontSize="large" />
-                      </Tooltip>
-                    </button>   
+                      <button
+                        className="btn-edit"
+                        onClick={() => {
+                          handleModalFormOpen();
+                          setPublisherToEdited(data);
+                        }}
+                      >
+                        <Tooltip title="Edit">
+                          <EditTwoToneIcon fontSize="large" />
+                        </Tooltip>
+                      </button>
+                      <button
+                        className="btn-delete"
+                        onClick={() => {
+                          setPublisherToDelete(data);
+                          handleModalDeleteOpen();
+                        }}
+                      >
+                        <Tooltip title="Delete">
+                          <DeleteForeverTwoToneIcon fontSize="large" />
+                        </Tooltip>
+                      </button>
                     </td>
                   </tr>
                 );

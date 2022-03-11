@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+type TableStyleProps = {
+  asc: boolean;
+  desc: boolean;
+}
+
 export const TableContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -9,6 +14,7 @@ export const TableContainer = styled.div`
   background: white;
   align-items: center;
   margin-top: 1rem;
+  max-width: 100%;
   width: 100%;
   border-radius: 0.5rem;
   box-shadow: 1px 3px 5px #ababab;
@@ -66,10 +72,6 @@ export const TableContainer = styled.div`
   }
 `;
 
-
-type TableStyleProps = {
-  orderDir: boolean;
-}
 export const TableStyle = styled.div<TableStyleProps>`
     width: 100%;
     display: flex;
@@ -109,14 +111,47 @@ export const TableStyle = styled.div<TableStyleProps>`
       border: 0.5px solid #CDD2D7;
       min-width: 5rem;
       transition: filter 0.15s;
-      &:hover{
-        filter: brightness(0.9) ;
+      .sorted{
+        visibility: visible;
+        }
+      .notSorted{
+        visibility: hidden;
+      }
+      .sortIndicator{
+        display: grid;
+        grid-template-columns: 3fr 1fr  ;
       }
       img{
-        width:1rem; 
+        width:1rem;
         height:1rem;
+        /* position: relative; 
+        bottom: 0;
+        right: 0; */
+        margin: 0.5rem;
+
+      }
+      span{
+        width:2rem;
+        height:1rem;
+        visibility: ${props=> props.asc === true || props.desc === true ? 'visible' : 'hidden'};
+        /* position: relative; 
+        bottom: 0;
+        right: 0; */
+        color: #CDD2D7;
+        font-size: 0.7rem;
         
       }
+
+      &:hover{
+        filter: brightness(0.9);
+        img{
+         visibility: visible;
+        }
+        span{
+          visibility: visible;
+        }
+      }
+
     }
     .loading{
       height: 5rem;

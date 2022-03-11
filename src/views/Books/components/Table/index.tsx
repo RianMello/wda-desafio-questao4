@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { ReactElement, useCallback, useEffect, useMemo, useState } from "react";
 import { useBook } from "../../../../hooks/useBook";
 import { Book } from "../../../../interfaces/ResponseAPI";
 
@@ -106,6 +105,7 @@ const CustomTablePagination = styled(TablePaginationUnstyled)(
     `
 );
 
+
 export function Table() {
   const [search, setSearch] = useState<string>("");
   const [page, setPage] = useState(0);
@@ -121,8 +121,8 @@ export function Table() {
 
   const [sort, setSort] = useState<Book[]>(books);
   const [typeSort, setTypeSort] = useState("");
-  const [asc, setAsc] = useState(true);
-  var ordered = false;
+  const [asc, setAsc] = useState(false);
+  const [desc, setDesc] = useState(false)
 
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -131,6 +131,83 @@ export function Table() {
     setLoading(load);
   }, [load]);
 
+  type SortProps = {
+    id: string;
+    label: string;
+    ordered: boolean;
+    direction: {
+      asc: string | ReactElement;
+      desc: string | ReactElement;
+    };
+  }
+
+  const thSort: SortProps[] = [
+    {
+      id: 'id',
+      label: 'ID',
+      ordered: false,
+      direction: {
+        asc: <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-up.png"/>,
+        desc: <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-down.png"/>,
+      }
+    },
+    {
+      id: 'name',
+      label: t('name'),
+      ordered: false,
+      direction: {
+        asc: 'A-Z',
+        desc: 'Z-A',
+      }
+    },
+    {
+      id: 'release',
+      label: t('release'),
+      ordered: false,
+      direction: {
+        asc: <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-up.png"/>,
+        desc: <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-down.png"/>,
+      }
+    },
+    {
+      id: 'publisher-company',
+      label: t("publisher"),
+      ordered: false,
+      direction: {
+        asc: 'A-Z',
+        desc: 'Z-A',
+      }
+    },
+    {
+      id: 'author',
+      label: t("copies"),
+      ordered: false,
+      direction: {
+        asc: 'A-Z',
+        desc: 'Z-A',
+      }
+    },
+    {
+      id: 'copies',
+      label: t("copies"),
+      ordered: false,
+      direction: {
+        asc: <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-up.png"/>,
+        desc: <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-down.png"/>,
+      }
+    },
+    {
+      id: 'rented',
+      label: t("rented"),
+      ordered: false,
+      direction: {
+        asc: <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-up.png"/>,
+        desc: <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-down.png"/>,
+      }
+    }
+  ];
+  
+  const [sortSelector, setSortSelector] = useState(thSort)
   // const navigate = useNavigate()
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -168,63 +245,6 @@ export function Table() {
     return <Delete book={book} onFinish={handleModalDeleteClose} />;
   };
 
-  useEffect(() => {
-    const handleSortTable = (id: any) => {
-      var sorted = books;
-      if (id === "id") {
-        if (asc) {
-          sorted = [...books].sort((a, b) => a.id - b.id);
-        } else {
-          sorted = [...books].sort((a, b) => b.id - a.id);
-        }
-      } else if (id === "name") {
-        if (asc) {
-          console.log("Dir A-Z");
-          sorted = [...books].sort((a, b) => a.nome.localeCompare(b.nome));
-        } else {
-          console.log("Dir Z-A");
-          sorted = [...books].sort((a, b) => b.nome.localeCompare(a.nome));
-        }
-      } else if (id === "release") {
-        if (asc) {
-          sorted = [...books].sort((a, b) => a.lancamento - b.lancamento);
-        } else {
-          sorted = [...books].sort((a, b) => b.lancamento - a.lancamento);
-        }
-      } else if (id === "publisher-company") {
-        if (asc) {
-          sorted = [...books].sort((a, b) =>
-            a.editora.nome.localeCompare(b.editora.nome)
-          );
-        } else {
-          sorted = [...books].sort((a, b) =>
-            b.editora.nome.localeCompare(a.editora.nome)
-          );
-        }
-      } else if (id === "author") {
-        if (asc) {
-          sorted = [...books].sort((a, b) => b.autor.localeCompare(a.autor));
-        } else {
-          sorted = [...books].sort((a, b) => a.autor.localeCompare(b.autor));
-        }
-      } else if (id === "copies") {
-        if (asc) {
-          sorted = [...books].sort((a, b) => a.quantidade - b.quantidade);
-        } else {
-          sorted = [...books].sort((a, b) => b.quantidade - a.quantidade);
-        }
-      } else if (id === "rented") {
-        if (asc) {
-          sorted = [...books].sort((a, b) => a.totalalugado - b.totalalugado);
-        } else {
-          sorted = [...books].sort((a, b) => b.totalalugado - a.totalalugado);
-        }
-      }
-      setSort(sorted);
-    };
-    handleSortTable(typeSort);
-  }, [typeSort, books, asc]);
-
   const searched = useMemo(
     () =>
       sort.filter(
@@ -240,9 +260,106 @@ export function Table() {
     [search, sort]
   );
 
+  const sortOrNo = useCallback((ref: string, ord: string) => {
+    console.log(ref)
+    console.log(ord)
+    if(ord === 'asc'){
+      setAsc(true)
+      setSortSelector((oldState: SortProps[]) => {
+        return oldState.map((old) => {
+          if(old.id !== ref && old.ordered === true){
+            return { ...old, ordered: false}
+          }
+          if(old.id === ref){
+            return { ...old, ordered: true}
+          }
+          return { ...old, ordered: false}
+        })})
+    }else if(ord === 'desc'){
+      setAsc(false)
+      setDesc(true)
+      setSortSelector((oldState: SortProps[]) => {
+        return oldState.map((old) => {
+          if(old.id !== ref && old.ordered === false){
+            return { ...old, ordered: false}
+          }
+          if(old.id === ref){
+            return { ...old, ordered: true}
+          }
+          return { ...old, ordered: false}
+        })})
+    }else if(ord === 'alt'){
+      setAsc(false)
+      setDesc(false)
+      setSortSelector((oldState: SortProps[]) => {
+        return oldState.map((old) => {
+          if(old.id === ref && old.ordered === true){
+            return { ...old, ordered: false}
+          }
+          return { ...old, ordered: false}
+        })})
+    }
+  },[]);
+
+  const handleSortTable = useCallback((id: any) => {
+    var sorted = books;
+    if (id === "id") {
+      if (asc) {
+        sorted = [...books].sort((a, b) => a.id - b.id);
+      } else if(desc){
+         sorted = [...books].sort((a, b) => b.id - a.id);
+      }
+    } else if (id === "name") {
+      if (asc) {
+        sorted = [...books].sort((a, b) => a.nome.localeCompare(b.nome));
+      } else if(desc){
+        sorted = [...books].sort((a, b) => b.nome.localeCompare(a.nome));
+      }
+    } else if (id === "release") {
+      if (asc) {
+        sorted = [...books].sort((a, b) => a.lancamento - b.lancamento);
+      } else if(desc){
+        sorted = [...books].sort((a, b) => b.lancamento - a.lancamento);
+      }
+    } else if (id === "publisher-company") {
+      if (asc) {
+        sorted = [...books].sort((a, b) =>
+          a.editora.nome.localeCompare(b.editora.nome)
+        );
+      } else if(desc) {
+        sorted = [...books].sort((a, b) =>
+          b.editora.nome.localeCompare(a.editora.nome)
+        );
+      }
+    } else if (id === "author") {
+      if (asc) {
+        sorted = [...books].sort((a, b) => b.autor.localeCompare(a.autor));
+      } else if(desc){
+        sorted = [...books].sort((a, b) => a.autor.localeCompare(b.autor));
+      }
+    } else if (id === "copies") {
+      if (asc) {
+        sorted = [...books].sort((a, b) => a.quantidade - b.quantidade);
+      } else if(desc){
+        sorted = [...books].sort((a, b) => b.quantidade - a.quantidade);
+      }
+    } else if (id === "rented") {
+      if (asc) {
+        sorted = [...books].sort((a, b) => a.totalalugado - b.totalalugado);
+      } else if(desc){
+        sorted = [...books].sort((a, b) => b.totalalugado - a.totalalugado);
+      }
+    }
+    setSort(sorted);
+  },[asc, desc, books]);
+
+  useEffect(() => {
+    handleSortTable(typeSort);
+  }, [books, asc, desc, typeSort, handleSortTable]);
+
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - books.length) : 0;
-
+ 
   return (
     <TableContainer>
       <ModalComponent
@@ -281,75 +398,42 @@ export function Table() {
         </button>
       </div>
 
-      <TableStyle orderDir={asc}>
+      <TableStyle asc={asc} desc={desc}>
         <table aria-label="custom pagination table">
           <thead>
             <tr key="thead" className="table-head">
-              <th
-                id="id"
-                onClick={(e) => {
-                  setTypeSort(e.currentTarget.id);
-                  setAsc(!asc);
-                }}
-              >
-                ID
-              </th>
-              <th
-                id="name"
-                onClick={(e) => {
-                  setTypeSort(e.currentTarget.id);
-                  setAsc(!asc);
-                }}
-              >
-                {t("name")}
-                <img src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/24/000000/external-arrow-arrows-those-icons-lineal-color-those-icons-6.png" />
-              </th>
-              <th
-                id="release"
-                onClick={(e) => {
-                  setTypeSort(e.currentTarget.id);
-                  setAsc(!asc);
-                }}
-              >
-                {t("release")}
-              </th>
-              <th
-                id="publisher-company"
-                onClick={(e) => {
-                  setTypeSort(e.currentTarget.id);
-                  setAsc(!asc);
-                }}
-              >
-                {t("publisher")}
-              </th>
-              <th
-                id="author"
-                onClick={(e) => {
-                  setTypeSort(e.currentTarget.id);
-                  setAsc(!asc);
-                }}
-              >
-                {t("author")}
-              </th>
-              <th
-                id="copies"
-                onClick={(e) => {
-                  setTypeSort(e.currentTarget.id);
-                  setAsc(!asc);
-                }}
-              >
-                {t("copies")}
-              </th>
-              <th
-                id="rented"
-                onClick={(e) => {
-                  setTypeSort(e.currentTarget.id);
-                  setAsc(!asc);
-                }}
-              >
-                {t("rented")}
-              </th>
-              <th id="actions">{t("actions")}</th>
+            {
+              sortSelector.map(((th) => {
+                console.log(th.ordered);
+                return(
+                  <th
+                    id={th.id}
+                    onClick={(e) => {
+                      setTypeSort(e.currentTarget.id)
+                      if(desc === false && asc === false){ 
+                        sortOrNo(e.currentTarget.id, 'asc')
+                      }else if(asc === true && desc === false){
+                        sortOrNo(e.currentTarget.id,'desc')
+                      }else if(desc === true && asc === false){
+                        sortOrNo(e.currentTarget.id,'asc')
+                      }else if(asc === true && desc === true){
+                        sortOrNo(e.currentTarget.id,'alt')
+                      }
+                    }}
+                  >
+                  <div className="sortIndicator">
+                    {th.label}
+                    <span>{th.ordered ? (asc === true? th.direction.asc : th.direction.desc) : <img className={th.ordered? 'sorted' : 'notSorted'} src="https://img.icons8.com/material-two-tone/24/000000/sorting-arrows.png" alt="^"/>}</span>
+                  </div>
+                  </th>
+                )
+              }))
+            }
+            <th
+              id="actions"
+            >
+              {t('actions')}
+            </th>
             </tr>
           </thead>
           <tbody>
