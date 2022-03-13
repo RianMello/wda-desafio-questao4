@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { useRent } from "../../../../hooks/useRent";
 import { Rent } from "../../../../interfaces/ResponseAPI";
@@ -8,23 +9,32 @@ interface DeleteProps {
   onFinish: () => void;
 }
 export function Delete({ rent, onFinish }: DeleteProps) {
-  const { removeRent } = useRent();
-  const { t } = useTranslation()
+  const { editRent } = useRent();
+  const { t } = useTranslation();
+  const today = dayjs().format("YYYY-MM-DD");
 
-  function deleteBook() {
+  function returnBook() {
     console.log("tentando pelo menos");
-    removeRent(rent, onFinish);
+    const returnedBook: Rent = {
+      id: rent.id,
+      data_aluguel: rent.data_aluguel,
+      data_devolucao: today,
+      data_previsao: rent.data_previsao,
+      livro_id: rent.livro_id,
+      usuario_id: rent.usuario_id,
+    };
+    editRent(returnedBook, onFinish);
   }
 
   return (
     <DeleteContainer>
-      <h2>{t('sureDelete.deleteRent')}</h2>
+      <h2>{t("sureDelete.returnBook")}</h2>
       <div className="buttons-container">
         <button className="btn-Delete" onClick={() => onFinish()}>
-          {t('options.no')}
+          {t("options.no")}
         </button>
-        <button className="btn-noDelete" onClick={() => deleteBook()}>
-          {t('options.yes')}
+        <button className="btn-noDelete" onClick={() => returnBook()}>
+          {t("options.yes")}
         </button>
       </div>
     </DeleteContainer>

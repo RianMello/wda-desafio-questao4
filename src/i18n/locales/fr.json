@@ -45,6 +45,7 @@
             "impedimentUser": "L'enregistrement de cet utilisateur ne peut pas encore être supprimé car il a un livre non retourné"
         },
         "sureDelete": {
+            "returnBook": "Voulez-vous vraiment marquer le livre comme retourné ?",
             "deleteBook":"Voulez-vous vraiment supprimer l'enregistrement de ce livre ?",
             "deleteUser": "Voulez-vous vraiment supprimer l'enregistrement de cet utilisateur ?",
             "deleteRent": "Voulez-vous vraiment supprimer ce dossier de location ?",

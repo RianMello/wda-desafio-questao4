@@ -10,6 +10,7 @@ import api from "../services/api";
 
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import dayjs from "dayjs";
 
 interface RentsContextProps {
   rents: Rent[];
@@ -75,12 +76,16 @@ export function RentsProvider({ children }: RentsProviderProps) {
     if (rent.data_devolucao) {
       if (datePrazo <= dateRet) {
         situation = {
-          label: "Devolvido atrasado!",
+          label: `Devolvido com atraso, na data: ${dayjs(
+            rent.data_devolucao
+          ).format("YYYY/MM/DD")}!`,
           icon: <CheckBoxIcon sx={{ color: "red" }} />,
         };
       } else if (datePrazo >= dateRet) {
         situation = {
-          label: "Devolvido!",
+          label: `Devolvido na data: ${dayjs(rent.data_devolucao).format(
+            "YYYY/MM/DD"
+          )}!`,
           icon: <CheckBoxIcon sx={{ color: "green" }} />,
         };
       }

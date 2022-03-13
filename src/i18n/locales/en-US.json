@@ -45,6 +45,7 @@
             "impedimentUser": "This user's record cannot be deleted yet as he has an unreturned book"
         },
         "sureDelete": {
+            "returnBook": "Are you sure you want to mark the book as returned?",
             "deleteBook":"Are you sure you want to delete the record for this book?",
             "deleteUser": "Are you sure you want to delete the record for this User?",
             "deleteRent": "Are you sure you want to delete this rental record?",

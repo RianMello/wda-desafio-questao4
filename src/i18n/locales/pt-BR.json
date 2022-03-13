@@ -45,6 +45,7 @@
             "impedimentUser": "O registro deste usuário ainda não pode ser excluído porque ele tem um livro não devolvido"
         },
         "sureDelete": {
+            "returnBook": "Tem certeza de que deseja marcar o livro como devolvido?",
             "deleteBook":"Tem certeza de que deseja excluir o registro deste livro?",
             "deleteUser": "Tem certeza de que deseja excluir o registro deste usuário?",
             "deleteRent": "Tem certeza de que deseja excluir este registro de aluguel?",

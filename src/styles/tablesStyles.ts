@@ -205,13 +205,14 @@ export const TableStyle = styled.div<TableStyleProps>`
         border-radius: 1.5rem;
         border: none;
         background-color: #fefcff;
-        width: 2.5rem;
+        width: 100%;
+        max-width: 2.5rem;
         height: 2.5rem;
         margin: 0.25rem;
         align-items: center;
-        color: #fa938c;
-        @media (max-width: 420px) {
-          width: 1rem;
+        color: #fc6056;
+        @media (max-width: 728px) {
+          max-width: 1.5rem;
           height: 1rem;
         }
     }

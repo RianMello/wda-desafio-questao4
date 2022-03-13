@@ -117,7 +117,7 @@ export function Table() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
   const [rentToEdited, setRentToEdited] = useState(rents[0]);
-  const [rentToDelete, setRentToDelete] = useState({} as Rent);
+  const [rentToDelete, setRentToDelete] = useState(rents[0]);
 
   const [sort, setSort] = useState<Rent[]>(rents);
   const [typeSort, setTypeSort] = useState("");
@@ -151,7 +151,7 @@ export function Table() {
       },
     },
     {
-      id: "name",
+      id: "rentedBook",
       label: t("rentedBook"),
       ordered: false,
       direction: {
@@ -177,15 +177,15 @@ export function Table() {
         desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
       },
     },
-    {
-      id: "returnDate",
-      label: t("returnDate"),
-      ordered: false,
-      direction: {
-        asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
-        desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
-      },
-    },
+    // {
+    //   id: "returnDate",
+    //   label: t("returnDate"),
+    //   ordered: false,
+    //   direction: {
+    //     asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
+    //     desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
+    //   },
+    // },
     {
       id: "expectedDate",
       label: t("expectedDate"),
@@ -322,56 +322,63 @@ export function Table() {
             b.usuario_id.nome.localeCompare(a.usuario_id.nome)
           );
         }
+      } else if (id === "rentedBook") {
+        if (asc) {
+          sorted = [...rents].sort((a, b) =>
+            a.livro_id.nome.localeCompare(b.livro_id.nome)
+          );
+        } else if (desc) {
+          sorted = [...rents].sort((a, b) =>
+            b.livro_id.nome.localeCompare(a.livro_id.nome)
+          );
+        }
       } else if (id === "rentalDate") {
         if (asc) {
           sorted = [...rents].sort((a, b) => {
-            let dateRentalA = new Date(a.data_devolucao);
-            let dateRentalB = new Date(b.data_devolucao);
-            if (dateRentalA.valueOf() > dateRentalB.valueOf()) {
+            let dateRentalA = new Date(Date.parse(a.data_aluguel));
+            let dateRentalB = new Date(Date.parse(b.data_aluguel));
+            if (dateRentalA > dateRentalB) {
               return 1;
-            } else if (dateRentalA.valueOf() < dateRentalB.valueOf()) {
+            } else if (dateRentalA < dateRentalB) {
               return -1;
             }
             return 0;
           });
         } else if (desc) {
-          sorted = [...rents].sort((a, b) =>
-            b.data_aluguel.localeCompare(a.data_aluguel)
-          );
-        }
-      } else if (id === "returnDate") {
-        if (asc) {
           sorted = [...rents].sort((a, b) => {
-            let dateReturnA = new Date(a.data_devolucao);
-            let dateReturnB = new Date(b.data_devolucao);
-            if (dateReturnA.valueOf() > dateReturnB.valueOf()) {
-              return 1;
-            } else if (dateReturnA.valueOf() < dateReturnB.valueOf()) {
+            let dateRentalA = new Date(Date.parse(a.data_aluguel));
+            let dateRentalB = new Date(Date.parse(b.data_aluguel));
+            if (dateRentalA > dateRentalB) {
               return -1;
+            } else if (dateRentalA < dateRentalB) {
+              return 1;
             }
             return 0;
           });
-        } else if (desc) {
-          sorted = [...rents].sort((a, b) =>
-            b.data_aluguel.localeCompare(a.data_aluguel)
-          );
         }
       } else if (id === "expectedDate") {
         if (asc) {
           sorted = [...rents].sort((a, b) => {
-            let datePrevA = new Date(a.data_previsao);
-            let datePrevB = new Date(b.data_previsao);
-            if (datePrevA.valueOf() > datePrevB.valueOf()) {
+            let dateRentalA = new Date(a.data_previsao);
+            let dateRentalB = new Date(b.data_previsao);
+            if (dateRentalA.getTime() > dateRentalB.getTime()) {
               return 1;
-            } else if (datePrevA.valueOf() < datePrevB.valueOf()) {
+            } else if (dateRentalA.getTime() < dateRentalB.getTime()) {
               return -1;
             }
             return 0;
           });
         } else if (desc) {
-          sorted = [...rents].sort((a, b) =>
-            b.data_aluguel.localeCompare(a.data_aluguel)
-          );
+          sorted = [...rents].sort((a, b) => {
+            let dateRentalA = new Date(a.data_previsao);
+            let dateRentalB = new Date(b.data_previsao);
+            if (dateRentalA.getTime() > dateRentalB.getTime()) {
+              return -1;
+            } else if (dateRentalA.getTime() < dateRentalB.getTime()) {
+              return 1;
+            }
+            return 0;
+          });
         }
       }
       setSort(sorted);
@@ -490,7 +497,7 @@ export function Table() {
                 const dateReturn = dayjs(data.data_devolucao).format(
                   "DD/MM/YYYY"
                 );
-                const dateExpected = dayjs(data.data_devolucao).format(
+                const dateExpected = dayjs(data.data_previsao).format(
                   "DD/MM/YYYY"
                 );
                 console.log(dateExpected);
@@ -500,45 +507,28 @@ export function Table() {
                   <tr key={data.id}>
                     <td style={{ width: 80 }}>#{data.id}</td>
                     <td style={{ width: 120 }} align="right">
-                      {data.usuario_id.nome}
+                      {data.livro_id.nome}
                     </td>
                     <td style={{ width: 120 }} align="right">
-                      {data.livro_id.nome}
+                      {data.usuario_id.nome}
                     </td>
                     <td style={{ width: 120 }} align="right">
                       {dateRent}
                     </td>
                     <td style={{ width: 120 }} align="right">
-                      {dateReturn === "Invalid Date"
-                        ? "dd/mm/aaaa"
-                        : dateReturn}
-                    </td>
-                    <td style={{ width: 120 }} align="right">
-                      {dateExpected === "Invalid Date"
-                        ? "dd/mm/aaaa"
-                        : dateExpected}
+                      {dateExpected}
                     </td>
                     <td style={{ width: 120 }} align="right">
                       <Tooltip title={span.label}>{span.icon}</Tooltip>
                     </td>
                     <td style={{ width: 120 }} align="right">
-                      {/* <button
-                        className="btn-edit"
-                        onClick={() => {
-                          handleModalFormOpen();
-                          setRentToEdited(data);
-                        }}
-                      >
-                        <Tooltip title="Edit">
-                        <EditTwoToneIcon fontSize="large" />
-                        </Tooltip>
-                      </button> */}
                       <button
                         className="btn-delete"
                         onClick={() => {
-                          setRentToDelete(data);
                           handleModalDeleteOpen();
+                          setRentToDelete(data as Rent);
                         }}
+                        disabled={span.label === "Não devolvido" ? false : true}
                       >
                         <Tooltip title={t("giveBack") as string}>
                           <SettingsBackupRestoreIcon fontSize="large" />

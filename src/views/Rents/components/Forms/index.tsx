@@ -27,12 +27,12 @@ interface initialProps {
 }
 
 export function FormRent({ rent, onFinish }: FormRentProps) {
-  const { addRent, editRent } = useRent();
+  const { addRent } = useRent();
   const { users } = useUser();
   const { editBook, available } = useBook();
 
-  const [user, setUser] = useState(rent?.id ? rent.usuario_id : users[0]);
-  const [book, setBook] = useState(rent?.id ? rent.livro_id : available[0]);
+  const [user, setUser] = useState(users[0]);
+  const [book, setBook] = useState(available[0]);
 
   const schema = Yup.object().shape({
     id: Yup.number(),
@@ -105,17 +105,9 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
       usuario_id: user,
       livro_id: book,
     };
-    if (rent?.id !== undefined) {
-      editRent({...rentFinish, data_devolucao: today}, onFinish);
-      console.log(rentFinish);
-      return;
-    } else {
-      let renteded = book.totalalugado + 1;
-      editBook({ ...book, totalalugado: renteded })
-      addRent(rentFinish as Rent, onFinish);
-      console.log(rentFinish);
-      return;
-    }
+    addRent(rentFinish as Rent, onFinish);
+    console.log(rentFinish);
+    return;
   };
 
   return (
@@ -129,57 +121,41 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
         }}
       >
         <Form>
-          <fieldset>
-            <legend>
-              {rent?.id ? "Edit rental record" : "Add rental record"}
-            </legend>
-            <SelectUser
-              rent={rent}
-              users={users}
-              userChange={handleUserChange}
-            />
-            <SelectBook
-              rent={rent}
-              books={available}
-              bookChange={handleBookChange}
-            />
-            <label htmlFor="data_aluguel">Rental date:</label>
-            <Field
-              id="data_aluguel"
-              name="data_aluguel"
-              type="date"
-              min={today}
-            />
-            <ErrorMessage
-              component="span"
-              className="errorMessage"
-              name="data_aluguel"
-            />
-            <label htmlFor="data_devolucao">Return date:</label>
-            <Field
-              id="data_devolucao"
-              name="data_devolucao"
-              type="date"
-              min={today}
-            />
-            <ErrorMessage
-              component="span"
-              className="errorMessage"
-              name="data_devolucao"
-            />
-            <label htmlFor="data_previsao">Expected date:</label>
-            <Field
-              id="data_previsao"
-              name="data_previsao"
-              type="date"
-              min={today}
-            />
-            <ErrorMessage
-              component="span"
-              className="errorMessage"
-              name="data_previsao"
-            />
-          </fieldset>
+          <SelectUser rent={rent} users={users} userChange={handleUserChange} />
+          <SelectBook
+            rent={rent}
+            books={available}
+            bookChange={handleBookChange}
+          />
+          <label htmlFor="data_aluguel">Rental date:</label>
+          <Field
+            id="data_aluguel"
+            name="data_aluguel"
+            type="date"
+            min={today}
+          />
+          <ErrorMessage
+            component="span"
+            className="errorMessage"
+            name="data_aluguel"
+          />
+          <ErrorMessage
+            component="span"
+            className="errorMessage"
+            name="data_devolucao"
+          />
+          <label htmlFor="data_previsao">Expected date:</label>
+          <Field
+            id="data_previsao"
+            name="data_previsao"
+            type="date"
+            min={today}
+          />
+          <ErrorMessage
+            component="span"
+            className="errorMessage"
+            name="data_previsao"
+          />
           <div className="control-modalForm">
             <button className="btn-cancel" onClick={onFinish}>
               Cancel
