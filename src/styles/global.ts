@@ -24,25 +24,19 @@ export const GlobalStyle = createGlobalStyle`
         @media (max-width: 1080px) {
             font-size: 95.75%;
         }
-        @media (max-width: 720px) {
+        @media (max-width: 810px) {
             font-size: 87.5%;
         }
-        @media (max-width: 520px){
-            font-size: 79.25%;
-        }
-        @media (max-width: 420px) {
-            font-size: 71%;
-        }
-        @media (max-width: 320px){
-            font-size: 62.75%; 
+        @media (max-width: 610px) {
+            font-size: 75%;
         }
     }
 
     body {
-        display: flex;
         -webkit-font-smoothing: antialiased;
         justify-content: center;
         background: #435166;
+        width: 100%;
     }
 
     body, input, button, textarea {

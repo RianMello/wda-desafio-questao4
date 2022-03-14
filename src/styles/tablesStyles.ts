@@ -8,21 +8,17 @@ type TableStyleProps = {
 export const TableContainer = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 10rem;
   height: 100%;
-  justify-content: space-between;
+  justify-content: center;
   background: white;
   align-items: center;
   margin-top: 1rem;
-  max-width: 100%;
   width: 100%;
   border-radius: 0.5rem;
   box-shadow: 1px 3px 5px #ababab;
   .table-head {
     height: 4rem;
-    @media (max-width: 420px) {
-      height: 2.5rem;
-    }
+    width: 100%;
   }
   .header-table-actions {
     width: 90%;
@@ -32,9 +28,6 @@ export const TableContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     margin-top: 1rem;
-    @media (max-width: 420px) {
-      width: 90%;
-    }
   }
   .btn-new {
     display: flex;
@@ -59,16 +52,6 @@ export const TableContainer = styled.div`
     strong {
       margin-left: 0.2rem;
     }
-
-    @media (max-width: 420px) {
-      max-width: 6rem;
-      min-width: 3rem;
-      font-size: 0.8rem;
-      .add_icon{
-        width: 1.5rem;
-        height: 1.5rem;
-      }
-    }
   }
   .search-input {
     width: 25rem;
@@ -85,58 +68,59 @@ export const TableContainer = styled.div`
     padding: 0.5rem;
     margin-right: 2rem;
     background: transparent;
-
-    @media (max-width: 420px) {
-      max-width: 20rem;
-    }
   }
 `;
 
 export const TableStyle = styled.div<TableStyleProps>`
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    max-width: 90%;
+    width: 90%;
+    max-width: 1800px;
     table {
       font-family: Poppins, sans-serif;;
       font-size: 1rem;
       border-collapse: collapse;
       margin-bottom: 2rem;
-    }
-  
-    td,
-    th {
-      text-align: center;
-      padding: 0.25rem;
-      max-width: 20rem;
+      width: 100%;
     }
     tr{ 
       background: #fafafa;
       transition: filter 0.15s;
       border-bottom: 1px solid #CDD2D7;
-     
+      width: 100%;
+      height: 1rem;
+      td{
+        min-width: calc(100% / 8);
+        max-width: calc(100% / 8);
+        width: 100%;
+        height: 1rem;
+      }
     }
     tbody{
       tr{
         transition: filter 0.15s;
+        width: 100%;
+        height: 1rem;
         &:hover{
           filter: brightness(0.9) ;
         }
         td{
+          min-width: calc(100% / 8);
+          max-width: calc(100% / 8);
           width: 100%;
+          text-align: center;
+          height: 1rem;
+          font-size: 1.25rem;
         }
       }
     }
     th {
       background-color: #4394e0;
       color: white;
-      width: 100%;
       font-size: 1.25rem;
       border: 0.5px solid #CDD2D7; 
       transition: filter 0.15s;
-      .flip{
-        transform: scaleX(-1);
-      }
+      width: 100%;
+      min-width: calc(100% / 8);
+      max-width: calc(100% / 8);
       .sorted{
         visibility: visible;
         }
@@ -144,22 +128,27 @@ export const TableStyle = styled.div<TableStyleProps>`
         visibility: hidden;
       }
       .sortIndicator{
-        display: grid;
-        grid-template-columns: 3fr 1fr  ;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 2rem;
+        width: 100%;
+        margin: 0;
       }
-      img{
-        width:1rem;
-        height:1rem;
-        margin: 0.5rem;
-
+      label{
+        max-width:2rem;
+        min-width:1rem;
+        text-align: center;
       }
       span{
-        width:2rem;
-        height:1rem;
+        max-width: 2rem;
+        min-width: 1rem;
+        position: relative;
+        bottom: -50%;
+        right: 50%;
+        height: 1rem;
         visibility: ${props => props.asc === true || props.desc === true ? 'visible' : 'hidden'};
-        color: #CDD2D7;
         font-size: 0.7rem;
-        
       }
 
       &:hover{
@@ -187,58 +176,51 @@ export const TableStyle = styled.div<TableStyleProps>`
       background-color: #4394e0;
       color: #ffefeb;
     }
+    .actions{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      height:100%;
+      width: 100%;
+    }
     .btn-edit{
-        border-radius: 1.5rem;
         border: none;
-        background-color: #fefcff;
-        width: 2.5rem;
-        height: 2.5rem;
-        margin: 0.25rem;
+        background: transparent;
+        width: 50%;
+        height: 100%;
         align-items: center;
         color: #8ac5ff;
-        @media (max-width: 420px) {
-          width: 1rem;
-          height: 1rem;
+
+        svg{
+          width: 50%;
+          height: 50%;
+          transition: transform 0.2s;
+        }
+
+        &:hover{
+          svg{
+            transform: scale(1.5);
+          };
         }
     }
     .btn-delete{
-        border-radius: 1.5rem;
         border: none;
-        background-color: #fefcff;
-        width: 100%;
-        max-width: 2.5rem;
-        height: 2.5rem;
-        margin: 0.25rem;
+        background: transparent;
+        width: 50%;
+        height: 100%;
         align-items: center;
         color: #fc6056;
-        @media (max-width: 728px) {
-          max-width: 1.5rem;
-          height: 1rem;
+
+        svg{
+          width: 60%;
+          height: 60%;
+          transition: transform 0.2s;
+        }
+
+        &:hover{
+          svg{
+            transform: scale(1.5);
+          };
         }
     }
-    @media (min-width: 320px) and (max-width: 1024px){
-      table{
-        font-size: 1rem;
-      }
-        thead{
-          th, td{
-            max-width: 10rem;
-            min-width: 3rem;
-            }
-          .table-head{
-            th{
-              font-size: 1.2rem;
-              max-width: 10rem;
-              min-width: 1rem;
-            }
-          }
-          tr{
-            max-height: 1rem;
-          }
-        }
-        .pagination{
-          max-height: 2rem;
-        }
-      }
-  );
 `;

@@ -177,15 +177,6 @@ export function Table() {
         desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
       },
     },
-    // {
-    //   id: "returnDate",
-    //   label: t("returnDate"),
-    //   ordered: false,
-    //   direction: {
-    //     asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
-    //     desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
-    //   },
-    // },
     {
       id: "expectedDate",
       label: t("expectedDate"),

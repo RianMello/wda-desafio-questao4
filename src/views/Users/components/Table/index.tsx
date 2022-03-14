@@ -5,6 +5,9 @@ import { User } from "../../../../interfaces/ResponseAPI";
 import { styled } from "@mui/system";
 import TablePaginationUnstyled from "@mui/base/TablePaginationUnstyled";
 import { TableContainer, TableStyle } from "../../../../styles/tablesStyles";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ShuffleIcon from "@mui/icons-material/Shuffle";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
@@ -121,7 +124,7 @@ export function Table() {
   const [sort, setSort] = useState<User[]>(users);
   const [typeSort, setTypeSort] = useState("");
   const [asc, setAsc] = useState(false);
-  const [desc, setDesc] = useState(false)
+  const [desc, setDesc] = useState(false);
 
   const { t } = useTranslation();
 
@@ -137,57 +140,57 @@ export function Table() {
       asc: string | ReactElement;
       desc: string | ReactElement;
     };
-  }
+  };
 
   const thSort: SortProps[] = [
     {
-      id: 'id',
-      label: 'ID',
+      id: "id",
+      label: "ID",
       ordered: false,
       direction: {
-        asc: <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-up.png"/>,
-        desc: <img src="https://img.icons8.com/ios-filled/50/000000/long-arrow-down.png"/>,
-      }
+        asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
+        desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
+      },
     },
     {
-      id: 'name',
-      label: t('name'),
+      id: "name",
+      label: t("name"),
       ordered: false,
       direction: {
-        asc: 'A-Z',
-        desc: 'Z-A',
-      }
+        asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
+        desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
+      },
     },
     {
-      id: 'address',
+      id: "address",
       label: t("address"),
       ordered: false,
       direction: {
-        asc: 'A-Z',
-        desc: 'Z-A',
-      }
+        asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
+        desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
+      },
     },
     {
-      id: 'email',
+      id: "email",
       label: t("email"),
       ordered: false,
       direction: {
-        asc: 'A-Z',
-        desc: 'Z-A',
-      }
+        asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
+        desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
+      },
     },
     {
-      id: 'city',
-      label: t('city'),
+      id: "city",
+      label: t("city"),
       ordered: false,
       direction: {
-        asc: 'A-Z',
-        desc: 'Z-A',
-      }
+        asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
+        desc: <ArrowDownwardIcon sx={{ color: "black" }} />,
+      },
     },
   ];
-  
-  const [sortSelector, setSortSelector] = useState(thSort)
+
+  const [sortSelector, setSortSelector] = useState(thSort);
 
   const searched = useMemo(
     () =>
@@ -237,91 +240,97 @@ export function Table() {
 
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - users.length) : 0;
-    const sortOrNo = useCallback((ref: string, ord: string) => {
-      console.log(ref)
-      console.log(ord)
-      if(ord === 'asc'){
-        setAsc(true)
-        setSortSelector((oldState: SortProps[]) => {
-          return oldState.map((old) => {
-            if(old.id !== ref && old.ordered === true){
-              return { ...old, ordered: false}
-            }
-            if(old.id === ref){
-              return { ...old, ordered: true}
-            }
-            return { ...old, ordered: false}
-          })})
-      }else if(ord === 'desc'){
-        setAsc(false)
-        setDesc(true)
-        setSortSelector((oldState: SortProps[]) => {
-          return oldState.map((old) => {
-            if(old.id !== ref && old.ordered === false){
-              return { ...old, ordered: false}
-            }
-            if(old.id === ref){
-              return { ...old, ordered: true}
-            }
-            return { ...old, ordered: false}
-          })})
-      }else if(ord === 'alt'){
-        setAsc(false)
-        setDesc(false)
-        setSortSelector((oldState: SortProps[]) => {
-          return oldState.map((old) => {
-            if(old.id === ref && old.ordered === true){
-              return { ...old, ordered: false}
-            }
-            return { ...old, ordered: false}
-          })})
-      }
-    },[]);
-  
-    const handleSortTable = useCallback((id: any) => {
+  const sortOrNo = useCallback((ref: string, ord: string) => {
+    console.log(ref);
+    console.log(ord);
+    if (ord === "asc") {
+      setAsc(true);
+      setSortSelector((oldState: SortProps[]) => {
+        return oldState.map((old) => {
+          if (old.id !== ref && old.ordered === true) {
+            return { ...old, ordered: false };
+          }
+          if (old.id === ref) {
+            return { ...old, ordered: true };
+          }
+          return { ...old, ordered: false };
+        });
+      });
+    } else if (ord === "desc") {
+      setAsc(false);
+      setDesc(true);
+      setSortSelector((oldState: SortProps[]) => {
+        return oldState.map((old) => {
+          if (old.id !== ref && old.ordered === false) {
+            return { ...old, ordered: false };
+          }
+          if (old.id === ref) {
+            return { ...old, ordered: true };
+          }
+          return { ...old, ordered: false };
+        });
+      });
+    } else if (ord === "alt") {
+      setAsc(false);
+      setDesc(false);
+      setSortSelector((oldState: SortProps[]) => {
+        return oldState.map((old) => {
+          if (old.id === ref && old.ordered === true) {
+            return { ...old, ordered: false };
+          }
+          return { ...old, ordered: false };
+        });
+      });
+    }
+  }, []);
+
+  const handleSortTable = useCallback(
+    (id: any) => {
       var sorted = users;
       if (id === "id") {
         if (asc) {
           sorted = [...users].sort((a, b) => a.id - b.id);
-        } else if(desc){
-           sorted = [...users].sort((a, b) => b.id - a.id);
+        } else if (desc) {
+          sorted = [...users].sort((a, b) => b.id - a.id);
         }
       } else if (id === "name") {
         if (asc) {
           sorted = [...users].sort((a, b) => a.nome.localeCompare(b.nome));
-        } else if(desc){
+        } else if (desc) {
           sorted = [...users].sort((a, b) => b.nome.localeCompare(a.nome));
         }
       } else if (id === "address") {
         if (asc) {
-          sorted = [...users].sort((a, b) => a.endereco.localeCompare(b.endereco));
-        } else if(desc){
-          sorted = [...users].sort((a, b) => b.endereco.localeCompare(a.endereco));
+          sorted = [...users].sort((a, b) =>
+            a.endereco.localeCompare(b.endereco)
+          );
+        } else if (desc) {
+          sorted = [...users].sort((a, b) =>
+            b.endereco.localeCompare(a.endereco)
+          );
         }
       } else if (id === "email") {
         if (asc) {
-          sorted = [...users].sort((a, b) =>
-            a.email.localeCompare(b.email)
-          );
-        } else if(desc) {
-          sorted = [...users].sort((a, b) =>
-            b.email.localeCompare(a.email)
-          );
+          sorted = [...users].sort((a, b) => a.email.localeCompare(b.email));
+        } else if (desc) {
+          sorted = [...users].sort((a, b) => b.email.localeCompare(a.email));
         }
       } else if (id === "city") {
         if (asc) {
           sorted = [...users].sort((a, b) => a.cidade.localeCompare(b.cidade));
-        } else if(desc){
+        } else if (desc) {
           sorted = [...users].sort((a, b) => b.cidade.localeCompare(a.cidade));
         }
       }
       setSort(sorted);
-    },[asc, desc, users]);
-  
-    useEffect(() => {
-      handleSortTable(typeSort);
-    }, [users, asc, desc, typeSort, handleSortTable]);
-  
+    },
+    [asc, desc, users]
+  );
+
+  useEffect(() => {
+    handleSortTable(typeSort);
+  }, [users, asc, desc, typeSort, handleSortTable]);
+
   return (
     <TableContainer>
       <ModalComponent
@@ -342,7 +351,7 @@ export function Table() {
         <input
           className="search-input"
           type="text"
-          placeholder={t('search')}
+          placeholder={t("search")}
           value={search}
           onInput={(e) => {
             const target = e.target as HTMLInputElement;
@@ -356,7 +365,7 @@ export function Table() {
             setUserToEdited({} as User);
           }}
         >
-          <AddCircleTwoToneIcon /> <strong>{t('user')}</strong>
+          <AddCircleTwoToneIcon /> <strong>{t("user")}</strong>
         </button>
       </div>
 
@@ -364,38 +373,42 @@ export function Table() {
         <table aria-label="custom pagination table">
           <thead>
             <tr key="thead" className="table-head">
-            {
-              sortSelector.map(((th) => {
+              {sortSelector.map((th) => {
                 console.log(th.ordered);
-                return(
+                return (
                   <th
                     id={th.id}
                     onClick={(e) => {
-                      setTypeSort(e.currentTarget.id)
-                      if(desc === false && asc === false){ 
-                        sortOrNo(e.currentTarget.id, 'asc')
-                      }else if(asc === true && desc === false){
-                        sortOrNo(e.currentTarget.id,'desc')
-                      }else if(desc === true && asc === false){
-                        sortOrNo(e.currentTarget.id,'asc')
-                      }else if(asc === true && desc === true){
-                        sortOrNo(e.currentTarget.id,'alt')
+                      setTypeSort(e.currentTarget.id);
+                      if (desc === false && asc === false) {
+                        sortOrNo(e.currentTarget.id, "asc");
+                      } else if (asc === true && desc === false) {
+                        sortOrNo(e.currentTarget.id, "desc");
+                      } else if (desc === true && asc === false) {
+                        sortOrNo(e.currentTarget.id, "asc");
+                      } else if (asc === true && desc === true) {
+                        sortOrNo(e.currentTarget.id, "alt");
                       }
                     }}
                   >
-                  <div className="sortIndicator">
-                    {th.label}
-                    <span>{th.ordered ? (asc === true? th.direction.asc : th.direction.desc) : <img className={th.ordered? 'sorted' : 'notSorted'} src="https://img.icons8.com/material-two-tone/24/000000/sorting-arrows.png" alt="^"/>}</span>
-                  </div>
+                    <div className="sortIndicator">
+                      {th.label}
+                      <span>
+                        {th.ordered ? (
+                          asc === true ? (
+                            th.direction.asc
+                          ) : (
+                            th.direction.desc
+                          )
+                        ) : (
+                          <ShuffleIcon sx={{ color: "black" }} />
+                        )}
+                      </span>
+                    </div>
                   </th>
-                )
-              }))
-            }
-            <th
-              id="actions"
-            >
-              {t('actions')}
-            </th>
+                );
+              })}
+              <th id="actions">{t("actions")}</th>
             </tr>
           </thead>
           <tbody>
@@ -419,20 +432,12 @@ export function Table() {
                 : searched
               ).map((data: User) => (
                 <tr key={data.id}>
-                  <td style={{ width: 80 }}> #{data.id}</td>
-                  <td style={{ width: 120 }} align="right">
-                    {data.nome}
-                  </td>
-                  <td style={{ width: 120 }} align="right">
-                    {data.endereco}
-                  </td>
-                  <td style={{ width: 120 }} align="right">
-                    {data.email}
-                  </td>
-                  <td style={{ width: 120 }} align="right">
-                    {data.cidade}
-                  </td>
-                  <td style={{ width: 120 }} align="right">
+                  <td> #{data.id}</td>
+                  <td align="right">{data.nome}</td>
+                  <td align="right">{data.endereco}</td>
+                  <td align="right">{data.email}</td>
+                  <td align="right">{data.cidade}</td>
+                  <td align="right">
                     <button
                       className="btn-edit"
                       onClick={() => {

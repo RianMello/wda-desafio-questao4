@@ -35,7 +35,7 @@ export const Button = styled.button<PropType>`
 `
 export const Container = styled.div`
     display: flex;
-    padding: 2rem;
+    padding: 1rem;
     flex-direction: row;
     justify-content: center;
     align-items: center;

@@ -388,7 +388,7 @@ export function Table() {
           <tbody>
             {loading === true ? (
               <tr key="load" className="loading">
-                <td colSpan={8}>
+                <td colSpan={4}>
                   Please wait for the data to load
                   <img
                     className="gif"
@@ -407,36 +407,34 @@ export function Table() {
               ).map((data: PublisherCompany) => {
                 return (
                   <tr key={data.id}>
-                    <td style={{ width: 80 }}> #{data.id}</td>
-                    <td style={{ width: 120 }} align="right">
-                      {data.nome}
-                    </td>
-                    <td style={{ width: 120 }} align="right">
-                      {data.cidade}
-                    </td>
-                    <td style={{ width: 120 }} align="right">
-                      <button
-                        className="btn-edit"
-                        onClick={() => {
-                          handleModalFormOpen();
-                          setPublisherToEdited(data);
-                        }}
-                      >
-                        <Tooltip title="Edit">
-                          <EditTwoToneIcon fontSize="large" />
-                        </Tooltip>
-                      </button>
-                      <button
-                        className="btn-delete"
-                        onClick={() => {
-                          setPublisherToDelete(data);
-                          handleModalDeleteOpen();
-                        }}
-                      >
-                        <Tooltip title="Delete">
-                          <DeleteForeverTwoToneIcon fontSize="large" />
-                        </Tooltip>
-                      </button>
+                    <td> #{data.id}</td>
+                    <td align="right">{data.nome}</td>
+                    <td align="right">{data.cidade}</td>
+                    <td align="right">
+                      <div className="actions">
+                        <button
+                          className="btn-edit"
+                          onClick={() => {
+                            handleModalFormOpen();
+                            setPublisherToEdited(data);
+                          }}
+                        >
+                          <Tooltip title="Edit">
+                            <EditTwoToneIcon fontSize="large" />
+                          </Tooltip>
+                        </button>
+                        <button
+                          className="btn-delete"
+                          onClick={() => {
+                            setPublisherToDelete(data);
+                            handleModalDeleteOpen();
+                          }}
+                        >
+                          <Tooltip title="Delete">
+                            <DeleteForeverTwoToneIcon fontSize="large" />
+                          </Tooltip>
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 );

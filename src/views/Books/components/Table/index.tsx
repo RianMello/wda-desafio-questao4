@@ -44,14 +44,10 @@ const CustomTablePagination = styled(TablePaginationUnstyled)(
     }
     & .MuiTablePaginationUnstyled-toolbar {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: flex-start;
       gap: 10px;
-  
-      @media (min-width: 768px) {
-        flex-direction: row;
-        align-items: center;
-      }
+
     }
     & .MuiTablePaginationUnstyled-selectLabel {
       margin: 0;
@@ -474,7 +470,7 @@ export function Table() {
               ).map((data: Book) => {
                 return (
                   <tr key={data.id}>
-                    <td> #{data.id}</td>
+                    <td align="right">{data.id}</td>
                     <td align="right">{data.nome}</td>
                     <td align="right">{data.lancamento}</td>
                     <td align="right">{data.editora.nome}</td>
@@ -482,28 +478,30 @@ export function Table() {
                     <td align="right">{data.quantidade}</td>
                     <td align="right">{data.totalalugado}</td>
                     <td align="right">
-                      <button
-                        className="btn-edit"
-                        onClick={() => {
-                          handleModalFormOpen();
-                          setBookToEdited(data);
-                        }}
-                      >
-                        <Tooltip title="Edit">
-                          <EditTwoToneIcon fontSize="large" />
-                        </Tooltip>
-                      </button>
-                      <button
-                        className="btn-delete"
-                        onClick={() => {
-                          setBookToDelete(data);
-                          handleModalDeleteOpen();
-                        }}
-                      >
-                        <Tooltip title="Delete">
-                          <DeleteForeverTwoToneIcon fontSize="large" />
-                        </Tooltip>
-                      </button>
+                      <div className="actions">
+                        <button
+                          className="btn-edit"
+                          onClick={() => {
+                            handleModalFormOpen();
+                            setBookToEdited(data);
+                          }}
+                        >
+                          <Tooltip title="Edit">
+                            <EditTwoToneIcon fontSize="large" />
+                          </Tooltip>
+                        </button>
+                        <button
+                          className="btn-delete"
+                          onClick={() => {
+                            setBookToDelete(data);
+                            handleModalDeleteOpen();
+                          }}
+                        >
+                          <Tooltip title="Delete">
+                            <DeleteForeverTwoToneIcon fontSize="large" />
+                          </Tooltip>
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 );
