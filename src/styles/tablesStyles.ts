@@ -21,43 +21,56 @@ export const TableContainer = styled.div`
   .table-head {
     height: 4rem;
     width: 100%;
+
+    svg{
+      width: 1rem;
+      height: 1rem;
+    }
   }
   .header-table-actions {
-    width: 90%;
+    width: 100%;
     height: 5rem;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-top: 1rem;
   }
   .btn-new {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 
     border: none;
     border-radius: 0.5rem;
 
+    background: transparent;
+
+    width: 100%;
     min-width: 6rem;
-    max-width: 12rem;
+    max-width: 8rem;
     height: 3rem;
-    padding: 0.5rem;
+    margin: 0.5rem;
 
     color: white;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.2rem;
 
-    background-color: #4394e0;
-
-    strong {
-      margin-left: 0.2rem;
+    background-color: #4fe39c;
+    .add_icon{
+      width: 1.5rem;
+      height: 1.5rem;
     }
   }
   .search-input {
-    width: 25rem;
-    height: 2rem;
+    width: 100%;
+    min-width: 15rem;
+    max-width: 30rem;
+    color: white;
+    ::placeholder{
+      color: white;
+    }
+    height: 3rem;
     border-width: 0;
     border-bottom: 1px solid #cdd2d7;
     :hover {
@@ -68,8 +81,8 @@ export const TableContainer = styled.div`
     }
     border-radius: 0.15rem;
     padding: 0.5rem;
-    margin-right: 2rem;
-    background: transparent;
+    margin: 0.5rem;
+    background: #589ee0;
   }
 `;
 
@@ -82,38 +95,46 @@ export const TableStyle = styled.div<TableStyleProps>`
       border-collapse: collapse;
       margin-bottom: 2rem;
       width: 100%;
+      margin-top: 2rem;
     }
     tr{ 
       background: #fafafa;
       transition: filter 0.15s;
       border-bottom: 1px solid #CDD2D7;
       width: 100%;
-      height: 1rem;
+      height: 2rem;
+      .search-tr{
+        background: transparent;
+        height: 4rem;
+        
+      }
       td{
         min-width: calc(100% / 8);
-        max-width: calc(100% / 8);
+        max-width: calc(100% / 4);
         width: 100%;
-        height: 1rem;
+        height: 2rem;
+        padding: 0.5rem;
       }
     }
     tbody{
       tr{
         transition: filter 0.15s;
         width: 100%;
-        height: 1rem;
+        height: 2rem;
         &:hover{
           filter: brightness(0.9) ;
         }
         td{
           min-width: calc(100% / 8);
-          max-width: calc(100% / 8);
+          max-width: calc(100% / 4);
           width: 100%;
           text-align: center;
-          height: 1rem;
+          height: 2rem;
           font-size: 1.25rem;
         }
       }
     }
+    
     th {
       background-color: #4394e0;
       color: white;
@@ -122,7 +143,7 @@ export const TableStyle = styled.div<TableStyleProps>`
       transition: filter 0.15s;
       width: 100%;
       min-width: calc(100% / 8);
-      max-width: calc(100% / 8);
+      max-width: calc(100% / 4);
       .sorted{
         visibility: visible;
         }
@@ -182,8 +203,8 @@ export const TableStyle = styled.div<TableStyleProps>`
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      height:100%;
-      width: 100%;
+      height:3rem;
+      max-width: 100%;
     }
     .btn-edit{
         border: none;
@@ -194,8 +215,8 @@ export const TableStyle = styled.div<TableStyleProps>`
         color: #8ac5ff;
 
         svg{
-          width: 50%;
-          height: 50%;
+          width: 80%;
+          height: 80%;
           transition: transform 0.2s;
         }
 
@@ -214,8 +235,8 @@ export const TableStyle = styled.div<TableStyleProps>`
         color: #fc6056;
 
         svg{
-          width: 60%;
-          height: 60%;
+          width: 80%;
+          height: 80%;
           transition: transform 0.2s;
         }
 

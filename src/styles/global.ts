@@ -76,23 +76,20 @@ export const GlobalStyle = createGlobalStyle`
         max-width: 40%;
         background: white;
         position: relative;
-        border-radius: 0.2rem;
+        border-radius: 0.5rem;
 
         .titleModal{
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             flex-direction: row;
             height: 5rem;
             font-weight: bold;
             font-size: 2rem;
             text-align: center;
-
+            padding-left: 2.5rem;
+            padding-right: 1rem;
             span{
-                position: absolute;
-                top: 0;
-                right: 0;
-                margin: 0.25rem;
                 cursor: pointer;
                 svg{
                     width: 2rem;
@@ -111,6 +108,32 @@ export const GlobalStyle = createGlobalStyle`
         padding: 2rem;
         position: relative;
         border-radius: 0.4rem;
+
+        .titleModal{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: row;
+            height: 5rem;
+            font-weight: bold;
+            font-size: 2rem;
+            text-align: center;
+            div{
+                color: #e34f4f;
+                font-size: 2.5rem
+            }
+            span{
+                cursor: pointer;
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0.5rem;
+                svg{
+                    width: 2rem;
+                    height: 2rem;
+                }
+            }
+        }
     }
     .modalDelete-overlay{
         display: flex;

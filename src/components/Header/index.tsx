@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Container } from "./style";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next"
-import { SelectLanguage } from '../SelectLanguage/index'
+import { useTranslation } from "react-i18next";
+import { SelectLanguage } from "../SelectLanguage/index";
 
 interface IButton {
   id: number;
@@ -12,12 +12,11 @@ interface IButton {
 }
 
 export function Header() {
-
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const buttons = [
     {
       id: 1,
-      label: "publishers",
+      label: "publisher.publishers",
       navigate: "/publishers",
       isSelected: false,
     },
@@ -47,32 +46,33 @@ export function Header() {
     },
   ];
   const [button, setButton] = useState(buttons);
-  var currentPage = document.URL
+  var currentPage = document.URL;
 
   const handleChangeSelectedPage = () => {
     setButton((old) =>
       old.map((el: IButton) => {
-        if(currentPage.includes('/publishers')){
-          if (el.navigate === '/publishers'){
+        if (currentPage.includes("/publishers")) {
+          if (el.navigate === "/publishers") {
             return { ...el, isSelected: true };
           }
         }
-        if(currentPage.includes('/books')){
-          if (el.navigate === '/books'){
+        if (currentPage.includes("/books")) {
+          if (el.navigate === "/books") {
             return { ...el, isSelected: true };
           }
         }
-        if(currentPage.includes('/users')){
-          if (el.navigate === '/users'){
+        if (currentPage.includes("/users")) {
+          if (el.navigate === "/users") {
             return { ...el, isSelected: true };
           }
         }
-        if(currentPage.includes('/rents')){
-          if (el.navigate === '/rents'){
+        if (currentPage.includes("/rents")) {
+          if (el.navigate === "/rents") {
             return { ...el, isSelected: true };
           }
-        }if(currentPage.substr(-1, 1) === '/'){
-          if (el.navigate === '/'){
+        }
+        if (currentPage.substr(-1, 1) === "/") {
+          if (el.navigate === "/") {
             return { ...el, isSelected: true };
           }
         }
@@ -81,9 +81,9 @@ export function Header() {
     );
   };
 
-  useEffect(()=> {
-    handleChangeSelectedPage()
-  },[currentPage]);
+  useEffect(() => {
+    handleChangeSelectedPage();
+  }, [currentPage]);
 
   const toNavigate = useNavigate();
 
@@ -93,11 +93,10 @@ export function Header() {
         {button.map((bt: IButton) => {
           return (
             <Button
-            key={bt.id}
+              key={bt.id}
               selected={bt.isSelected}
               onClick={() => {
                 toNavigate(bt.navigate);
-                
               }}
             >
               {t(bt.label)}

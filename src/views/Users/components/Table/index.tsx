@@ -349,31 +349,34 @@ export function Table() {
       >
         {handleDeleteVerification(userToDelete)}
       </ModalComponent>
-      <div className="header-table-actions">
-        <input
-          className="search-input"
-          type="text"
-          placeholder={t("search")}
-          value={search}
-          onInput={(e) => {
-            const target = e.target as HTMLInputElement;
-            setSearch(target.value);
-          }}
-        />
-        <button
-          className="btn-new"
-          onClick={() => {
-            handleModalFormOpen();
-            setUserToEdited({} as User);
-          }}
-        >
-          <AddCircleTwoToneIcon /> <strong>{t("user")}</strong>
-        </button>
-      </div>
-
       <TableStyle asc={false} desc={false}>
         <table aria-label="custom pagination table">
           <thead>
+            <tr className="search-tr">
+              <th colSpan={8}>
+                <div className="header-table-actions">
+                  <input
+                    className="search-input"
+                    type="text"
+                    placeholder={t("search")}
+                    value={search}
+                    onInput={(e) => {
+                      const target = e.target as HTMLInputElement;
+                      setSearch(target.value);
+                    }}
+                  />
+                  <button
+                    className="btn-new"
+                    onClick={() => {
+                      handleModalFormOpen();
+                      setUserToEdited({} as User);
+                    }}
+                  >
+                    <AddCircleTwoToneIcon /> <strong>{t("user")}</strong>
+                  </button>
+                </div>
+              </th>
+            </tr>
             <tr key="thead" className="table-head">
               {sortSelector.map((th) => {
                 console.log(th.ordered);

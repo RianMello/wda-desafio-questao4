@@ -7,10 +7,9 @@ import TablePaginationUnstyled from "@mui/base/TablePaginationUnstyled";
 import { TableContainer, TableStyle } from "../../../../styles/tablesStyles";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import ShuffleIcon from "@mui/icons-material/Shuffle";
+import { FaRandom } from "react-icons/fa";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
-import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 import { Tooltip } from "@mui/material";
 
 import { useTranslation } from "react-i18next";
@@ -18,7 +17,9 @@ import { ModalComponent } from "../../../../components/Modal";
 import { FormBook } from "../Form";
 import { Delete } from "../Delete";
 import { useNavigate } from "react-router";
-import { IoMdClose } from "react-icons/io";
+
+import { IoMdClose, IoIosAddCircleOutline } from "react-icons/io";
+import { BsExclamationLg } from "react-icons/bs";
 
 const blue = {
   200: "#A5D8FF",
@@ -171,7 +172,7 @@ export function Table() {
     },
     {
       id: "publisher-company",
-      label: t("publisher"),
+      label: t("publisher.publisher"),
       ordered: false,
       direction: {
         asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
@@ -388,35 +389,47 @@ export function Table() {
         onRequestClose={handleModalDeleteClose}
         title="Edit"
       >
+        <div className="titleModal">
+          <div>
+            Attention
+            <BsExclamationLg />
+          </div>
+          <span onClick={handleModalDeleteClose}>
+            <IoMdClose />
+          </span>
+        </div>
         {handleDeleteVerification(bookToDelete)}
       </ModalComponent>
-      <div className="header-table-actions">
-        <input
-          className="search-input"
-          type="text"
-          placeholder={t("search")}
-          value={search}
-          onInput={(e) => {
-            const target = e.target as HTMLInputElement;
-            setSearch(target.value);
-          }}
-        />
-        <button
-          className="btn-new"
-          onClick={() => {
-            handleModalFormOpen();
-            setBookToEdited({} as Book);
-            setIsEdit(false);
-          }}
-        >
-          <AddCircleTwoToneIcon className="add_icon" />{" "}
-          <strong>{t("books.book")}</strong>
-        </button>
-      </div>
-
       <TableStyle asc={asc} desc={desc}>
         <table aria-label="custom pagination table">
           <thead>
+            <tr className="search-tr">
+              <th colSpan={8}>
+                <div className="header-table-actions">
+                  <input
+                    className="search-input"
+                    type="text"
+                    placeholder={t("search")}
+                    value={search}
+                    onInput={(e) => {
+                      const target = e.target as HTMLInputElement;
+                      setSearch(target.value);
+                    }}
+                  />
+                  <button
+                    className="btn-new"
+                    onClick={() => {
+                      handleModalFormOpen();
+                      setBookToEdited({} as Book);
+                      setIsEdit(false);
+                    }}
+                  >
+                    <IoIosAddCircleOutline className="add_icon" />{" "}
+                    {t("books.book")}
+                  </button>
+                </div>
+              </th>
+            </tr>
             <tr key="thead" className="table-head">
               {sortSelector.map((th) => {
                 console.log(th.ordered);
@@ -429,9 +442,9 @@ export function Table() {
                       return th.direction.desc;
                     }
                   } else if (asc === false && desc === false) {
-                    return <ShuffleIcon sx={{ color: "black" }} />;
+                    return <FaRandom color="black" />;
                   }
-                  return <ShuffleIcon className="notSorted" />;
+                  return <FaRandom className="notSorted" />;
                 };
                 return (
                   <th

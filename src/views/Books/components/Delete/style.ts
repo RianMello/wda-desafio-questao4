@@ -8,13 +8,10 @@ export const DeleteContainer = styled.div`
     height: 100%;
     width: 100%;
     font-family:'Poppins', sans-serif;
-    h1{
-        text-align: left;
-        margin: 0.5rem;
-    }
     h2{
         text-align: left;
-        margin: 0.5rem;
+        margin: 1rem;
+        color: #6b6b6b;
     }
     .btn-noDelete{
         width: 100%;
@@ -25,12 +22,19 @@ export const DeleteContainer = styled.div`
         border-radius: 0.4rem;
         margin: 0.5rem;
 
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         font-weight: bold;
-        color: white;
+        color: #4fe39c;
 
-        background: #f0bbbb;
-        text-shadow: 0 0 2px #4d0101;
+        transition: background 0.2s;
+
+        background: transparent;
+        border: 2px solid #4fe39c;
+
+        &:hover{
+            background: #4fe39c;
+            color: white;
+        }
     }
     .btn-Delete{
         width: 100%;
@@ -39,14 +43,20 @@ export const DeleteContainer = styled.div`
 
         border: none;
         border-radius: 0.4rem;
-        margin: 0.5rem;
+        margin: 1rem;
 
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         font-weight: bold;
-        color: white;
+        color: #e34f4f;
 
-        background: #afe3ca;
-        text-shadow: 0 0 2px #024d28;
+        transition: background 0.2s;
+        background: transparent;
+        border: 2px solid #e34f4f;
+
+        &:hover{
+            background: #e34f4f;
+            color: white;
+        }
         
     }
     .buttons-container{
@@ -66,17 +76,10 @@ export const InpedimentDelete = styled.div`
     align-items: center;
 
     .impediment{
-        text-align: center;
-        font-size: 1.5rem;
-        color: orange;
+        text-align: justify;
+        font-size: 2rem;
+        color: #a3a3a3;
         margin-top: 1rem;
-    }
-
-    .iconInpediment{
-        font-size: 5rem;
-        color: #ff4747;
-        border: 1px solid #ff4747;
-        border-radius: 50%;
     }
 
 `

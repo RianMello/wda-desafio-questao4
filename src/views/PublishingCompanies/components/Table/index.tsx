@@ -17,6 +17,7 @@ import { FormPublisher } from "../Form";
 import { Delete } from "../Delete";
 import { Tooltip } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { IoMdClose } from "react-icons/io";
 
 const blue = {
   200: "#A5D8FF",
@@ -117,6 +118,7 @@ export function Table() {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
 
   const { publishers, load } = usePublisher();
+  const [isEdit, setIsEdit] = useState(false);
   const [publisherToEdited, setPublisherToEdited] = useState(publishers[0]);
   const [publisherToDelete, setPublisherToDelete] = useState(publishers[0]);
   const { t } = useTranslation();
@@ -307,6 +309,12 @@ export function Table() {
         isDeleteModal={false}
         title="Edit"
       >
+        <div className="titleModal">
+          {isEdit ? t("publisher.form.edit") : t("publisher.form.add")}
+          <span onClick={handleModalFormClose}>
+            <IoMdClose />
+          </span>
+        </div>
         <FormPublisher
           onFinish={handleModalFormClose}
           publisher={publisherToEdited}
@@ -320,31 +328,35 @@ export function Table() {
       >
         {handleDeleteVerification(publisherToDelete)}
       </ModalComponent>
-      <div className="header-table-actions">
-        <input
-          className="search-input"
-          type="text"
-          placeholder={t("search")}
-          value={search}
-          onInput={(e) => {
-            const target = e.target as HTMLInputElement;
-            setSearch(target.value);
-          }}
-        />
-        <button
-          className="btn-new"
-          onClick={() => {
-            handleModalFormOpen();
-            setPublisherToEdited({} as PublisherCompany);
-          }}
-        >
-          <AddCircleTwoToneIcon /> <strong>{t("publisher")}</strong>
-        </button>
-      </div>
-
       <TableStyle asc={asc} desc={desc}>
         <table aria-label="custom pagination table">
           <thead>
+            <tr>
+              <th colSpan={8}>
+                <div className="header-table-actions">
+                  <input
+                    className="search-input"
+                    type="text"
+                    placeholder={t("search")}
+                    value={search}
+                    onInput={(e) => {
+                      const target = e.target as HTMLInputElement;
+                      setSearch(target.value);
+                    }}
+                  />
+                  <button
+                    className="btn-new"
+                    onClick={() => {
+                      handleModalFormOpen();
+                      setPublisherToEdited({} as PublisherCompany);
+                    }}
+                  >
+                    <AddCircleTwoToneIcon />{" "}
+                    <strong>{t("publisher.publisher")}</strong>
+                  </button>
+                </div>
+              </th>
+            </tr>
             <tr key="thead" className="table-head">
               {sortSelector.map((th) => {
                 console.log(th.ordered);
@@ -419,6 +431,7 @@ export function Table() {
                           onClick={() => {
                             handleModalFormOpen();
                             setPublisherToEdited(data);
+                            setIsEdit(true);
                           }}
                         >
                           <Tooltip title="Edit">

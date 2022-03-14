@@ -24,21 +24,21 @@ export function BooksProvider({ children }: BookProviderProps) {
   const [moreRenteds, setMoreRenteds] = useState([]);
   const [available, setAvailable] = useState([]);
 
-  const [load, setLoad] = useState(true)
+  const [load, setLoad] = useState(true);
 
   useEffect(() => {
     api
       .get("/api/livros")
       .then((res) => {
-        setLoad(false)
-        setBooks(res.data)
+        setLoad(false);
+        setBooks(res.data);
       })
       .catch((err) => console.log(err));
 
     api
       .get("/api/maisalugados")
       .then((res) => setMoreRenteds(res.data))
-      .catch((err) => console.log(err)); 
+      .catch((err) => console.log(err));
 
     api
       .get("/api/disponiveis")
@@ -52,27 +52,26 @@ export function BooksProvider({ children }: BookProviderProps) {
       .then(() => {
         onFinish();
       })
-      .catch(err =>{ 
-        if(err.message === 'Request failed with status code 400'){
-          alert('Book already registered! Check the data and try again');
+      .catch((err) => {
+        if (err.message === "Request failed with status code 400") {
+          alert("Book already registered! Check the data and try again");
         }
-      })
+      });
   }
 
   function removeBook(book: Book, onFinish: () => void) {
-    api.delete("/api/livro", { data: book })
-    .then(() => {
-      alert('Book deleted successfully')
-      onFinish();
-    })
-    .catch(() => {
-      alert('Book not deleted, error in comunication')
-    })
+    api
+      .delete("/api/livro", { data: book })
+      .then(() => {
+        onFinish();
+      })
+      .catch(() => {
+        alert("Book not deleted, error in comunication");
+      });
   }
 
   function editBook(book: Book) {
-    api.put("/api/livro", book)
-    .then(()=> console.log('Book updated'))
+    api.put("/api/livro", book).then(() => console.log("Book updated"));
   }
 
   return (

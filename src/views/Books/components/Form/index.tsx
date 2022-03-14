@@ -9,6 +9,12 @@ import * as Yup from "yup";
 import { Select } from "./Select";
 import { useState } from "react";
 
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+
+import { IoMdSave } from "react-icons/io";
+import { TiCancel } from "react-icons/ti";
+
 import { useTranslation } from "react-i18next";
 
 interface PropsFormBook {
@@ -131,24 +137,32 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
               name="autor"
             />
           </div>
-          <div className="input-group">
-            <label htmlFor="lancamento">Release:</label>
-            <Field id="lancamento" name="lancamento" type="date" max={today} />
-            <ErrorMessage
-              component="span"
-              className="errorMessage"
-              name="lancamento"
-            />
+          <div className="input-group-two">
+            <div>
+              <label htmlFor="lancamento">Release:</label>
+              <Field
+                id="lancamento"
+                name="lancamento"
+                type="date"
+                max={today}
+              />
+              <ErrorMessage
+                component="span"
+                className="errorMessage"
+                name="lancamento"
+              />
+            </div>
+            <div>
+              <label htmlFor="quantidade">Amount:</label>
+              <Field id="quantidade" name="quantidade" type="number" />
+              <ErrorMessage
+                component="span"
+                className="errorMessage"
+                name="quantidade"
+              />
+            </div>
           </div>
-          <div className="input-group">
-            <label htmlFor="quantidade">Amount:</label>
-            <Field id="quantidade" name="quantidade" type="number" />
-            <ErrorMessage
-              component="span"
-              className="errorMessage"
-              name="quantidade"
-            />
-          </div>
+          <div className="input-group"></div>
           <div className="input-group">
             <Select
               key={book?.id}
@@ -164,9 +178,11 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
           </div>
           <div className="control-modalForm">
             <button className="btn-cancel" onClick={onFinish}>
+              <TiCancel />
               Cancel
             </button>
             <button className="btn-save" type="submit">
+              <IoMdSave />
               Save
             </button>
           </div>

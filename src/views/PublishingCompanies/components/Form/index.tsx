@@ -5,6 +5,10 @@ import { ContainerForm } from "../../../../styles/formsStyles";
 
 import { Formik, FormikHelpers, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { TiCancel } from "react-icons/ti";
+import { IoMdSave } from "react-icons/io";
+
+import { useTranslation } from "react-i18next";
 
 interface PropsFormPublisher {
   onFinish: () => void;
@@ -22,6 +26,8 @@ export function FormPublisher({ onFinish, publisher }: PropsFormPublisher) {
     nome: Yup.string().required("You must provide the name of the publisher"),
     cidade: Yup.string().required("You must inform the publisher's home city"),
   });
+
+  const { t } = useTranslation();
 
   const { addPublisher, editPublisher } = usePublisher();
 
@@ -53,7 +59,7 @@ export function FormPublisher({ onFinish, publisher }: PropsFormPublisher) {
   };
 
   return (
-    < ContainerForm>
+    <ContainerForm>
       <Formik
         initialValues={initialValue}
         validationSchema={schema}
@@ -63,33 +69,36 @@ export function FormPublisher({ onFinish, publisher }: PropsFormPublisher) {
         }}
       >
         <Form>
-          <fieldset>
-            <legend>{publisher?.id ? "Edit Publisher" : "Add new Publisher"}</legend>
-            <label htmlFor="nome">Publishing Company name:</label>
+          <div className="input-group">
+            <label htmlFor="nome">{t("publisher.form.publisherName")}:</label>
             <Field id="nome" name="nome" type="text" />
             <ErrorMessage
               component="span"
               className="errorMessage"
               name="nome"
             />
-            <label htmlFor="cidade">Main city:</label>
+          </div>
+          <div className="input-group">
+            <label htmlFor="cidade">{t("cityMain")}:</label>
             <Field id="cidade" name="cidade" type="text" />
             <ErrorMessage
               component="span"
               className="errorMessage"
               name="cidade"
             />
-          </fieldset>
+          </div>
           <div className="control-modalForm">
             <button className="btn-cancel" onClick={onFinish}>
+              <TiCancel />
               Cancel
             </button>
             <button className="btn-save" type="submit">
+              <IoMdSave />
               Save
             </button>
           </div>
         </Form>
       </Formik>
-    </ ContainerForm>
+    </ContainerForm>
   );
 }

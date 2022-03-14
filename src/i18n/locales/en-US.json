@@ -16,12 +16,17 @@
                 "bookName": "Book's title"
             }
         },
-        "publisherss":{
+        "publisher":{
             "publisher": "Publisher",
             "publishers": "Publishing Company",
             "cityMain": "Main City",
             "impedimentPub": "There's a book from the publisher that's still rented, so we can't delete her record",
-            "deletePublisher": "Are you sure you want to delete the record for this Publisher Company?"
+            "deletePublisher": "Are you sure you want to delete the record for this Publisher Company?",
+            "form":{
+                "add":"Add new publisher",
+                "edit":"Edit publisher",
+                "publisherName": "Publishing Company Name"
+            }
         },
         "french": "French",
         "portuguese": "Portuguese",
@@ -45,7 +50,6 @@
         "topFiveRented": "The More Rented",
         "actions":"Actions",
         "name": "Name",
-        "publisher": "Publisher",
         "release":"Release",
         "author":"Author",
         "copies": "Copies",
