@@ -387,6 +387,7 @@ export function Table() {
         isDeleteModal={false}
         isOpen={isModalOpen}
         onRequestClose={handleModalFormClose}
+        title="Edit"
       >
         <FormRent onFinish={handleModalFormClose} rent={rentToEdited} />
       </ModalComponent>
@@ -394,6 +395,7 @@ export function Table() {
         isDeleteModal={true}
         isOpen={isModalDeleteOpen}
         onRequestClose={handleModalDeleteClose}
+        title="Edit"
       >
         {handleDeleteVerification(rentToDelete)}
       </ModalComponent>

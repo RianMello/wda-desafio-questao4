@@ -3,9 +3,10 @@ import styled from 'styled-components'
 export const ContainerForm = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     height: 100%;
+    width: 100%;
 
     fieldset{
         display: flex;
@@ -26,28 +27,38 @@ export const ContainerForm = styled.div`
     form{
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
         width: 100%;
         height: 100%;
+        max-width: 70%;
+
+        .input-group{
+            display: flex;
+            width: 100%;
+            justify-content: flex-start;
+            margin: 0.25rem;
+        }
         
         input{
             height: 2.3rem;
             padding: 0.5rem;
             border-width: 0;
             color: #9c9c9c;
+            width: 100%;
 
-            border: 1px solid #ebf4f7;
+            border-bottom: 1px solid silver;
             border-radius: 0.2rem;
-            border-bottom: 1px dashed #9c9c9c;
             margin-bottom: 1rem;
 
         }
         label{
             font-weight: bold;
-            padding-left: 0.25rem;
-            margin: 0rem;
+            font-size: 1.25rem;
             opacity: 0.7;
             color: #8a8a8a;
+            max-width: 8rem;
+            width: 100%;
+            text-align: left;
         }
     }
 
@@ -95,6 +106,8 @@ export const ContainerForm = styled.div`
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        width: 100%;
         margin-top: 2rem;
+        margin-bottom: 2rem;
     }
 `

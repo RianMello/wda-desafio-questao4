@@ -1,5 +1,22 @@
 {
     "translation": {
+        "book":{
+            "book": "Livre",
+            "books": "Livres",
+            "bookRecords": "Dossiers de livre",
+            "name": "Titre",
+            "release":"Année de Sortie",
+            "publisher": "Maison d'édition",
+            "author":"Auteur",
+            "amount": "Copies",
+            "rented": "Loué",
+            "impedimentBook": "Nous avons une copie du livre qui est toujours louée, nous ne pouvons donc pas supprimer votre dossier.",
+            "form":{
+                "add":"Ajouter un nouveau livre",
+                "edit":"éditer un livre",
+                "bookName": "Titre du livre"
+            }
+        },
         "french": "Français",
         "portuguese": "Portugais",
         "english": "Anglais",

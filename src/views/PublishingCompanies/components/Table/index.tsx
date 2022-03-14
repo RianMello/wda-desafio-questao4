@@ -305,6 +305,7 @@ export function Table() {
         isOpen={isModalOpen}
         onRequestClose={handleModalFormClose}
         isDeleteModal={false}
+        title="Edit"
       >
         <FormPublisher
           onFinish={handleModalFormClose}
@@ -315,6 +316,7 @@ export function Table() {
         isDeleteModal={true}
         isOpen={isModalDeleteOpen}
         onRequestClose={handleModalDeleteClose}
+        title="Edit"
       >
         {handleDeleteVerification(publisherToDelete)}
       </ModalComponent>

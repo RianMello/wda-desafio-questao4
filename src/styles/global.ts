@@ -73,11 +73,34 @@ export const GlobalStyle = createGlobalStyle`
         width: 100%;
         min-height: 15rem;
         max-height: 35rem;
-        max-width: 50%;
+        max-width: 40%;
         background: white;
-        padding: 2rem;
         position: relative;
         border-radius: 0.2rem;
+
+        .titleModal{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            height: 5rem;
+            font-weight: bold;
+            font-size: 2rem;
+            text-align: center;
+
+            span{
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0.25rem;
+                cursor: pointer;
+                svg{
+                    width: 2rem;
+                    height: 2rem;
+                }
+            }
+        }
+        
     }
     .modalDelete-content{
         width: 100%;

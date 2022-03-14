@@ -16,6 +16,8 @@ export const TableContainer = styled.div`
   width: 100%;
   border-radius: 0.5rem;
   box-shadow: 1px 3px 5px #ababab;
+
+  
   .table-head {
     height: 4rem;
     width: 100%;
@@ -73,7 +75,7 @@ export const TableContainer = styled.div`
 
 export const TableStyle = styled.div<TableStyleProps>`
     width: 90%;
-    max-width: 1800px;
+    max-width: 1080px;
     table {
       font-family: Poppins, sans-serif;;
       font-size: 1rem;

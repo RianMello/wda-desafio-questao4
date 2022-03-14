@@ -1,5 +1,28 @@
 {
     "translation":{
+        "book":{
+            "book": "Book",
+            "books": "Books",
+            "bookRecords": "Book Records",
+            "name": "Name",
+            "release":"Release",
+            "author":"Author",
+            "amount": "Amount",
+            "rented": "Rented",
+            "impedimentBook": "We have a copy of the book that is still rented, so we cannot delete your record",
+            "form":{
+                "add":"Add new book",
+                "edit":"Edit book",
+                "bookName": "Book's title"
+            }
+        },
+        "publisherss":{
+            "publisher": "Publisher",
+            "publishers": "Publishing Company",
+            "cityMain": "Main City",
+            "impedimentPub": "There's a book from the publisher that's still rented, so we can't delete her record",
+            "deletePublisher": "Are you sure you want to delete the record for this Publisher Company?"
+        },
         "french": "French",
         "portuguese": "Portuguese",
         "english": "English",
@@ -11,7 +34,6 @@
             "book": "Book",
             "books": "Books"
         },
-        "publishers": "Publishing Company",
         "users": "Users",
         "user": "User",
         "rents": "Rents",
@@ -23,8 +45,8 @@
         "topFiveRented": "The More Rented",
         "actions":"Actions",
         "name": "Name",
-        "release":"Release",
         "publisher": "Publisher",
+        "release":"Release",
         "author":"Author",
         "copies": "Copies",
         "rented": "Rented",
@@ -54,6 +76,21 @@
         "options": {
             "no": "No",
             "yes": "Yes"
+        },
+        "form":{
+            "add":{
+                "book": "Add new book",
+                "publisher": "Add new publisher company",
+                "user": "Add new user",
+                "rent": "Add new rental record"
+            },
+            "edit":{
+                "book": "Edit book",
+                "publisher": "Edit publisher company",
+                "user": "Edit user"
+            },
+            "book":""
         }
+        
     }
 }

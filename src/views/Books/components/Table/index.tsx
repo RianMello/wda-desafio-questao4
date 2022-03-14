@@ -18,6 +18,7 @@ import { ModalComponent } from "../../../../components/Modal";
 import { FormBook } from "../Form";
 import { Delete } from "../Delete";
 import { useNavigate } from "react-router";
+import { IoMdClose } from "react-icons/io";
 
 const blue = {
   200: "#A5D8FF",
@@ -114,7 +115,8 @@ export function Table() {
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
 
   const { books, load } = useBook();
-  const [bookToEdited, setBookToEdited] = useState(books[0]);
+  const [isEdit, setIsEdit] = useState(false);
+  const [bookToEdited, setBookToEdited] = useState({} as Book);
   const [bookToDelete, setBookToDelete] = useState({} as Book);
 
   const [sort, setSort] = useState<Book[]>(books);
@@ -370,13 +372,21 @@ export function Table() {
         isOpen={isModalOpen}
         onRequestClose={handleModalFormClose}
         isDeleteModal={false}
+        title=""
       >
+        <div className="titleModal">
+          {isEdit ? t("book.form.edit") : t("book.form.add")}
+          <span onClick={handleModalFormClose}>
+            <IoMdClose />
+          </span>
+        </div>
         <FormBook onFinish={handleModalFormClose} book={bookToEdited} />
       </ModalComponent>
       <ModalComponent
         isDeleteModal={true}
         isOpen={isModalDeleteOpen}
         onRequestClose={handleModalDeleteClose}
+        title="Edit"
       >
         {handleDeleteVerification(bookToDelete)}
       </ModalComponent>
@@ -396,6 +406,7 @@ export function Table() {
           onClick={() => {
             handleModalFormOpen();
             setBookToEdited({} as Book);
+            setIsEdit(false);
           }}
         >
           <AddCircleTwoToneIcon className="add_icon" />{" "}
@@ -484,6 +495,7 @@ export function Table() {
                           onClick={() => {
                             handleModalFormOpen();
                             setBookToEdited(data);
+                            setIsEdit(true);
                           }}
                         >
                           <Tooltip title="Edit">

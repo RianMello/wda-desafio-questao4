@@ -1,5 +1,21 @@
 {
     "translation": {
+        "book":{
+            "book": "Livro",
+            "books": "Livros",
+            "bookRecords": "Livros Alugados",
+            "name": "Titulo",
+            "release":"Lançamento",
+            "author":"Autor",
+            "amount": "Quantidade",
+            "rented": "Alugados",
+            "impedimentBook": "Temos uma cópia do livro que ainda está alugado, por isso não podemos excluir seu registro",
+            "form":{
+                "add":"Adicionar um novo livro",
+                "edit":"Editar um livro",
+                "bookName": "Titulo do livro"
+            }
+        },
         "french": "Francês",
         "portuguese": "Português",
         "english": "Inglês",

@@ -2,13 +2,14 @@ import { useBook } from "../../../../hooks/useBook";
 import dayjs from "dayjs";
 import { Book, PublisherCompany } from "../../../../interfaces/ResponseAPI";
 
-
 import { ContainerForm } from "../../../../styles/formsStyles";
-import { usePublisher }from "../../../../hooks/usePublisher";
+import { usePublisher } from "../../../../hooks/usePublisher";
 import { Formik, FormikHelpers, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Select } from "./Select";
 import { useState } from "react";
+
+import { useTranslation } from "react-i18next";
 
 interface PropsFormBook {
   onFinish: () => void;
@@ -29,9 +30,7 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
   const schema = Yup.object().shape({
     id: Yup.number(),
     nome: Yup.string().required("Voçê deve informar o nome do livro"),
-    lancamento: Yup.string().required(
-      "Voê deve informar a data de lançamento"
-    ),
+    lancamento: Yup.string().required("Voê deve informar a data de lançamento"),
     autor: Yup.string().required("Voê deve informar o nome do autor do livro"),
     quantidade: Yup.number()
       .min(1)
@@ -48,11 +47,15 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
   const { addBook, editBook } = useBook();
   const { publishers } = usePublisher();
 
-  const today = dayjs().format('YYYY-MM-DD')
-  const [ publisher, setPublisher] = useState<PublisherCompany>(book?.id ? book.editora : publishers[0]);
+  const { t } = useTranslation();
+
+  const today = dayjs().format("YYYY-MM-DD");
+  const [publisher, setPublisher] = useState<PublisherCompany>(
+    book?.id ? book.editora : publishers[0]
+  );
 
   const handlePublisherChange = (pub: PublisherCompany) => {
-      setPublisher(pub)
+    setPublisher(pub);
   };
 
   const initialValue = book?.id
@@ -69,7 +72,7 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
     : {
         id: 0,
         nome: "",
-        lancamento: '',
+        lancamento: "",
         autor: "",
         quantidade: 1,
         editora_id: 0,
@@ -78,7 +81,7 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
       };
 
   const handleSubmit = (values: initialProps) => {
-    const release = dayjs(values.lancamento).get('year');
+    const release = dayjs(values.lancamento).get("year");
     const bookFinish = {
       id: values.id,
       nome: values.nome,
@@ -89,13 +92,13 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
       totalalugado: values.totalalugado,
     };
 
-    console.log(bookFinish)
+    console.log(bookFinish);
     if (book?.id !== undefined) {
-      editBook(bookFinish as Book)
-      onFinish()
+      editBook(bookFinish as Book);
+      onFinish();
     } else {
       addBook(bookFinish as Book, onFinish);
-      console.log(values.lancamento)
+      console.log(values.lancamento);
     }
   };
 
@@ -110,15 +113,16 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
         }}
       >
         <Form>
-          <fieldset>
-            <legend>{book?.id ? 'Edit book' :'Add new book'}</legend>
-            <label htmlFor="nome">Book name:</label>
+          <div className="input-group">
+            <label htmlFor="nome">{t("book.form.bookName")}:</label>
             <Field id="nome" name="nome" type="text" />
             <ErrorMessage
               component="span"
               className="errorMessage"
               name="nome"
             />
+          </div>
+          <div className="input-group">
             <label htmlFor="autor">Author:</label>
             <Field id="autor" name="autor" type="text" />
             <ErrorMessage
@@ -126,36 +130,38 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
               className="errorMessage"
               name="autor"
             />
+          </div>
+          <div className="input-group">
             <label htmlFor="lancamento">Release:</label>
-            <Field
-              id="lancamento"
-              name="lancamento"
-              type="date"
-              max={today}
-            />
+            <Field id="lancamento" name="lancamento" type="date" max={today} />
             <ErrorMessage
               component="span"
               className="errorMessage"
               name="lancamento"
             />
+          </div>
+          <div className="input-group">
             <label htmlFor="quantidade">Amount:</label>
-            <Field
-              id="quantidade"
-              name="quantidade"
-              type="number"
-            />
+            <Field id="quantidade" name="quantidade" type="number" />
             <ErrorMessage
               component="span"
               className="errorMessage"
               name="quantidade"
             />
-            <Select key={book?.id} book={book} publishers={publishers} pubChange={handlePublisherChange}/>
+          </div>
+          <div className="input-group">
+            <Select
+              key={book?.id}
+              book={book}
+              publishers={publishers}
+              pubChange={handlePublisherChange}
+            />
             <ErrorMessage
               component="span"
               className="errorMessage"
               name="editora_id"
             />
-          </fieldset>
+          </div>
           <div className="control-modalForm">
             <button className="btn-cancel" onClick={onFinish}>
               Cancel

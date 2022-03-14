@@ -1,10 +1,15 @@
+import { useTranslation } from "react-i18next";
 import Modal from "react-modal";
+
+import { IoMdClose } from "react-icons/io";
+
 Modal.setAppElement("#root");
 
 interface ModalProps {
   isOpen: boolean;
   onRequestClose?: () => void;
   isDeleteModal: boolean;
+  title: string;
 }
 
 export const ModalComponent: React.FC<ModalProps> = ({
@@ -12,7 +17,10 @@ export const ModalComponent: React.FC<ModalProps> = ({
   onRequestClose,
   children,
   isDeleteModal,
+  title,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <Modal
       isOpen={isOpen}
@@ -20,8 +28,7 @@ export const ModalComponent: React.FC<ModalProps> = ({
       overlayClassName={isDeleteModal ? "modalDelete-overlay" : "modal-overlay"}
       className={isDeleteModal ? "modalDelete-content" : "modal-content"}
     >
-      <div className="titleHead">Title</div>
-      {children}
+      <div className="contentModal">{children}</div>
     </Modal>
   );
 };

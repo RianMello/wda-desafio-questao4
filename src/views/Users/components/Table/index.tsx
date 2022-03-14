@@ -337,6 +337,7 @@ export function Table() {
         isDeleteModal={false}
         isOpen={isModalOpen}
         onRequestClose={handleModalFormClose}
+        title="Edit"
       >
         <FormUser onFinish={handleModalFormClose} user={userToEdited} />
       </ModalComponent>
@@ -344,6 +345,7 @@ export function Table() {
         isDeleteModal={true}
         isOpen={isModalDeleteOpen}
         onRequestClose={handleModalDeleteClose}
+        title="Edit"
       >
         {handleDeleteVerification(userToDelete)}
       </ModalComponent>
