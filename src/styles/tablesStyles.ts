@@ -72,7 +72,7 @@ export const TableContainer = styled.div`
     }
     height: 3rem;
     border-width: 0;
-    border-bottom: 1px solid #cdd2d7;
+    border: 1px solid #cdd2d7;
     :hover {
       border-bottom: 1px solid #00d5ff;
       ::placeholder {
@@ -109,7 +109,7 @@ export const TableStyle = styled.div<TableStyleProps>`
         
       }
       td{
-        min-width: calc(100% / 8);
+        min-width: calc(100% / 7);
         max-width: calc(100% / 4);
         width: 100%;
         height: 2rem;
@@ -125,7 +125,7 @@ export const TableStyle = styled.div<TableStyleProps>`
           filter: brightness(0.9) ;
         }
         td{
-          min-width: calc(100% / 8);
+          min-width: calc(100% / 7);
           max-width: calc(100% / 4);
           width: 100%;
           text-align: center;
@@ -154,7 +154,7 @@ export const TableStyle = styled.div<TableStyleProps>`
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 2rem;
+        height: 3rem;
         width: 100%;
         margin: 0;
       }
@@ -166,10 +166,6 @@ export const TableStyle = styled.div<TableStyleProps>`
       span{
         max-width: 2rem;
         min-width: 1rem;
-        position: relative;
-        bottom: -50%;
-        right: 50%;
-        height: 1rem;
         visibility: ${props => props.asc === true || props.desc === true ? 'visible' : 'hidden'};
         font-size: 0.7rem;
       }

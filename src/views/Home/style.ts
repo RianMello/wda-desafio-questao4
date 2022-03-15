@@ -8,10 +8,61 @@ export const Container = styled.div`
     background-color: white;
     width: 100%;
     margin-top: 2rem;
+    height: 100%;
+
     .container-chart{
         width: 50rem;
         padding: 1rem;
     }
+
+
+    .grid-container{
+        display: flex;
+        flex-direction: column;
+
+        width: 100%;
+        max-width: 65rem;
+        height: 100rem;
+        padding: 1rem;
+        .grid-header{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            height: 10rem;
+            padding: 2.2rem;
+        }
+        .grid-content-chart{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            background: #f2f5f7;
+            border: 1px solid #CDD2D7;
+            height: 30rem;
+            border-radius: 0.5rem;
+            margin: 2rem;
+        }
+
+        .grid-content{
+            display: flex;
+            flex-direction: column;
+            justify-content:center;
+            background: #f2f5f7;
+            padding: 1rem;
+            border: 1px solid #CDD2D7;
+            width: 100%;
+            max-width: 25rem;
+            border-radius: 0.5rem;
+            height: 9rem;
+            ul{
+                list-style-type: none;
+            }
+        }
+
+    }
+
 `
 
 export const CardView = styled.div`

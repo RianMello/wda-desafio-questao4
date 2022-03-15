@@ -400,6 +400,7 @@ export function Table() {
         </div>
         {handleDeleteVerification(bookToDelete)}
       </ModalComponent>
+      <label>Book List</label>
       <TableStyle asc={asc} desc={desc}>
         <table aria-label="custom pagination table">
           <thead>

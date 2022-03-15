@@ -79,7 +79,7 @@ export function Home() {
   };
   return (
     <Container>
-      <VierContent>
+      {/* <VierContent>
         <CardView>
           <h1>{t("pubRecords")}</h1>
           {load ? (
@@ -128,10 +128,58 @@ export function Home() {
             <h3>{rents.length}</h3>
           )}
         </CardView>
-      </VierContent>
-      <div className="container-chart">
-        <h1>{t("topFiveRented")}</h1>
-        <Bar data={data} />
+      </VierContent> */}
+
+      <div className="container">
+        <div className="header">
+          <div className="content">
+            <div className="title-container">
+              <h3>Records</h3>
+            </div>
+            <ul>
+              <li>
+                <label>
+                  {t("pubRecords")}:{publishers.length}
+                </label>
+              </li>
+              <li>
+                <label>
+                  {t("pubRecords")}:{publishers.length}
+                </label>
+              </li>
+              <li>
+                <label>
+                  {t("pubRecords")}:{publishers.length}
+                </label>
+              </li>
+            </ul>
+          </div>
+          <div className="grid-content">
+            <ul>
+              <li>
+                <label>
+                  {t("pubRecords")}:{publishers.length}
+                </label>
+              </li>
+              <li>
+                <label>
+                  {t("pubRecords")}:{publishers.length}
+                </label>
+              </li>
+              <li>
+                <label>
+                  {t("pubRecords")}:{publishers.length}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="grid-content-chart">
+          <div className="container-chart">
+            <h1>{t("topFiveRented")}</h1>
+            <Bar data={data} />
+          </div>
+        </div>
       </div>
     </Container>
   );

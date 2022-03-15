@@ -52,6 +52,7 @@ export const Container = styled.div`
         justify-content: center;
         height: 100%;
         width: 100%;
+        max-width: 59rem;
     }
 
     @media (min-width:320px) and (max-width: 1024px){
