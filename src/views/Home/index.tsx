@@ -26,6 +26,14 @@ export function Home() {
   const { t } = useTranslation();
   const topFiveRenteds = moreRenteds.slice(0, 5);
 
+  const AmountBooks = () => {
+    let amount = 0;
+    books.map((book) => {
+      amount = book.quantidade + amount;
+    });
+    return amount;
+  };
+
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -77,6 +85,7 @@ export function Home() {
       indexAxis: "y",
     },
   };
+
   return (
     <Container>
       {/* <VierContent>
@@ -133,28 +142,28 @@ export function Home() {
       <div className="container">
         <div className="header">
           <div className="content">
-            <div className="title-container">
-              <h3>Records</h3>
+            <div className="title-content">
+              <h3>Inventory</h3>
             </div>
             <ul>
               <li>
                 <label>
-                  {t("pubRecords")}:{publishers.length}
+                  {t("book.books")}:{AmountBooks()}
                 </label>
               </li>
               <li>
                 <label>
-                  {t("pubRecords")}:{publishers.length}
+                  {t("publisher.publishers")}:{publishers.length}
                 </label>
               </li>
               <li>
                 <label>
-                  {t("pubRecords")}:{publishers.length}
+                  {t("users")}:{users.length}
                 </label>
               </li>
             </ul>
           </div>
-          <div className="grid-content">
+          <div className="content">
             <ul>
               <li>
                 <label>
@@ -174,7 +183,7 @@ export function Home() {
             </ul>
           </div>
         </div>
-        <div className="grid-content-chart">
+        <div className="content-chart">
           <div className="container-chart">
             <h1>{t("topFiveRented")}</h1>
             <Bar data={data} />

@@ -16,7 +16,7 @@ export const Container = styled.div`
     }
 
 
-    .grid-container{
+    .container{
         display: flex;
         flex-direction: column;
 
@@ -24,7 +24,7 @@ export const Container = styled.div`
         max-width: 65rem;
         height: 100rem;
         padding: 1rem;
-        .grid-header{
+        .header{
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -33,7 +33,7 @@ export const Container = styled.div`
             height: 10rem;
             padding: 2.2rem;
         }
-        .grid-content-chart{
+        .content-chart{
             display: flex;
             flex-direction: column;
             justify-content: space-around;
@@ -45,19 +45,26 @@ export const Container = styled.div`
             margin: 2rem;
         }
 
-        .grid-content{
-            display: flex;
-            flex-direction: column;
-            justify-content:center;
+        .content{
             background: #f2f5f7;
-            padding: 1rem;
             border: 1px solid #CDD2D7;
             width: 100%;
             max-width: 25rem;
             border-radius: 0.5rem;
             height: 9rem;
+            .title-content{
+                display: flex;
+                flex-direction: column;
+                justify-content:center;
+                align-items: center;
+
+                border-radius: 0.5rem 0.5rem 0  0;
+                border-bottom: 1px solid #CDD2D7;
+                width: 100%;
+            }
             ul{
                 list-style-type: none;
+                
             }
         }
 
