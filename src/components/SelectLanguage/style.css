@@ -1,12 +1,42 @@
 img{
-    width: 1.5rem;
+    width: 2.5rem;
     margin: 0;
-    padding: 0.25rem;
+}
+
+#demo-simple-select-autowidth{
+    width: 3rem;
+    height: 1.5rem;
 }
 
 @media (min-width: 320px) and (max-width: 1024px){
     .listLanguage{
         max-height: 1rem;
+    }
+    .select-lang{
+        height:3.5rem;
+        width:3.5rem;
+        border-radius: 50%;
+    }
+    #demo-simple-select-autowidth{
+        width: 3rem;
+        height: 1.5rem;
+    }
+    .MuiFormControl-root.css-15fuh84-MuiFormControl-root{
+        height:3.5rem;
+        width:3.5rem;
+        border-radius: 50%;
+        margin: -1px;;
+        padding:0;
+    }
+    .MuiOutlinedInput-root.MuiInputBase-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root{
+        height:3.5rem;
+        width:3.5rem;
+        border-radius: 50%;
+        margin:0;
+        padding:0;
+    }
+    .MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.MuiSelect-icon.MuiSelect-iconOutlined.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon{
+        visibility: hidden;
     }
     img{
         width: 1.5rem;

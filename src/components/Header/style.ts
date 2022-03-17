@@ -52,10 +52,22 @@ export const Container = styled.div`
         justify-content: center;
         height: 100%;
         width: 100%;
-        max-width: 59rem;
+        max-width: 68rem;
+    }
+
+    .select-lang{
+        position: absolute;
+        top: 1rem;
+        right: 0;
     }
 
     @media (min-width:320px) and (max-width: 1024px){
         padding-top: 1rem;
+        .select-lang{
+            position: absolute;
+            top: 6rem;
+            right: 1rem;
+        }
+        
     }
 `

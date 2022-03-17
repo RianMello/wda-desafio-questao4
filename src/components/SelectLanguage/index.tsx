@@ -46,8 +46,8 @@ export const SelectLanguage = () => {
   };
 
   return (
-    <div>
-      <FormControl sx={{ m: 1, minWidth: 80 }}>
+    <div className="select-lang">
+      <FormControl sx={{ m: 1, minWidth: 40 }}>
         <IconContext.Provider value={{ size: "1.5rem" }}>
           <InputLabel id="demo-simple-select-autowidth-label">
             <HiOutlineTranslate />
@@ -67,15 +67,23 @@ export const SelectLanguage = () => {
               console.log(i18n.language);
               return (
                 <MenuItem selected value={option.value}>
-                  <em>{t(option.name)}</em>
-                  <img src={option.flag} alt={t(option.name)} />
+                  {/* <em>{t(option.name)}</em> */}
+                  <img
+                    className="img-lang"
+                    src={option.flag}
+                    alt={t(option.name)}
+                  />
                 </MenuItem>
               );
             } else {
               return (
                 <MenuItem value={option.value}>
-                  <em>{t(option.name)}</em>
-                  <img src={option.flag} alt={t(option.name)} />
+                  {/* <em>{t(option.name)}</em> */}
+                  <img
+                    className="img-lang"
+                    src={option.flag}
+                    alt={t(option.name)}
+                  />
                 </MenuItem>
               );
             }

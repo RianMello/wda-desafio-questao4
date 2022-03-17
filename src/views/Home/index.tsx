@@ -17,14 +17,31 @@ import {
 import { Container, CardView, VierContent } from "./style";
 import { useTranslation } from "react-i18next";
 
+import { MdOutlineInventory2, MdPointOfSale } from "react-icons/md";
+import { useEffect, useState } from "react";
+import dayjs from "dayjs";
+import { Rent } from "../../interfaces/ResponseAPI";
+
 export function Home() {
-  const { moreRenteds, books, load } = useBook();
-  const { rents } = useRent();
+  const { moreRenteds, books } = useBook();
+  const { rents, handleSituationRent } = useRent();
   const { publishers } = usePublisher();
   const { users } = useUser();
 
   const { t } = useTranslation();
   const topFiveRenteds = moreRenteds.slice(0, 5);
+  const [lastRents, setLastRents] = useState<Rent[]>([]);
+
+  useEffect(() => {
+    let today = dayjs();
+    var lastArray: Rent[] = [];
+    rents.map((rent) => {
+      if (today.get("month") === dayjs(rent.data_aluguel).get("month")) {
+        lastArray.push(rent);
+      }
+    });
+    setLastRents(lastArray);
+  }, [rents]);
 
   const AmountBooks = () => {
     let amount = 0;
@@ -32,6 +49,17 @@ export function Home() {
       amount = book.quantidade + amount;
     });
     return amount;
+  };
+
+  const rentsNotReturned = () => {
+    let contNotReturned = 0;
+    rents.map((rent) => {
+      let sit = handleSituationRent(rent);
+      if (sit.label === "Não devolvido") {
+        contNotReturned++;
+      }
+    });
+    return contNotReturned;
   };
 
   ChartJS.register(
@@ -144,42 +172,58 @@ export function Home() {
           <div className="content">
             <div className="title-content">
               <h3>Inventory</h3>
+              <MdOutlineInventory2 />
             </div>
             <ul>
               <li>
                 <label>
-                  {t("book.books")}:{AmountBooks()}
+                  <strong>{t("book.books")}:</strong>
+                  {AmountBooks()} un.
+                </label>
+                <div className="content-hidden">titles: {books.length}</div>
+              </li>
+              <li>
+                <label>
+                  <strong>{t("publisher.publishers")}:</strong>
+                  {publishers.length} rec.
                 </label>
               </li>
               <li>
                 <label>
-                  {t("publisher.publishers")}:{publishers.length}
+                  <strong>{t("users")}:</strong>
+                  {users.length} rec.
                 </label>
               </li>
               <li>
                 <label>
-                  {t("users")}:{users.length}
+                  <strong>{t("rents")}:</strong>
+                  {users.length} rec.
                 </label>
+                <div className="content-hidden">
+                  No return: {rentsNotReturned()}
+                </div>
               </li>
             </ul>
           </div>
           <div className="content">
-            <ul>
-              <li>
-                <label>
-                  {t("pubRecords")}:{publishers.length}
-                </label>
-              </li>
-              <li>
-                <label>
-                  {t("pubRecords")}:{publishers.length}
-                </label>
-              </li>
-              <li>
-                <label>
-                  {t("pubRecords")}:{publishers.length}
-                </label>
-              </li>
+            <div className="title-content">
+              <h3>Last Rentals</h3>
+              <MdPointOfSale />
+            </div>
+            <ul className="lastRents">
+              {lastRents === [] ? (
+                <li>Loading</li>
+              ) : (
+                lastRents.map((rent) => {
+                  return (
+                    <li>
+                      User: {rent.usuario_id.nome}
+                      Book: {rent.livro_id.nome}
+                      Date: {rent.data_aluguel}
+                    </li>
+                  );
+                })
+              )}
             </ul>
           </div>
         </div>

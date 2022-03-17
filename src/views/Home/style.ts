@@ -30,7 +30,7 @@ export const Container = styled.div`
             justify-content: space-between;
             align-items: center;
             background: transparent;
-            height: 10rem;
+            height: 12rem;
             padding: 2.2rem;
         }
         .content-chart{
@@ -46,25 +46,116 @@ export const Container = styled.div`
         }
 
         .content{
+            display: flex;
+            flex-direction: column;
             background: #f2f5f7;
             border: 1px solid #CDD2D7;
             width: 100%;
             max-width: 25rem;
             border-radius: 0.5rem;
-            height: 9rem;
+            height: 12rem;
+
+            box-shadow: 0 0.5rem 1rem silver; 
+
+
             .title-content{
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
                 justify-content:center;
                 align-items: center;
+                background: #79bbe8;
 
                 border-radius: 0.5rem 0.5rem 0  0;
                 border-bottom: 1px solid #CDD2D7;
                 width: 100%;
+                font-size: 1.3rem;
+                height: 3.5rem;
+
+                h3{
+                    padding-right: 0.5rem;
+                }
             }
             ul{
+                display: flex;
+                flex-direction: column;
                 list-style-type: none;
-                
+                height: 100%;
+                li{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    height: 100%;
+                    padding-left: 2rem;
+                    padding-right: 2rem;
+                    transition: font-size 0.3s;
+                    label{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        strong{
+                            margin-right: 1rem;
+                            font-weight: bold;
+                            color: black;
+                        }
+                    }
+                    .content-hidden{
+                        visibility: hidden;
+                        opacity: 0.4;
+                    }
+                    &:hover{
+                        background: #dce3e8;
+                        font-size: 1.1rem;
+                        .content-hidden{
+                            visibility: visible;
+                        }
+                    }
+                }
+            }
+
+            .lastRents{
+                display: flex;
+                flex-direction: column;
+                list-style-type: none;
+                max-height: 100%;
+                overflow: scroll;
+                li{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    height: 100%;
+                    padding-left: 2rem;
+                    padding-right: 2rem;
+                    transition: font-size 0.3s;
+                    
+                    label{
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        strong{
+                            margin-right: 1rem;
+                            font-weight: bold;
+                            color: black;
+                        }
+                    }
+                    .content-hidden{
+                        visibility: hidden;
+                        opacity: 0.4;
+                    }
+                    &:hover{
+                        background: #dce3e8;
+                        font-size: 1.1rem;
+                        .content-hidden{
+                            visibility: visible;
+                        }
+                    }
+                }
+            }
+
+            @media (min-width: 328px) and (max-width: 1080px){
+                margin-right: 1rem;
+                margin-left: 1rem;
             }
         }
 
