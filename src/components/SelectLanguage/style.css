@@ -29,6 +29,7 @@ img{
         padding:0;
     }
     .MuiOutlinedInput-root.MuiInputBase-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root{
+        background: white;
         height:3.5rem;
         width:3.5rem;
         border-radius: 50%;

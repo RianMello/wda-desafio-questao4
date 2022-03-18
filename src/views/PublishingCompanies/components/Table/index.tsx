@@ -17,7 +17,10 @@ import { FormPublisher } from "../Form";
 import { Delete } from "../Delete";
 import { Tooltip } from "@mui/material";
 import { useTranslation } from "react-i18next";
+
 import { IoMdClose } from "react-icons/io";
+import { BsBuilding } from "react-icons/bs";
+import { TiArrowShuffle } from "react-icons/ti";
 
 const blue = {
   200: "#A5D8FF",
@@ -329,6 +332,11 @@ export function Table() {
         {handleDeleteVerification(publisherToDelete)}
       </ModalComponent>
       <TableStyle asc={asc} desc={desc}>
+        <div className="table-title">
+          <h2>
+            Table of Publishers <BsBuilding />{" "}
+          </h2>
+        </div>
         <table aria-label="custom pagination table">
           <thead>
             <tr>
@@ -369,9 +377,9 @@ export function Table() {
                       return th.direction.desc;
                     }
                   } else if (asc === false && desc === false) {
-                    return <ShuffleIcon sx={{ color: "black" }} />;
+                    return <TiArrowShuffle color="black" />;
                   }
-                  return <ShuffleIcon className="notSorted" />;
+                  return <TiArrowShuffle className="notSorted" />;
                 };
                 return (
                   <th

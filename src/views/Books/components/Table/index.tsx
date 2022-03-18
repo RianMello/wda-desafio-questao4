@@ -7,7 +7,6 @@ import TablePaginationUnstyled from "@mui/base/TablePaginationUnstyled";
 import { TableContainer, TableStyle } from "../../../../styles/tablesStyles";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { FaRandom } from "react-icons/fa";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import DeleteForeverTwoToneIcon from "@mui/icons-material/DeleteForeverTwoTone";
 import { Tooltip } from "@mui/material";
@@ -21,6 +20,7 @@ import { useNavigate } from "react-router";
 import { IoMdClose, IoIosAddCircleOutline } from "react-icons/io";
 import { BsExclamationLg } from "react-icons/bs";
 import { ImBooks } from "react-icons/im";
+import { TiArrowShuffle } from "react-icons/ti";
 
 const blue = {
   200: "#A5D8FF",
@@ -404,7 +404,7 @@ export function Table() {
       <TableStyle asc={asc} desc={desc}>
         <div className="table-title">
           <h2>
-            Book's Table <ImBooks />
+            Table of books <ImBooks />
           </h2>
         </div>
         <table aria-label="custom pagination table">
@@ -448,9 +448,9 @@ export function Table() {
                       return th.direction.desc;
                     }
                   } else if (asc === false && desc === false) {
-                    return <FaRandom color="black" />;
+                    return <TiArrowShuffle color="black" />;
                   }
-                  return <FaRandom className="notSorted" />;
+                  return <TiArrowShuffle className="notSorted" />;
                 };
                 return (
                   <th
@@ -500,7 +500,7 @@ export function Table() {
               ).map((data: Book) => {
                 return (
                   <tr key={data.id}>
-                    <td align="right">{data.id}</td>
+                    <td align="right">#{data.id}</td>
                     <td align="right">{data.nome}</td>
                     <td align="right">{data.lancamento}</td>
                     <td align="right">{data.editora.nome}</td>

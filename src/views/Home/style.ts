@@ -9,23 +9,24 @@ export const Container = styled.div`
     width: 100%;
     margin-top: 2rem;
     height: 100%;
-    .title-chart{
-            display: flex;
-                flex-direction: row;
-                justify-content:center;
-                align-items: center;
-                background: #79bbe8;
 
-                border-radius: 0.5rem 0.5rem 0  0;
-                border-bottom: 1px solid #CDD2D7;
-                width: 100%;
-                font-size: 1.3rem;
-                height: 5rem;
-        }
+    
+    .title-chart{
+        display: flex;
+        flex-direction: row;
+        justify-content:center;
+        align-items: center;
+        background: #79bbe8;
+
+        border-radius: 0.5rem 0.5rem 0  0;
+        border-bottom: 1px solid #CDD2D7;
+        width: 100%;
+        font-size: 1.3rem;
+        height: 5rem;
+    }
     .container-chart{
         width: 50rem;
-        padding: 1rem;
-        
+        padding: 1rem; 
     }
 
 
@@ -56,6 +57,7 @@ export const Container = styled.div`
             height: 30rem;
             border-radius: 0.5rem;
             margin: 2rem;
+            box-shadow: 0 0.5rem 1rem silver;
         }
 
         .content{

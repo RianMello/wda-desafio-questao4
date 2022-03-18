@@ -89,6 +89,7 @@ export const TableContainer = styled.div`
 export const TableStyle = styled.div<TableStyleProps>`
     width: 90%;
     max-width: 1080px;
+    
     table {
       font-family: Poppins, sans-serif;;
       font-size: 1rem;
@@ -96,7 +97,7 @@ export const TableStyle = styled.div<TableStyleProps>`
       border-spacing: 0;
       margin-bottom: 2rem;
       width: 100%;
-      margin-top: 2rem;
+      box-shadow: 0 0.5rem 1rem #808080;
     }
     tr{ 
       background: #fafafa;
@@ -138,9 +139,10 @@ export const TableStyle = styled.div<TableStyleProps>`
     .table-title{
       display: flex;
       justify-content: center;
+      align-items: center;
       font-size: 1.4rem;
-      margin-top: 2rem;
       max-width: 1080px;
+      height: 6rem;
     }
 
     th {

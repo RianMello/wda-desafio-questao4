@@ -18,6 +18,9 @@ import dayjs from "dayjs";
 import { Tooltip } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
+import { MdPointOfSale } from "react-icons/md";
+import { TiArrowShuffle } from "react-icons/ti";
+
 const blue = {
   200: "#A5D8FF",
   400: "#3399FF",
@@ -400,6 +403,11 @@ export function Table() {
         {handleDeleteVerification(rentToDelete)}
       </ModalComponent>
       <TableStyle asc={asc} desc={desc}>
+        <div className="table-title">
+          <h2>
+            Rent Table <MdPointOfSale />
+          </h2>
+        </div>
         <table aria-label="custom pagination table">
           <thead>
             <tr className="search-tr">
@@ -439,9 +447,9 @@ export function Table() {
                       return th.direction.desc;
                     }
                   } else if (asc === false && desc === false) {
-                    return <ShuffleIcon sx={{ color: "black" }} />;
+                    return <TiArrowShuffle color="black" />;
                   }
-                  return <ShuffleIcon className="notSorted" />;
+                  return <TiArrowShuffle className="notSorted" />;
                 };
                 return (
                   <th
@@ -450,11 +458,11 @@ export function Table() {
                       setTypeSort(e.currentTarget.id);
                       if (desc === false && asc === false) {
                         sortOrNo(e.currentTarget.id, "asc");
-                      } else if (asc === true && desc === false) {
+                      }
+                      if (asc === true && desc === false) {
                         sortOrNo(e.currentTarget.id, "desc");
-                      } else if (desc === true && asc === false) {
-                        sortOrNo(e.currentTarget.id, "asc");
-                      } else if (asc === true && desc === true) {
+                      }
+                      if (desc === true && asc === false) {
                         sortOrNo(e.currentTarget.id, "alt");
                       }
                     }}

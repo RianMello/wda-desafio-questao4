@@ -19,6 +19,9 @@ import { Delete } from "../Delete";
 import { Tooltip } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
+import { FaUsers } from "react-icons/fa";
+import { TiArrowShuffle } from "react-icons/ti";
+
 const blue = {
   200: "#A5D8FF",
   400: "#3399FF",
@@ -350,6 +353,12 @@ export function Table() {
         {handleDeleteVerification(userToDelete)}
       </ModalComponent>
       <TableStyle asc={false} desc={false}>
+        <div className="table-title">
+          <h2>
+            Users Table <FaUsers />
+          </h2>
+        </div>
+
         <table aria-label="custom pagination table">
           <thead>
             <tr className="search-tr">
@@ -387,11 +396,11 @@ export function Table() {
                       setTypeSort(e.currentTarget.id);
                       if (desc === false && asc === false) {
                         sortOrNo(e.currentTarget.id, "asc");
-                      } else if (asc === true && desc === false) {
+                      }
+                      if (asc === true && desc === false) {
                         sortOrNo(e.currentTarget.id, "desc");
-                      } else if (desc === true && asc === false) {
-                        sortOrNo(e.currentTarget.id, "asc");
-                      } else if (asc === true && desc === true) {
+                      }
+                      if (desc === true && asc === false) {
                         sortOrNo(e.currentTarget.id, "alt");
                       }
                     }}
@@ -406,7 +415,7 @@ export function Table() {
                             th.direction.desc
                           )
                         ) : (
-                          <ShuffleIcon sx={{ color: "black" }} />
+                          <TiArrowShuffle color="black" />
                         )}
                       </span>
                     </div>

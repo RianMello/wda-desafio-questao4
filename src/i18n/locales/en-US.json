@@ -18,7 +18,7 @@
         },
         "publisher":{
             "publisher": "Publisher",
-            "publishers": "Publishing Company",
+            "publishers": "Publishers",
             "cityMain": "Main City",
             "impedimentPub": "There's a book from the publisher that's still rented, so we can't delete her record",
             "deletePublisher": "Are you sure you want to delete the record for this Publisher Company?",
