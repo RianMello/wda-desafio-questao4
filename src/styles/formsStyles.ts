@@ -48,6 +48,9 @@ export const ContainerForm = styled.div`
             margin: 0.25rem;
             div{
                 flex-direction: column;
+                @media (min-width: 328px) and (max-width: 1080px){
+                    max-width: 40%;
+                }
             }
         }
         .outlined-basic{
@@ -99,6 +102,11 @@ export const ContainerForm = styled.div`
             filter: brightness(0.9) ;
         }
         margin-right: 1.5rem;
+
+        @media (min-width: 328px) and (max-width: 1080px){
+            width: 6rem;
+            height: 2.7rem;
+        }
     }
 
     .btn-save{
@@ -124,6 +132,11 @@ export const ContainerForm = styled.div`
         &:hover{
             filter: brightness(0.9) ;
         }
+
+        @media (min-width: 328px) and (max-width: 1080px){
+            width: 6rem;
+            height: 2.7rem;
+        }
     }
     
     .errorMessage{
@@ -136,6 +149,5 @@ export const ContainerForm = styled.div`
         flex-direction: row;
         justify-content: flex-end;
         width: 100%;
-        margin: 1rem;
     }
 `

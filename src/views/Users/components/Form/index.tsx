@@ -81,14 +81,6 @@ export function FormUser({ onFinish, user }: PropsFormBook) {
               name="nome"
             />
           </div>
-
-          <label htmlFor="cidade">City:</label>
-          <Field id="cidade" name="cidade" type="text" />
-          <ErrorMessage
-            component="span"
-            className="errorMessage"
-            name="cidade"
-          />
           <label htmlFor="email">Email:</label>
           <Field
             id="email"
@@ -100,6 +92,13 @@ export function FormUser({ onFinish, user }: PropsFormBook) {
             component="span"
             className="errorMessage"
             name="email"
+          />
+          <label htmlFor="cidade">City:</label>
+          <Field id="cidade" name="cidade" type="text" />
+          <ErrorMessage
+            component="span"
+            className="errorMessage"
+            name="cidade"
           />
           <label htmlFor="endereco">Address:</label>
           <Field id="endereco" name="endereco" type="text" />

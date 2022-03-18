@@ -15,7 +15,7 @@ export const Button = styled.button<PropType>`
     min-width: 5rem;
     width: 100%;
 
-    background: #fafcff;
+    background: ${props => props.selected ? '#fafcff' : 'white'} ;
 
     font-family:'Poppins', sans-serif;
     font-size: ${props => props.selected ? '1.8rem' : '1.5rem'};
@@ -35,7 +35,6 @@ export const Button = styled.button<PropType>`
 `
 export const Container = styled.div`
     display: flex;
-    padding: 1rem;
     flex-direction: row;
     justify-content: center;
     align-items: center;

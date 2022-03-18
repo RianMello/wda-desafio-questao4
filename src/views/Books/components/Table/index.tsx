@@ -377,7 +377,7 @@ export function Table() {
         title=""
       >
         <div className="titleModal">
-          {isEdit ? t("books.form.edit") : t("books.form.add")}
+          {isEdit ? t("book.form.edit") : t("book.form.add")}
           <span onClick={handleModalFormClose}>
             <IoMdClose />
           </span>
@@ -415,7 +415,7 @@ export function Table() {
                   <input
                     className="search-input"
                     type="text"
-                    placeholder={t("search")}
+                    placeholder="Filter" //{t("search")}
                     value={search}
                     onInput={(e) => {
                       const target = e.target as HTMLInputElement;

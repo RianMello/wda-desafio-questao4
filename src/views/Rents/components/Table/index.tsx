@@ -20,6 +20,7 @@ import { useTranslation } from "react-i18next";
 
 import { MdPointOfSale } from "react-icons/md";
 import { TiArrowShuffle } from "react-icons/ti";
+import { IoMdClose } from "react-icons/io";
 
 const blue = {
   200: "#A5D8FF",
@@ -126,6 +127,8 @@ export function Table() {
   const [typeSort, setTypeSort] = useState("");
   const [asc, setAsc] = useState(false);
   const [desc, setDesc] = useState(false);
+
+  const [isEdit, setIsEdit] = useState(false);
 
   const { t } = useTranslation();
 
@@ -392,6 +395,12 @@ export function Table() {
         onRequestClose={handleModalFormClose}
         title="Edit"
       >
+        <div className="titleModal">
+          Add new Rental
+          <span onClick={handleModalFormClose}>
+            <IoMdClose />
+          </span>
+        </div>
         <FormRent onFinish={handleModalFormClose} rent={rentToEdited} />
       </ModalComponent>
       <ModalComponent

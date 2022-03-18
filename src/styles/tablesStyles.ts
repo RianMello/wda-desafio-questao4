@@ -72,7 +72,7 @@ export const TableContainer = styled.div`
     }
     height: 3rem;
     border-width: 0;
-    border: 1px solid #cdd2d7;
+    border-bottom: 1px solid #cdd2d7;
     :hover {
       border-bottom: 1px solid #00d5ff;
       ::placeholder {

@@ -26,7 +26,17 @@ export const Container = styled.div`
     }
     .container-chart{
         width: 50rem;
-        padding: 1rem; 
+        padding: 1rem;
+
+        canvas{
+            max-height: 384px;
+            max-width:728px;
+
+            @media (max-width: 720px) and (min-width: 768px){
+                max-height: 288px;
+                max-width:528px; 
+            };
+        }
     }
 
 

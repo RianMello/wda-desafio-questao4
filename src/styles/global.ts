@@ -30,6 +30,9 @@ export const GlobalStyle = createGlobalStyle`
         @media (max-width: 610px) {
             font-size: 75%;
         }
+        @media (max-width: 410px){
+            font-size: 62,5%
+        }
     }
 
     body {
@@ -72,7 +75,7 @@ export const GlobalStyle = createGlobalStyle`
     .modal-content{;
         width: 100%;
         min-height: 15rem;
-        max-height: 35rem;
+        max-height: 40rem;
         max-width: 40%;
         background: white;
         position: relative;
@@ -96,6 +99,9 @@ export const GlobalStyle = createGlobalStyle`
                     height: 2rem;
                 }
             }
+        }
+        @media (min-width: 328px) and (max-width: 1680px){
+            max-width: 60%;
         }
         
     }

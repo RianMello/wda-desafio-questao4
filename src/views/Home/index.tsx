@@ -18,7 +18,7 @@ import { Container } from "./style";
 import { useTranslation } from "react-i18next";
 
 import { MdOutlineInventory2, MdPointOfSale } from "react-icons/md";
-import { FcSalesPerformance } from "react-icons/fc";
+import { GiRank3 } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { Rent } from "../../interfaces/ResponseAPI";
@@ -168,8 +168,10 @@ export function Home() {
         </div>
         <div className="content-chart">
           <div className="title-chart">
-            <h1>{t("topFiveRented")}</h1>
-            <FcSalesPerformance />
+            <h1>
+              {t("topFiveRented")}
+              <GiRank3 />
+            </h1>
           </div>
           <div className="container-chart">
             <Bar data={data} />
