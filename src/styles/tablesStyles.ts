@@ -92,7 +92,8 @@ export const TableStyle = styled.div<TableStyleProps>`
     table {
       font-family: Poppins, sans-serif;;
       font-size: 1rem;
-      border-collapse: collapse;
+      border-collapse: separate;
+      border-spacing: 0;
       margin-bottom: 2rem;
       width: 100%;
       margin-top: 2rem;
@@ -106,8 +107,8 @@ export const TableStyle = styled.div<TableStyleProps>`
       .search-tr{
         background: transparent;
         height: 4rem;
-        
       }
+      
       td{
         min-width: calc(100% / 7);
         max-width: calc(100% / 4);
@@ -134,7 +135,14 @@ export const TableStyle = styled.div<TableStyleProps>`
         }
       }
     }
-    
+    .table-title{
+      display: flex;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      max-width: 1080px;
+    }
+
     th {
       background-color: #4394e0;
       color: white;

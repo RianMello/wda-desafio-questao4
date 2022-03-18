@@ -3,7 +3,7 @@ import { useUser } from "../../hooks/useUser";
 import { usePublisher } from "../../hooks/usePublisher";
 import { useRent } from "../../hooks/useRent";
 
-import { Bar, Doughnut } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -14,10 +14,11 @@ import {
   Legend,
 } from "chart.js";
 
-import { Container, CardView, VierContent } from "./style";
+import { Container } from "./style";
 import { useTranslation } from "react-i18next";
 
 import { MdOutlineInventory2, MdPointOfSale } from "react-icons/md";
+import { FcSalesPerformance } from "react-icons/fc";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { Rent } from "../../interfaces/ResponseAPI";
@@ -33,12 +34,13 @@ export function Home() {
   const [lastRents, setLastRents] = useState<Rent[]>([]);
 
   useEffect(() => {
-    let today = dayjs();
     var lastArray: Rent[] = [];
     rents.map((rent) => {
-      if (today.get("month") === dayjs(rent.data_aluguel).get("month")) {
+      if (dayjs().format("YYYY-MM-DD") === rent.data_aluguel) {
         lastArray.push(rent);
+        console.log(dayjs(rent.data_aluguel).get("day"));
       }
+      return lastArray;
     });
     setLastRents(lastArray);
   }, [rents]);
@@ -76,32 +78,11 @@ export function Home() {
   });
   console.log(labels);
 
-  const dataP = {
-    labels: ["Red", "Blue", "Yellow"],
-    datasets: [
-      {
-        label: "My First Dataset",
-        data: [300, 50, 100],
-        backgroundColor: [
-          "rgb(255, 99, 132)",
-          "rgb(54, 162, 235)",
-          "rgb(255, 205, 86)",
-        ],
-        hoverOffset: 4,
-      },
-    ],
-  };
-
-  const config = {
-    type: "doughnut",
-    data: dataP,
-  };
-
   const data = {
     labels: labels,
     datasets: [
       {
-        label: t("moreRented"),
+        label: "",
         backgroundColor: "#4394e0",
         borderColor: "#4394e0",
         data: topFiveRenteds.map((data) => {
@@ -116,57 +97,6 @@ export function Home() {
 
   return (
     <Container>
-      {/* <VierContent>
-        <CardView>
-          <h1>{t("pubRecords")}</h1>
-          {load ? (
-            <img
-              className="gif"
-              src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif"
-              alt="loadingGIF"
-            />
-          ) : (
-            <h3>{publishers.length}</h3>
-          )}
-        </CardView>
-        <CardView>
-          <h1>{t("bokRecords")}</h1>
-          {load ? (
-            <img
-              className="gif"
-              src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif"
-              alt="loadingGIF"
-            />
-          ) : (
-            <h3>{books.length}</h3>
-          )}
-        </CardView>
-        <CardView>
-          <h1>{t("userRecords")}</h1>
-          {load ? (
-            <img
-              className="gif"
-              src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif"
-              alt="loadingGIF"
-            />
-          ) : (
-            <h3>{users.length}</h3>
-          )}
-        </CardView>
-        <CardView>
-          <h1>{t("rentRecords")}</h1>
-          {load ? (
-            <img
-              className="gif"
-              src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif"
-              alt="loadingGIF"
-            />
-          ) : (
-            <h3>{rents.length}</h3>
-          )}
-        </CardView>
-      </VierContent> */}
-
       <div className="container">
         <div className="header">
           <div className="content">
@@ -174,7 +104,7 @@ export function Home() {
               <h3>Inventory</h3>
               <MdOutlineInventory2 />
             </div>
-            <ul>
+            <ul className="inventory-list">
               <li>
                 <label>
                   <strong>{t("book.books")}:</strong>
@@ -210,26 +140,38 @@ export function Home() {
               <h3>Last Rentals</h3>
               <MdPointOfSale />
             </div>
-            <ul className="lastRents">
-              {lastRents === [] ? (
-                <li>Loading</li>
-              ) : (
-                lastRents.map((rent) => {
+            {lastRents === [] ? (
+              <h2>No rentals today</h2>
+            ) : (
+              <ul className="lastRents">
+                {lastRents.map((rent) => {
                   return (
                     <li>
-                      User: {rent.usuario_id.nome}
-                      Book: {rent.livro_id.nome}
-                      Date: {rent.data_aluguel}
+                      <div className="first">
+                        <div className="list-content">
+                          {" "}
+                          <strong>User: </strong>
+                          <p>{rent.usuario_id.nome}</p>
+                        </div>
+                        <div className="list-content">
+                          <strong>Book: </strong>
+                          <p>{rent.livro_id.nome}</p>
+                        </div>
+                      </div>
+                      <p>today</p>
                     </li>
                   );
-                })
-              )}
-            </ul>
+                })}
+              </ul>
+            )}
           </div>
         </div>
         <div className="content-chart">
-          <div className="container-chart">
+          <div className="title-chart">
             <h1>{t("topFiveRented")}</h1>
+            <FcSalesPerformance />
+          </div>
+          <div className="container-chart">
             <Bar data={data} />
           </div>
         </div>

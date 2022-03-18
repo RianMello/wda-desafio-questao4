@@ -9,10 +9,23 @@ export const Container = styled.div`
     width: 100%;
     margin-top: 2rem;
     height: 100%;
+    .title-chart{
+            display: flex;
+                flex-direction: row;
+                justify-content:center;
+                align-items: center;
+                background: #79bbe8;
 
+                border-radius: 0.5rem 0.5rem 0  0;
+                border-bottom: 1px solid #CDD2D7;
+                width: 100%;
+                font-size: 1.3rem;
+                height: 5rem;
+        }
     .container-chart{
         width: 50rem;
         padding: 1rem;
+        
     }
 
 
@@ -75,7 +88,7 @@ export const Container = styled.div`
                     padding-right: 0.5rem;
                 }
             }
-            ul{
+            .inventory-list{
                 display: flex;
                 flex-direction: column;
                 list-style-type: none;
@@ -89,6 +102,7 @@ export const Container = styled.div`
                     padding-left: 2rem;
                     padding-right: 2rem;
                     transition: font-size 0.3s;
+                    border-bottom: 1px solid #CDD2D7;
                     label{
                         display: flex;
                         flex-direction: row;
@@ -119,16 +133,29 @@ export const Container = styled.div`
                 list-style-type: none;
                 max-height: 100%;
                 overflow: scroll;
+                padding: 0.5rem;
                 li{
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
                     align-items: center;
                     height: 100%;
-                    padding-left: 2rem;
-                    padding-right: 2rem;
                     transition: font-size 0.3s;
-                    
+                    border-bottom: 1px solid #CDD2D7;
+                    .first{
+                        display: flex;
+                        flex-direction: column;
+                        .list-content{
+                            display: flex;
+                            flex-direction: row;
+                            strong{
+                                margin-right: 1rem;
+                                font-weight: bold;
+                                color: black;
+                            }
+                        }
+                    }
+
                     label{
                         display: flex;
                         flex-direction: row;
@@ -145,7 +172,6 @@ export const Container = styled.div`
                     }
                     &:hover{
                         background: #dce3e8;
-                        font-size: 1.1rem;
                         .content-hidden{
                             visibility: visible;
                         }

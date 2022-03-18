@@ -20,6 +20,7 @@ import { useNavigate } from "react-router";
 
 import { IoMdClose, IoIosAddCircleOutline } from "react-icons/io";
 import { BsExclamationLg } from "react-icons/bs";
+import { ImBooks } from "react-icons/im";
 
 const blue = {
   200: "#A5D8FF",
@@ -400,8 +401,12 @@ export function Table() {
         </div>
         {handleDeleteVerification(bookToDelete)}
       </ModalComponent>
-      <label>Book List</label>
       <TableStyle asc={asc} desc={desc}>
+        <div className="table-title">
+          <h2>
+            Book's Table <ImBooks />
+          </h2>
+        </div>
         <table aria-label="custom pagination table">
           <thead>
             <tr className="search-tr">

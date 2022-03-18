@@ -15,7 +15,7 @@ export const Button = styled.button<PropType>`
     min-width: 5rem;
     width: 100%;
 
-    background: ${props => props.selected ? '##fafcff' : '#fcfcfc'};
+    background: #fafcff;
 
     font-family:'Poppins', sans-serif;
     font-size: ${props => props.selected ? '1.8rem' : '1.5rem'};
