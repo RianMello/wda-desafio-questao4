@@ -377,7 +377,7 @@ export function Table() {
         title=""
       >
         <div className="titleModal">
-          {isEdit ? t("book.form.edit") : t("book.form.add")}
+          {isEdit ? t("books.form.edit") : t("books.form.add")}
           <span onClick={handleModalFormClose}>
             <IoMdClose />
           </span>

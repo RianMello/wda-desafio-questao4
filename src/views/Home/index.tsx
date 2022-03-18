@@ -140,7 +140,7 @@ export function Home() {
               <h3>Last Rentals</h3>
               <MdPointOfSale />
             </div>
-            {lastRents === [] ? (
+            {lastRents.length === 0 ? (
               <h2>No rentals today</h2>
             ) : (
               <ul className="lastRents">

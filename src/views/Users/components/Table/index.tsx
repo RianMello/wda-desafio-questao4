@@ -21,6 +21,7 @@ import { useTranslation } from "react-i18next";
 
 import { FaUsers } from "react-icons/fa";
 import { TiArrowShuffle } from "react-icons/ti";
+import { IoMdClose } from "react-icons/io";
 
 const blue = {
   200: "#A5D8FF",
@@ -123,6 +124,7 @@ export function Table() {
   const { users, load } = useUser();
   const [userToEdited, setUserToEdited] = useState(users[0]);
   const [userToDelete, setUserToDelete] = useState({} as User);
+  const [isEdit, setIsEdit] = useState(false);
 
   const [sort, setSort] = useState<User[]>(users);
   const [typeSort, setTypeSort] = useState("");
@@ -342,6 +344,12 @@ export function Table() {
         onRequestClose={handleModalFormClose}
         title="Edit"
       >
+        <div className="titleModal">
+          {isEdit ? t("users") : t("book.form.add")}
+          <span onClick={handleModalFormClose}>
+            <IoMdClose />
+          </span>
+        </div>
         <FormUser onFinish={handleModalFormClose} user={userToEdited} />
       </ModalComponent>
       <ModalComponent
@@ -381,7 +389,7 @@ export function Table() {
                       setUserToEdited({} as User);
                     }}
                   >
-                    <AddCircleTwoToneIcon /> <strong>{t("user")}</strong>
+                    <AddCircleTwoToneIcon /> <strong>{t("user.user")}</strong>
                   </button>
                 </div>
               </th>

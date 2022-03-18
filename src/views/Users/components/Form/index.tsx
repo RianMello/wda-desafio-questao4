@@ -72,8 +72,7 @@ export function FormUser({ onFinish, user }: PropsFormBook) {
         }}
       >
         <Form>
-          <fieldset>
-            <legend>{user?.id ? "Edit user record" : "Add new user"}</legend>
+          <div className="input-group">
             <label htmlFor="nome">User name:</label>
             <Field id="nome" name="nome" type="text" />
             <ErrorMessage
@@ -81,33 +80,34 @@ export function FormUser({ onFinish, user }: PropsFormBook) {
               className="errorMessage"
               name="nome"
             />
-            <label htmlFor="cidade">City:</label>
-            <Field id="cidade" name="cidade" type="text" />
-            <ErrorMessage
-              component="span"
-              className="errorMessage"
-              name="cidade"
-            />
-            <label htmlFor="email">Email:</label>
-            <Field
-              id="email"
-              name="email"
-              placeholder="email@mail.com"
-              type="text"
-            />
-            <ErrorMessage
-              component="span"
-              className="errorMessage"
-              name="email"
-            />
-            <label htmlFor="endereco">Address:</label>
-            <Field id="endereco" name="endereco" type="text" />
-            <ErrorMessage
-              component="span"
-              className="errorMessage"
-              name="endereco"
-            />
-          </fieldset>
+          </div>
+
+          <label htmlFor="cidade">City:</label>
+          <Field id="cidade" name="cidade" type="text" />
+          <ErrorMessage
+            component="span"
+            className="errorMessage"
+            name="cidade"
+          />
+          <label htmlFor="email">Email:</label>
+          <Field
+            id="email"
+            name="email"
+            placeholder="email@mail.com"
+            type="text"
+          />
+          <ErrorMessage
+            component="span"
+            className="errorMessage"
+            name="email"
+          />
+          <label htmlFor="endereco">Address:</label>
+          <Field id="endereco" name="endereco" type="text" />
+          <ErrorMessage
+            component="span"
+            className="errorMessage"
+            name="endereco"
+          />
           <div className="control-modalForm">
             <button className="btn-cancel" onClick={onFinish}>
               Cancel

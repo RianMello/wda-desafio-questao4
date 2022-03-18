@@ -40,7 +40,14 @@
             "books": "Books"
         },
         "users": "Users",
-        "user": "User",
+        "user": {
+            "user": "User",
+            "form":{
+                "add":"Add new user",
+                "edit":"Edit user",
+                "publisherName": "User name"
+            }
+        },
         "rents": "Rents",
         "rent": "Rent",
         "pubRecords": "Publishers' Records",
