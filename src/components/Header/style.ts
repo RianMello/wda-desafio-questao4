@@ -61,10 +61,9 @@ export const Container = styled.div`
     }
 
     @media (min-width:320px) and (max-width: 1280px){
-        padding-top: 1rem;
         .select-lang{
             position: absolute;
-            top: 6.5rem;
+            top: 5rem;
             right: 1rem;
         }
         

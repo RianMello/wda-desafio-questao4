@@ -108,6 +108,9 @@ export const TableStyle = styled.div<TableStyleProps>`
       .search-tr{
         background: transparent;
         height: 4rem;
+        &:hover {
+          filter: none;
+        }
       }
       
       td{
