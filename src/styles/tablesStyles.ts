@@ -89,7 +89,7 @@ export const TableContainer = styled.div`
 export const TableStyle = styled.div<TableStyleProps>`
     width: 90%;
     max-width: 1080px;
-    
+    min-width: 328px;
     table {
       font-family: Poppins, sans-serif;;
       font-size: 1rem;
@@ -98,6 +98,10 @@ export const TableStyle = styled.div<TableStyleProps>`
       margin-bottom: 2rem;
       width: 100%;
       box-shadow: 0 0.5rem 1rem #808080;
+
+      @media (max-width: 768px) {
+        max-width: 500px;
+      }
     }
     tr{ 
       background: #fafafa;
@@ -155,7 +159,7 @@ export const TableStyle = styled.div<TableStyleProps>`
       border: 0.5px solid #CDD2D7; 
       transition: filter 0.15s;
       width: 100%;
-      min-width: calc(100% / 8);
+      min-width: calc(100% / 7);
       max-width: calc(100% / 4);
       .sorted{
         visibility: visible;

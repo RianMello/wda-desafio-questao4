@@ -141,7 +141,7 @@ export function Home() {
               <MdPointOfSale />
             </div>
             {lastRents.length === 0 ? (
-              <h2>No rentals today</h2>
+              <h2 style={{ textAlign: "center" }}>No rentals today</h2>
             ) : (
               <ul className="lastRents">
                 {lastRents.map((rent) => {
