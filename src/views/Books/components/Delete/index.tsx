@@ -11,23 +11,26 @@ interface DeleteProps {
 }
 
 export const Delete = ({ book, onFinish }: DeleteProps) => {
-  const { rents } = useRent();
+  const { rents, handleSituationRent } = useRent();
   const { removeBook } = useBook();
 
   const { t } = useTranslation();
 
   function deleteBook() {
-    console.log("tentando pelo menos");
     removeBook(book, onFinish);
     return;
   }
 
   function deleteVerification() {
-    const canDelete = rents.find((rent) => rent.livro_id.id === book.id);
+    const canDelete = rents.find(
+      (rent) =>
+        rent.livro_id.id === book.id &&
+        handleSituationRent(rent).label === "Não devolvido"
+    );
     if (canDelete !== undefined) {
       return (
         <InpedimentDelete>
-          <h1 className="impediment">{t("impediment.impedimentBook")}</h1>
+          <h1 className="impediment">{t("book.impedimentBook")}</h1>
         </InpedimentDelete>
       );
     }
@@ -36,10 +39,10 @@ export const Delete = ({ book, onFinish }: DeleteProps) => {
         <h2>{t("sureDelete.deleteBook")}</h2>
         <div className="buttons-container">
           <button className="btn-Delete" onClick={() => onFinish()}>
-            {t("options.no")}
+            {t("sureDelete.options.no")}
           </button>
           <button className="btn-noDelete" onClick={() => deleteBook()}>
-            {t("options.yes")}
+            {t("sureDelete.options.yes")}
           </button>
         </div>
       </DeleteContainer>

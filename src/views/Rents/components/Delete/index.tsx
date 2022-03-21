@@ -31,10 +31,10 @@ export function Delete({ rent, onFinish }: DeleteProps) {
       <h2>{t("sureDelete.returnBook")}</h2>
       <div className="buttons-container">
         <button className="btn-Delete" onClick={() => onFinish()}>
-          {t("options.no")}
+          {t("sureDelete.options.no")}
         </button>
         <button className="btn-noDelete" onClick={() => returnBook()}>
-          {t("options.yes")}
+          {t("sureDelete.options.yes")}
         </button>
       </div>
     </DeleteContainer>

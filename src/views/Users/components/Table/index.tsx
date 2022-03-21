@@ -22,6 +22,7 @@ import { useTranslation } from "react-i18next";
 import { FaUsers } from "react-icons/fa";
 import { TiArrowShuffle } from "react-icons/ti";
 import { IoMdClose } from "react-icons/io";
+import { BsExclamationLg } from "react-icons/bs";
 
 const blue = {
   200: "#A5D8FF",
@@ -159,7 +160,7 @@ export function Table() {
     },
     {
       id: "name",
-      label: t("name"),
+      label: t("user.name"),
       ordered: false,
       direction: {
         asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
@@ -168,7 +169,7 @@ export function Table() {
     },
     {
       id: "address",
-      label: t("address"),
+      label: t("user.address"),
       ordered: false,
       direction: {
         asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
@@ -177,7 +178,7 @@ export function Table() {
     },
     {
       id: "email",
-      label: t("email"),
+      label: t("user.email"),
       ordered: false,
       direction: {
         asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
@@ -186,7 +187,7 @@ export function Table() {
     },
     {
       id: "city",
-      label: t("city"),
+      label: t("user.city"),
       ordered: false,
       direction: {
         asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
@@ -358,12 +359,21 @@ export function Table() {
         onRequestClose={handleModalDeleteClose}
         title="Edit"
       >
+        <div className="titleModal">
+          <div>
+            Attention
+            <BsExclamationLg />
+          </div>
+          <span onClick={handleModalDeleteClose}>
+            <IoMdClose />
+          </span>
+        </div>
         {handleDeleteVerification(userToDelete)}
       </ModalComponent>
       <TableStyle asc={false} desc={false}>
         <div className="table-title">
           <h2>
-            Users Table <FaUsers />
+            {t("user.tableTitle")} <FaUsers />
           </h2>
         </div>
 
@@ -375,7 +385,7 @@ export function Table() {
                   <input
                     className="search-input"
                     type="text"
-                    placeholder={t("search")}
+                    placeholder={t("filter")}
                     value={search}
                     onInput={(e) => {
                       const target = e.target as HTMLInputElement;
@@ -437,7 +447,7 @@ export function Table() {
             {loading === true ? (
               <tr key="load" className="loading">
                 <td colSpan={8}>
-                  Please wait for the data to load
+                  {t("waitingData")}
                   <img
                     className="gif"
                     src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif"

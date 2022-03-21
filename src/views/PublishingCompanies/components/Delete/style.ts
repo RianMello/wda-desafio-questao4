@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 
 export const DeleteContainer = styled.div`
-    display: flex;
+     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
@@ -10,8 +10,8 @@ export const DeleteContainer = styled.div`
     font-family:'Poppins', sans-serif;
     h2{
         text-align: left;
-        margin: 0.5rem;
-        font-size: 1.5rem;
+        margin: 1rem;
+        color: #6b6b6b;
     }
     .btn-noDelete{
         width: 100%;
@@ -20,14 +20,20 @@ export const DeleteContainer = styled.div`
 
         border: none;
         border-radius: 0.4rem;
-        margin: 0.5rem;
 
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         font-weight: bold;
-        color: white;
+        color: #4fe39c;
 
-        background: #f0bbbb;
-        text-shadow: 0 0 2px #4d0101;
+        transition: background 0.2s;
+
+        background: transparent;
+        border: 2px solid #4fe39c;
+
+        &:hover{
+            background: #4fe39c;
+            color: white;
+        }
     }
     .btn-Delete{
         width: 100%;
@@ -36,14 +42,19 @@ export const DeleteContainer = styled.div`
 
         border: none;
         border-radius: 0.4rem;
-        margin: 0.5rem;
 
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         font-weight: bold;
-        color: white;
+        color: #e34f4f;
 
-        background: #afe3ca;
-        text-shadow: 0 0 2px #024d28;
+        transition: background 0.2s;
+        background: transparent;
+        border: 2px solid #e34f4f;
+
+        &:hover{
+            background: #e34f4f;
+            color: white;
+        }
         
     }
     .buttons-container{
@@ -54,4 +65,19 @@ export const DeleteContainer = styled.div`
         width: 100%;
         height: 100%;
     }
+`
+
+export const InpedimentDelete = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .impediment{
+        text-align: justify;
+        font-size: 1.4rem;
+        color: #a3a3a3;
+        margin-top: 1rem;
+    }
+
 `

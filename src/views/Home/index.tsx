@@ -101,7 +101,7 @@ export function Home() {
         <div className="header">
           <div className="content">
             <div className="title-content">
-              <h3>Inventory</h3>
+              <h3>{t("dashboard.inventory")}</h3>
               <MdOutlineInventory2 />
             </div>
             <ul className="inventory-list">
@@ -110,7 +110,9 @@ export function Home() {
                   <strong>{t("book.books")}:</strong>
                   {AmountBooks()} un.
                 </label>
-                <div className="content-hidden">titles: {books.length}</div>
+                <div className="content-hidden">
+                  {t("dashboard.titles")}: {books.length}
+                </div>
               </li>
               <li>
                 <label>
@@ -120,28 +122,30 @@ export function Home() {
               </li>
               <li>
                 <label>
-                  <strong>{t("users")}:</strong>
+                  <strong>{t("user.users")}:</strong>
                   {users.length} rec.
                 </label>
               </li>
               <li>
                 <label>
-                  <strong>{t("rents")}:</strong>
+                  <strong>{t("rental.rentals")}:</strong>
                   {users.length} rec.
                 </label>
                 <div className="content-hidden">
-                  No return: {rentsNotReturned()}
+                  {t("dashboard.noReturned")}: {rentsNotReturned()}
                 </div>
               </li>
             </ul>
           </div>
           <div className="content">
             <div className="title-content">
-              <h3>Last Rentals</h3>
+              <h3>{t("dashboard.lastRentals")}</h3>
               <MdPointOfSale />
             </div>
             {lastRents.length === 0 ? (
-              <h2 style={{ textAlign: "center" }}>No rentals today</h2>
+              <h2 style={{ textAlign: "center", marginTop: "2rem" }}>
+                {t("dashboard.noRental")}
+              </h2>
             ) : (
               <ul className="lastRents">
                 {lastRents.map((rent) => {
@@ -150,15 +154,15 @@ export function Home() {
                       <div className="first">
                         <div className="list-content">
                           {" "}
-                          <strong>User: </strong>
+                          <strong>{t("user.user")}: </strong>
                           <p>{rent.usuario_id.nome}</p>
                         </div>
                         <div className="list-content">
-                          <strong>Book: </strong>
+                          <strong>{t("book.book")}: </strong>
                           <p>{rent.livro_id.nome}</p>
                         </div>
                       </div>
-                      <p>today</p>
+                      <p>{t("dashboard.today")}</p>
                     </li>
                   );
                 })}
@@ -169,7 +173,7 @@ export function Home() {
         <div className="content-chart">
           <div className="title-chart">
             <h1>
-              {t("topFiveRented")}
+              {t("dashboard.mostRented")}
               <GiRank3 />
             </h1>
           </div>

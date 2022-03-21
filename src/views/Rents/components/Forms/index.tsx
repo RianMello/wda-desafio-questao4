@@ -10,6 +10,7 @@ import { SelectUser } from "./Select/userSelector";
 import { useState } from "react";
 import { SelectBook } from "./Select/bookSelector";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 
 interface FormRentProps {
   rent?: Rent;
@@ -30,6 +31,8 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
   const { addRent } = useRent();
   const { users } = useUser();
   const { editBook, available } = useBook();
+
+  const { t } = useTranslation();
 
   const [user, setUser] = useState(users[0]);
   const [book, setBook] = useState(available[0]);
@@ -127,12 +130,13 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
             books={available}
             bookChange={handleBookChange}
           />
-          <label htmlFor="data_aluguel">Rental date:</label>
+          <label htmlFor="data_aluguel">{t("rental.rentalDate")}:</label>
           <Field
             id="data_aluguel"
             name="data_aluguel"
             type="date"
             min={today}
+            max={today}
           />
           <ErrorMessage
             component="span"
@@ -144,7 +148,7 @@ export function FormRent({ rent, onFinish }: FormRentProps) {
             className="errorMessage"
             name="data_devolucao"
           />
-          <label htmlFor="data_previsao">Expected date:</label>
+          <label htmlFor="data_previsao">{t("rental.deadline")}:</label>
           <Field
             id="data_previsao"
             name="data_previsao"

@@ -4,6 +4,9 @@ import { ContainerForm } from "../../../../styles/formsStyles";
 import { Formik, FormikHelpers, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useUser } from "../../../../hooks/useUser";
+import { useTranslation } from "react-i18next";
+import { TiCancel } from "react-icons/ti";
+import { IoMdSave } from "react-icons/io";
 
 interface PropsFormBook {
   onFinish: () => void;
@@ -18,6 +21,8 @@ interface initialProps {
 }
 
 export function FormUser({ onFinish, user }: PropsFormBook) {
+  const { t } = useTranslation();
+
   const schema = Yup.object().shape({
     cidade: Yup.string().required("Você deve informar a cidade do usuário"),
     email: Yup.string().required("Você deve informar a email do usuário"),
@@ -73,7 +78,7 @@ export function FormUser({ onFinish, user }: PropsFormBook) {
       >
         <Form>
           <div className="input-group">
-            <label htmlFor="nome">User name:</label>
+            <label htmlFor="nome">{t("user.form.userName")}:</label>
             <Field id="nome" name="nome" type="text" />
             <ErrorMessage
               component="span"
@@ -81,7 +86,7 @@ export function FormUser({ onFinish, user }: PropsFormBook) {
               name="nome"
             />
           </div>
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">{t("user.email")}:</label>
           <Field
             id="email"
             name="email"
@@ -93,14 +98,14 @@ export function FormUser({ onFinish, user }: PropsFormBook) {
             className="errorMessage"
             name="email"
           />
-          <label htmlFor="cidade">City:</label>
+          <label htmlFor="cidade">{t("user.city")}:</label>
           <Field id="cidade" name="cidade" type="text" />
           <ErrorMessage
             component="span"
             className="errorMessage"
             name="cidade"
           />
-          <label htmlFor="endereco">Address:</label>
+          <label htmlFor="endereco">{t("user.address")}:</label>
           <Field id="endereco" name="endereco" type="text" />
           <ErrorMessage
             component="span"
@@ -109,10 +114,12 @@ export function FormUser({ onFinish, user }: PropsFormBook) {
           />
           <div className="control-modalForm">
             <button className="btn-cancel" onClick={onFinish}>
-              Cancel
+              <TiCancel />
+              {t("form.cancel")}
             </button>
             <button className="btn-save" type="submit">
-              Save
+              <IoMdSave />
+              {t("form.save")}
             </button>
           </div>
         </Form>

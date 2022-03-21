@@ -79,7 +79,7 @@ export function FormPublisher({ onFinish, publisher }: PropsFormPublisher) {
             />
           </div>
           <div className="input-group">
-            <label htmlFor="cidade">{t("cityMain")}:</label>
+            <label htmlFor="cidade">{t("publisher.cityMain")}:</label>
             <Field id="cidade" name="cidade" type="text" />
             <ErrorMessage
               component="span"
@@ -90,11 +90,11 @@ export function FormPublisher({ onFinish, publisher }: PropsFormPublisher) {
           <div className="control-modalForm">
             <button className="btn-cancel" onClick={onFinish}>
               <TiCancel />
-              Cancel
+              {t("form.cancel")}
             </button>
             <button className="btn-save" type="submit">
               <IoMdSave />
-              Save
+              {t("form.save")}
             </button>
           </div>
         </Form>

@@ -77,7 +77,7 @@ export const InpedimentDelete = styled.div`
 
     .impediment{
         text-align: justify;
-        font-size: 2rem;
+        font-size: 1.4rem;
         color: #a3a3a3;
         margin-top: 1rem;
     }

@@ -155,7 +155,7 @@ export function Table() {
     },
     {
       id: "name",
-      label: t("name"),
+      label: t("book.name"),
       ordered: false,
       direction: {
         asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
@@ -164,7 +164,7 @@ export function Table() {
     },
     {
       id: "release",
-      label: t("release"),
+      label: t("book.release"),
       ordered: false,
       direction: {
         asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
@@ -182,7 +182,7 @@ export function Table() {
     },
     {
       id: "author",
-      label: t("copies"),
+      label: t("book.copies"),
       ordered: false,
       direction: {
         asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
@@ -191,7 +191,7 @@ export function Table() {
     },
     {
       id: "copies",
-      label: t("copies"),
+      label: t("book.author"),
       ordered: false,
       direction: {
         asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
@@ -200,7 +200,7 @@ export function Table() {
     },
     {
       id: "rented",
-      label: t("rented"),
+      label: t("book.rented"),
       ordered: false,
       direction: {
         asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
@@ -231,7 +231,6 @@ export function Table() {
 
   const handleModalFormClose = () => {
     setIsModalOpen(false);
-    navigate("/books");
     document.location.reload();
   };
   const handleModalDeleteOpen = () => {
@@ -239,7 +238,6 @@ export function Table() {
   };
   const handleModalDeleteClose = () => {
     setIsModalDeleteOpen(false);
-    navigate("/books");
     document.location.reload();
   };
 
@@ -404,7 +402,7 @@ export function Table() {
       <TableStyle asc={asc} desc={desc}>
         <div className="table-title">
           <h2>
-            Table of books <ImBooks />
+            {t("book.tableTitle")} <ImBooks />
           </h2>
         </div>
         <table aria-label="custom pagination table">
@@ -415,7 +413,7 @@ export function Table() {
                   <input
                     className="search-input"
                     type="text"
-                    placeholder="Filter" //{t("search")}
+                    placeholder={t("filter")}
                     value={search}
                     onInput={(e) => {
                       const target = e.target as HTMLInputElement;
@@ -431,7 +429,7 @@ export function Table() {
                     }}
                   >
                     <IoIosAddCircleOutline className="add_icon" />{" "}
-                    {t("books.book")}
+                    {t("book.book")}
                   </button>
                 </div>
               </th>
@@ -482,7 +480,7 @@ export function Table() {
             {loading === true ? (
               <tr key="load" className="loading">
                 <td colSpan={8}>
-                  Please wait for the data to load
+                  {t("waitingData")}
                   <img
                     className="gif"
                     src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif"

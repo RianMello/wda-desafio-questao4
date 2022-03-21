@@ -17,7 +17,6 @@ export const TableContainer = styled.div`
   border-radius: 0.5rem;
   box-shadow: 1px 3px 5px #ababab;
 
-  
   .table-head {
     height: 4rem;
     width: 100%;
@@ -151,7 +150,6 @@ export const TableStyle = styled.div<TableStyleProps>`
       max-width: 1080px;
       height: 6rem;
     }
-
     th {
       background-color: #4394e0;
       color: white;

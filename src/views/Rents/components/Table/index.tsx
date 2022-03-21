@@ -21,6 +21,7 @@ import { useTranslation } from "react-i18next";
 import { MdPointOfSale } from "react-icons/md";
 import { TiArrowShuffle } from "react-icons/ti";
 import { IoMdClose } from "react-icons/io";
+import { BsExclamationLg } from "react-icons/bs";
 
 const blue = {
   200: "#A5D8FF",
@@ -158,7 +159,7 @@ export function Table() {
     },
     {
       id: "rentedBook",
-      label: t("rentedBook"),
+      label: t("book.book"),
       ordered: false,
       direction: {
         asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
@@ -167,7 +168,7 @@ export function Table() {
     },
     {
       id: "responsible",
-      label: t("responsible"),
+      label: t("rental.responsible"),
       ordered: false,
       direction: {
         asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
@@ -176,7 +177,7 @@ export function Table() {
     },
     {
       id: "rentalDate",
-      label: t("rentedDate"),
+      label: t("rental.rentalDate"),
       ordered: false,
       direction: {
         asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
@@ -185,7 +186,7 @@ export function Table() {
     },
     {
       id: "expectedDate",
-      label: t("expectedDate"),
+      label: t("rental.deadline"),
       ordered: false,
       direction: {
         asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
@@ -194,7 +195,7 @@ export function Table() {
     },
     {
       id: "situation",
-      label: t("situation"),
+      label: t("rental.situation"),
       ordered: false,
       direction: {
         asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
@@ -425,7 +426,7 @@ export function Table() {
                   <input
                     className="search-input"
                     type="text"
-                    placeholder={t("search")}
+                    placeholder={t("filter")}
                     value={search}
                     onInput={(e) => {
                       const target = e.target as HTMLInputElement;
@@ -439,7 +440,8 @@ export function Table() {
                       setRentToEdited({} as Rent);
                     }}
                   >
-                    <AddCircleTwoToneIcon /> <strong>{t("rent")}</strong>
+                    <AddCircleTwoToneIcon />{" "}
+                    <strong>{t("rental.rental")}</strong>
                   </button>
                 </div>
               </th>
@@ -490,7 +492,7 @@ export function Table() {
             {loading === true ? (
               <tr key="load" className="loading">
                 <td colSpan={8}>
-                  Please wait for the data to load
+                  {t("waitingData")}
                   <img
                     className="gif"
                     src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif"
@@ -543,7 +545,7 @@ export function Table() {
                         }}
                         disabled={span.label === "Não devolvido" ? false : true}
                       >
-                        <Tooltip title={t("giveBack") as string}>
+                        <Tooltip title={t("rental.giveBack") as string}>
                           <SettingsBackupRestoreIcon fontSize="large" />
                         </Tooltip>
                       </button>

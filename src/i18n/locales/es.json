@@ -1,75 +1,95 @@
 {
     "translation":{
+        "waitingData": "Por favor, aguarde enquanto os dados carregam",
+        "actions":"Acción",
+        "filter": "Filtrar",
         "book":{
             "book": "Libro",
             "books": "Libros",
-            "bookRecords": "Registros de libros",
-            "name": "Titre",
-            "release":"Lanzamiento",
+            "bookRecords": "Book Records",
+            "tableTitle": "Registros de libros",
+            "name": "Título",
+            "release":"fecha de lanzamiento",
             "author":"Autor",
-            "amount": "La cantidad",
-            "rented": "alquilado",
-            "impedimentBook": "Tenemos una copia del libro que todavía está alquilada, por lo que no podemos eliminar su registro.",
+            "copies": "Copies",
+            "amount": "Copias",
+            "rented": "Alquilado",
+            "impedimentBook": "Tenemos una copia del libro que todavía está alquilado, por lo que no podemos eliminar su registro",
             "form":{
                 "add":"Agregar nuevo libro",
                 "edit":"Editar libro",
                 "bookName": "Título del libro"
             }
         },
-        "french": "Francés",
-        "portuguese": "Portugués",
-        "english": "Inglés",
-        "spanish": "Español",
-        "search": "Búsqueda",
-        "dashboard": "Tablero",
-        "giveBack": "Devolvérsela",
-        "books":{
-            "book": "libro",
-            "books": "Libros"
+        "publisher":{
+            "publisher": "Editorial",
+            "publishers": "Editoriales",
+            "name": "Nombre",
+            "cityMain": "Ciudad sede",
+            "tableTitle": "Tabla de Editoriales",
+            "impedimentPub": "Hay un libro de esta editorial que aún no ha sido devuelto, por lo que no podemos eliminar este registro.",
+            "deletePublisher": "¿Está seguro de que desea eliminar el registro de esta empresa editora?",
+            "form":{
+                "add":"Agregar nuevo editorial",
+                "edit":"Editar editorial",
+                "publisherName": "Nombre de la empresa editora"
+            }
         },
-        "publishers": "Compañia de publicidad",
-        "users": "Usuarios",
-        "user": "Usuario",
-        "rents": "Renta",
-        "rent": "Alquila",
-        "pubRecords": "Registros de los editores",
-        "bokRecords": "Registros de libros",
-        "rentRecords": "Registros de alquiler",
-        "userRecords": "Registros de usuario",
-        "topFiveRented": "Los más alquilados",
-        "actions":"Comandos",
-        "name": "Nombre",
-        "release":"Lanzamiento",
-        "publisher": "Comp. de Publicidad",
-        "author":"Autor",
-        "copies": "Copias",
-        "rented": "Alquilado",
-        "cityMain": "Ciudad sede",
-        "city": "Cidade",
-        "email": "Correo electrónico",
-        "address":"Direccion de casa",
-        "rentedBook": "Libro Alquilado",
-        "returnDate":"Fecha de regreso",
-        "rentedDate":"Fecha de Alquiler",
-        "expectedDate": "Fecha de espera",
-        "situation": "Situación",
-        "responsible": "Responsable",
-        "rowsPerPage":"Rows per page",
-        "moreRented": "más alquilado",
-        "impediment":{
-            "impedimentBook": "Este libro está actualmente alquilado, por lo que no se puede eliminar",
-            "impedimentUser": "El registro de este usuario no se puede eliminar todavía porque tiene un libro sin devolver"
+        "user": {
+            "user": "Usuario",
+            "users": "Usuarios",
+            "name": "Nombre",
+            "address": "Dirección de casa",
+            "email":"Correo electrónico",
+            "city": "Ciudad",
+            "tableTitle": "Tabla de usuarios",
+            "form":{
+                "add":"Agregar nuevo usuario",
+                "edit":"Editar usuario",
+                "userName": "Nombre de usuario"
+            },
+            "modal": {
+                "impediment": "El registro de este usuario no se puede eliminar todavía porque tiene un libro sin devolver",
+                "deleteSure": "¿Está seguro de que desea eliminar el registro de este usuario?"
+            }
+        },
+        "rental":{
+            "rental": "Alquiler",
+            "rentals": "Alquileres",
+            "responsible": "Responsable",
+            "rentalDate": "Fecha de alquiler",
+            "deadline": "Fecha límite",
+            "situation":"Situación",
+            "giveBack": "Devolver",
+            "tableTitle": "Tabla de Alquileres",
+            "form":{
+                "add":"Agregar nuevo alquiler"
+            }
+        },
+        "dashboard":{
+            "dashboard": "Tablero",
+            "inventory": "Inventario",
+            "lastRentals": "Últimos alquileres",
+            "noRental": "No hay alquileres hoy",
+            "mostRented": "Más alquilado",
+            "titles": "Títulos",
+            "noReturned": "No devuelto",
+            "today": "Hoy dia"
         },
         "sureDelete": {
+            "options": {
+                "no": "No",
+                "yes": "Sí"
+            },
             "returnBook": "¿Estás seguro de que quieres marcar el libro como devuelto?",
             "deleteBook":"¿Está seguro de que desea eliminar el registro de este libro?",
             "deleteUser": "¿Está seguro de que desea eliminar el registro de este usuario?",
             "deleteRent": "¿Está seguro de que desea eliminar este registro de alquiler?",
             "deletePublisher": "¿Está seguro de que desea eliminar el registro de esta empresa editora?"
         },
-        "options": {
-            "no": "No",
-            "yes": "Sí"
+        "form":{
+            "cancel": "Cancelar",
+            "save": "Salvar"
         }
     }
 }

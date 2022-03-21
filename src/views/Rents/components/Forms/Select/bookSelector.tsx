@@ -1,5 +1,6 @@
 import { ErrorMessage, Field } from "formik";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Book, Rent } from "../../../../../interfaces/ResponseAPI";
 import { SelectContainer } from "./style";
 
@@ -11,10 +12,11 @@ interface SelectProps {
 
 export function SelectBook({ rent, books, bookChange }: SelectProps) {
   const [book, setBook] = useState(books[0]);
+  const { t } = useTranslation();
 
   return (
     <SelectContainer>
-      <label htmlFor="book_id">Book:</label>
+      <label htmlFor="book_id">{t("book.book")}:</label>
       <Field
         as="select"
         id="book_id"

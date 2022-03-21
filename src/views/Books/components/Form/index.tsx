@@ -8,10 +8,6 @@ import { Formik, FormikHelpers, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Select } from "./Select";
 import { useState } from "react";
-
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-
 import { IoMdSave } from "react-icons/io";
 import { TiCancel } from "react-icons/ti";
 
@@ -129,7 +125,7 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
             />
           </div>
           <div className="input-group">
-            <label htmlFor="autor">Author:</label>
+            <label htmlFor="autor">{t("book.author")}:</label>
             <Field id="autor" name="autor" type="text" />
             <ErrorMessage
               component="span"
@@ -139,7 +135,7 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
           </div>
           <div className="input-group-two">
             <div>
-              <label htmlFor="lancamento">Release:</label>
+              <label htmlFor="lancamento">{t("book.release")}:</label>
               <Field
                 id="lancamento"
                 name="lancamento"
@@ -153,7 +149,7 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
               />
             </div>
             <div>
-              <label htmlFor="quantidade">Amount:</label>
+              <label htmlFor="quantidade">{t("book.amount")}:</label>
               <Field id="quantidade" name="quantidade" type="number" />
               <ErrorMessage
                 component="span"
@@ -162,7 +158,6 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
               />
             </div>
           </div>
-          <div className="input-group"></div>
           <div className="input-group">
             <Select
               key={book?.id}
@@ -179,11 +174,11 @@ export function FormBook({ onFinish, book }: PropsFormBook) {
           <div className="control-modalForm">
             <button className="btn-cancel" onClick={onFinish}>
               <TiCancel />
-              Cancel
+              {t("form.cancel")}
             </button>
             <button className="btn-save" type="submit">
               <IoMdSave />
-              Save
+              {t("form.save")}
             </button>
           </div>
         </Form>

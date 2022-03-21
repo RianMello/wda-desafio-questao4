@@ -19,7 +19,7 @@ import { Tooltip } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 import { IoMdClose } from "react-icons/io";
-import { BsBuilding } from "react-icons/bs";
+import { BsBuilding, BsExclamationLg } from "react-icons/bs";
 import { TiArrowShuffle } from "react-icons/ti";
 
 const blue = {
@@ -157,7 +157,7 @@ export function Table() {
     },
     {
       id: "name",
-      label: t("name"),
+      label: t("publisher.name"),
       ordered: false,
       direction: {
         asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
@@ -166,7 +166,7 @@ export function Table() {
     },
     {
       id: "cidade",
-      label: t("cityMain"),
+      label: t("publisher.cityMain"),
       ordered: false,
       direction: {
         asc: <ArrowUpwardIcon sx={{ color: "black" }} />,
@@ -329,12 +329,21 @@ export function Table() {
         onRequestClose={handleModalDeleteClose}
         title="Edit"
       >
+        <div className="titleModal">
+          <div>
+            Attention
+            <BsExclamationLg />
+          </div>
+          <span onClick={handleModalDeleteClose}>
+            <IoMdClose />
+          </span>
+        </div>
         {handleDeleteVerification(publisherToDelete)}
       </ModalComponent>
       <TableStyle asc={asc} desc={desc}>
         <div className="table-title">
           <h2>
-            Table of Publishers <BsBuilding />{" "}
+            {t("publisher.tableTitle")} <BsBuilding />
           </h2>
         </div>
         <table aria-label="custom pagination table">
@@ -345,7 +354,7 @@ export function Table() {
                   <input
                     className="search-input"
                     type="text"
-                    placeholder={t("search")}
+                    placeholder={t("filter")}
                     value={search}
                     onInput={(e) => {
                       const target = e.target as HTMLInputElement;
@@ -411,7 +420,7 @@ export function Table() {
             {loading === true ? (
               <tr key="load" className="loading">
                 <td colSpan={4}>
-                  Please wait for the data to load
+                  {t("waitingData")}
                   <img
                     className="gif"
                     src="https://img.icons8.com/material-two-tone/24/000000/dots-loading--v3.gif"

@@ -22,12 +22,6 @@ const optionsLng = [
     flag: "https://img.icons8.com/fluency/48/000000/usa_1.png",
   },
   {
-    id: 2,
-    name: "french",
-    value: "fr",
-    flag: "https://img.icons8.com/color/48/000000/france.png",
-  },
-  {
     id: 3,
     name: "spanish",
     value: "es",
