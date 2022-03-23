@@ -238,6 +238,7 @@ export function Table() {
   };
   const handleModalDeleteClose = () => {
     setIsModalDeleteOpen(false);
+    document.location.reload();
   };
 
   const handleDeleteVerification = (user: User) => {
